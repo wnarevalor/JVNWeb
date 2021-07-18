@@ -1,559 +1,559 @@
-// Generated from C:/Users/USUARIO/Documents/2021-I/Lenguajes/Proyecto/grammar\jvnweb.g4 by ANTLR 4.9.1
+// Generated from C:/Users/USUARIO/Documents/2021-I/Lenguajes/Proyecto/grammar\JVNWeb.g4 by ANTLR 4.9.1
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
- * This class provides an empty implementation of {@link jvnwebVisitor},
+ * This class provides an empty implementation of {@link JVNWebVisitor},
  * which can be extended to create a visitor which only needs to handle a subset
  * of the available methods.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public class jvnwebBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements jvnwebVisitor<T> {
+public class JVNWebBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements JVNWebVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMain(jvnwebParser.MainContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMain(JVNWebParser.MainContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContenidoEncabezado(jvnwebParser.ContenidoEncabezadoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContenidoEncabezado(JVNWebParser.ContenidoEncabezadoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTitulo(jvnwebParser.TituloContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTitulo(JVNWebParser.TituloContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContenido(jvnwebParser.ContenidoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContenido(JVNWebParser.ContenidoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElementoCompuesto(jvnwebParser.ElementoCompuestoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitElementoCompuesto(JVNWebParser.ElementoCompuestoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElementoSimple(jvnwebParser.ElementoSimpleContext ctx) { return visitChildren(ctx); }
+	@Override public T visitElementoSimple(JVNWebParser.ElementoSimpleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitReferencia(jvnwebParser.ReferenciaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitReferencia(JVNWebParser.ReferenciaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElementoFormulario(jvnwebParser.ElementoFormularioContext ctx) { return visitChildren(ctx); }
+	@Override public T visitElementoFormulario(JVNWebParser.ElementoFormularioContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElementoLista(jvnwebParser.ElementoListaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitElementoLista(JVNWebParser.ElementoListaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTexto(jvnwebParser.TextoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTexto(JVNWebParser.TextoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTextoAlternativo(jvnwebParser.TextoAlternativoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContenidoTabla(jvnwebParser.ContenidoTablaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContenidoTabla(JVNWebParser.ContenidoTablaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFilaTabla(jvnwebParser.FilaTablaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFilaTabla(JVNWebParser.FilaTablaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElementoTabla(jvnwebParser.ElementoTablaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitElementoTabla(JVNWebParser.ElementoTablaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMultimedia(jvnwebParser.MultimediaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMultimedia(JVNWebParser.MultimediaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMostrarControles(jvnwebParser.MostrarControlesContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMostrarControles(JVNWebParser.MostrarControlesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFuente(jvnwebParser.FuenteContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFuente(JVNWebParser.FuenteContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitClases(jvnwebParser.ClasesContext ctx) { return visitChildren(ctx); }
+	@Override public T visitClases(JVNWebParser.ClasesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtributoFuente(jvnwebParser.AtributoFuenteContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtributoFuente(JVNWebParser.AtributoFuenteContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtributoTipo(jvnwebParser.AtributoTipoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtributoTipo(JVNWebParser.AtributoTipoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtributoNombre(jvnwebParser.AtributoNombreContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtributoNombre(JVNWebParser.AtributoNombreContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtributoValor(jvnwebParser.AtributoValorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtributoValor(JVNWebParser.AtributoValorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtributoDescripcion(jvnwebParser.AtributoDescripcionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtributoDescripcion(JVNWebParser.AtributoDescripcionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtributoFilas(jvnwebParser.AtributoFilasContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtributoFilas(JVNWebParser.AtributoFilasContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtributoColumnas(jvnwebParser.AtributoColumnasContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtributoColumnas(JVNWebParser.AtributoColumnasContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTipoEntrada(jvnwebParser.TipoEntradaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTipoEntrada(JVNWebParser.TipoEntradaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAtributoImagen(jvnwebParser.AtributoImagenContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAtributoImagen(JVNWebParser.AtributoImagenContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEstilos(jvnwebParser.EstilosContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEstilos(JVNWebParser.EstilosContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEstilo(jvnwebParser.EstiloContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEstilo(JVNWebParser.EstiloContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEventoComun(jvnwebParser.EventoComunContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEventoComun(JVNWebParser.EventoComunContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEventoFormulario(jvnwebParser.EventoFormularioContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEventoFormulario(JVNWebParser.EventoFormularioContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitEventoEntrada(jvnwebParser.EventoEntradaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitEventoEntrada(JVNWebParser.EventoEntradaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCodigo(jvnwebParser.CodigoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCodigo(JVNWebParser.CodigoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCambioElemento(jvnwebParser.CambioElementoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCambioElemento(JVNWebParser.CambioElementoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitObtenerElemento(jvnwebParser.ObtenerElementoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitObtenerElemento(JVNWebParser.ObtenerElementoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDeclaracion(jvnwebParser.DeclaracionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDeclaracion(JVNWebParser.DeclaracionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOtrasDec(jvnwebParser.OtrasDecContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOtrasDec(JVNWebParser.OtrasDecContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAsignacion(jvnwebParser.AsignacionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAsignacion(JVNWebParser.AsignacionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAsignacionSimple(jvnwebParser.AsignacionSimpleContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAsignacionSimple(JVNWebParser.AsignacionSimpleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDeclaracionF(jvnwebParser.DeclaracionFContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDeclaracionF(JVNWebParser.DeclaracionFContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArgumentos(jvnwebParser.ArgumentosContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArgumentos(JVNWebParser.ArgumentosContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOtrosArg(jvnwebParser.OtrosArgContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOtrosArg(JVNWebParser.OtrosArgContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpresion(jvnwebParser.ExpresionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpresion(JVNWebParser.ExpresionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpresionPar(jvnwebParser.ExpresionParContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpresionPar(JVNWebParser.ExpresionParContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpresioni(jvnwebParser.ExpresioniContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpresioni(JVNWebParser.ExpresioniContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCasoIdentificador(jvnwebParser.CasoIdentificadorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCasoIdentificador(JVNWebParser.CasoIdentificadorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLfuncion(jvnwebParser.LfuncionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLfuncion(JVNWebParser.LfuncionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCiclo(jvnwebParser.CicloContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCiclo(JVNWebParser.CicloContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCondicional(jvnwebParser.CondicionalContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCondicional(JVNWebParser.CondicionalContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContCond(jvnwebParser.ContCondContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContCond(JVNWebParser.ContCondContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSino(jvnwebParser.SinoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSino(JVNWebParser.SinoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContSiNo(jvnwebParser.ContSiNoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContSiNo(JVNWebParser.ContSiNoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCpara(jvnwebParser.CparaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCpara(JVNWebParser.CparaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCparaIn(jvnwebParser.CparaInContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCparaIn(JVNWebParser.CparaInContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCparaOf(jvnwebParser.CparaOfContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCparaOf(JVNWebParser.CparaOfContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAvance(jvnwebParser.AvanceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAvance(JVNWebParser.AvanceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContPara(jvnwebParser.ContParaContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContPara(JVNWebParser.ContParaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCmientras(jvnwebParser.CmientrasContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCmientras(JVNWebParser.CmientrasContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContMientras(jvnwebParser.ContMientrasContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContMientras(JVNWebParser.ContMientrasContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCHacer(jvnwebParser.CHacerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCHacer(JVNWebParser.CHacerContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContHacer(jvnwebParser.ContHacerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContHacer(JVNWebParser.ContHacerContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitImpresion(jvnwebParser.ImpresionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitImpresion(JVNWebParser.ImpresionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSeleccion(jvnwebParser.SeleccionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSeleccion(JVNWebParser.SeleccionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCasos(jvnwebParser.CasosContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCasos(JVNWebParser.CasosContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCdefecto(jvnwebParser.CdefectoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCdefecto(JVNWebParser.CdefectoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContSelec(jvnwebParser.ContSelecContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContSelec(JVNWebParser.ContSelecContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContDefecto(jvnwebParser.ContDefectoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContDefecto(JVNWebParser.ContDefectoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDfuncion(jvnwebParser.DfuncionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDfuncion(JVNWebParser.DfuncionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitContFun(jvnwebParser.ContFunContext ctx) { return visitChildren(ctx); }
+	@Override public T visitContFun(JVNWebParser.ContFunContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRompe(jvnwebParser.RompeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRompe(JVNWebParser.RompeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitObjetoDec(jvnwebParser.ObjetoDecContext ctx) { return visitChildren(ctx); }
+	@Override public T visitObjetoDec(JVNWebParser.ObjetoDecContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArreglo(jvnwebParser.ArregloContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArreglo(JVNWebParser.ArregloContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArregloDec(jvnwebParser.ArregloDecContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArregloDec(JVNWebParser.ArregloDecContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArregloAsig(jvnwebParser.ArregloAsigContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArregloAsig(JVNWebParser.ArregloAsigContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPropiedades(jvnwebParser.PropiedadesContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPropiedades(JVNWebParser.PropiedadesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOtrasProp(jvnwebParser.OtrasPropContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOtrasProp(JVNWebParser.OtrasPropContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValor(jvnwebParser.ValorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitValor(JVNWebParser.ValorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitObjeto(jvnwebParser.ObjetoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitObjeto(JVNWebParser.ObjetoContext ctx) { return visitChildren(ctx); }
 }

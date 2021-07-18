@@ -1,4 +1,4 @@
-grammar jvnweb;
+grammar JVNWeb;
 
 main: 'Encabezado' contenidoEncabezado 'FinEncabezado' 'Cuerpo' contenido 'FinCuerpo' ('Codigo' codigo 'FinCodigo')?;
 
@@ -19,7 +19,7 @@ elementoCompuesto:
 
 elementoSimple:
     texto
-    | 'Enlace' clases? referencia? estilos? eventoComun* referencia TEXTO 'FinEnlace'
+    | 'Enlace' clases? referencia? estilos? eventoComun* TEXTO 'FinEnlace'
     | 'Linea' clases? estilos? eventoComun* 'FinLinea'
     | 'TextoConEnfasis' '(' 'enfasis' ':' ENFASIS ')' clases? estilos? eventoComun* texto* 'FinTextoConEnfasis'
     | 'Boton' clases? estilos? eventoComun* texto* 'Boton';
@@ -30,11 +30,11 @@ elementoFormulario:
      'Etiqueta' clases? estilos? eventoComun* texto* 'FinEtiqueta'
     | 'EntradaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada* 'FinEntradaDeTexto'
     | 'AreaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada*  'FinAreaDeTexto'
-    | 'Selector' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada* ('Opcion' atributoValor 'FinOpcion')* 'FinSelector';
+    | 'Selector' clases? atributoNombre? atributoValor? estilos? eventoEntrada* ('Opcion' atributoValor eventoComun* texto* 'FinOpcion')* 'FinSelector';
 
 elementoLista:  'ElementoLista' clases? estilos? eventoComun*  (elementoSimple | multimedia)* 'FinElementoLista';
 
-texto: TEXTO | 'Texto' clases? estilos? eventoComun*  TEXTO 'FinTexto';
+texto: TEXTO | ('Texto' clases? estilos? eventoComun* texto* 'FinTexto');
 
 textoAlternativo: 'TextoAlernativo' clases? estilos? eventoComun*  TEXTO 'FinTextoAlternativo' | ;
 
@@ -47,7 +47,7 @@ elementoTabla: 'ElementoTabla' clases? estilos? eventoComun*  (elementoSimple | 
 multimedia:
     'Audio' clases? mostrarControles? estilos? eventoComun*  fuente 'FinAudio'
     | 'Video' clases? mostrarControles? estilos? eventoComun*  fuente 'FinVideo'
-    | 'Imagen' clases? atributoFuente  ( '(' atributoImagen ':' '“' TEXTO '“' ')' )* estilos?               eventoComun* textoAlternativo 'FinImagen';
+    | 'Imagen' clases? atributoFuente  ( '(' atributoImagen ':' '“' TEXTO '“' ')' )* estilos?               eventoComun*  'FinImagen';
 
 mostrarControles: '(' 'conControles' ')';
 
@@ -101,7 +101,7 @@ CLASE: '.'[a-zA-Z0-9_][a-zA-Z0-9_-]+;
 
 declaracion: 'variable' ID asignacion otrasDec;
 
-otrasDec: ',' ID asignacion otrasDec;
+otrasDec: ',' ID asignacion otrasDec | ;
 
 asignacion: ( '=' expresion | );
 
@@ -127,13 +127,13 @@ ciclo: cpara | cmientras | cHacer | cparaOf | cparaIn;
 
 condicional: 'si' '(' expresion ')' 'entonces' contCond rompe sino 'fin_si';
 
-contCond: asignacionSimple contCond | declaracion contCond | declaracionF contCond | impresion contCond | condicional contCond | cpara contCond |
-cmientras contCond | cHacer contCond | seleccion contCond |;
+contCond: asignacionSimple contCond | declaracion contCond | declaracionF contCond | impresion contCond | condicional contCond | ciclo contCond |
+seleccion contCond |;
 
 sino: 'si_no' contSiNo rompe;
 
-contSiNo: asignacionSimple contSiNo | declaracion contSiNo | declaracionF contSiNo | impresion contSiNo | condicional contSiNo | cpara contSiNo |
-cmientras contSiNo | cHacer contSiNo | seleccion contSiNo |;
+contSiNo: asignacionSimple contSiNo | declaracion contSiNo | declaracionF contSiNo | impresion contSiNo | condicional contSiNo | ciclo contSiNo |
+seleccion contSiNo |;
 
 cpara: 'para' '(' ID '=' expresion ';' expresion ';' avance ')' 'hacer' contPara rompe 'fin_para';
 
@@ -143,17 +143,17 @@ cparaOf: 'para' ( ID 'de' ID) contPara 'fin_para';
 
 avance: ID | ENTERO | REAL;
 
-contPara: asignacionSimple contPara | declaracion contPara | declaracionF contPara | impresion contPara | condicional contPara | cpara contPara |
- cmientras contPara | cHacer contPara | seleccion contPara |;
+contPara: asignacionSimple contPara | declaracion contPara | declaracionF contPara | impresion contPara | condicional contPara | ciclo contPara |
+seleccion contPara |;
 
 cmientras: 'mientras' '(' expresion ')' 'hacer' contMientras rompe 'fin_mientras';
 
 contMientras: asignacionSimple contMientras | declaracion contMientras | declaracionF contMientras | impresion contMientras | condicional contMientras |
- cpara contMientras | cmientras contMientras | cHacer contMientras | seleccion contMientras |;
+ciclo contMientras| seleccion contMientras |;
 
 cHacer: 'hacer' contHacer rompe 'mientras' '(' expresion ')';
 
-contHacer: asignacionSimple contHacer | declaracion contHacer | declaracionF contHacer | cmientras contHacer | cHacer contHacer | seleccion contHacer |;
+contHacer: asignacionSimple contHacer | declaracion contHacer | declaracionF contHacer | ciclo contHacer | seleccion contHacer |;
 
 impresion: 'imprimir' expresion 'fin_imprimir';
 
@@ -161,13 +161,13 @@ seleccion: 'seleccionar' '(' (ID | IDCOMPUESTO) ')' 'entre' casos cdefecto 'fin_
 casos: 'caso' (ID | valor) ':' contSelec 'romper' casos |;
 cdefecto: 'defecto' ':' contDefecto 'romper' |;
 contSelec: asignacionSimple contSelec | declaracion contSelec | declaracionF contSelec |
-impresion contSelec | condicional contSelec | cpara contSelec | cmientras contSelec | cHacer contSelec | seleccion contSelec |;
+impresion contSelec | condicional contSelec | ciclo contSelec | seleccion contSelec |;
 contDefecto: asignacionSimple contDefecto | declaracion contDefecto | declaracionF contDefecto |
-impresion contDefecto | condicional contDefecto | cpara contDefecto | cmientras contDefecto | cHacer contDefecto | seleccion contDefecto |;
+impresion contDefecto | condicional contDefecto | ciclo contDefecto | seleccion contDefecto |;
 
 dfuncion: 'funcion' (ID | ) '(' argumentos ')' 'hace' contFun ('retornar' expresion ';' |  ) 'fin_funcion';
-contFun: asignacionSimple contFun | declaracion contFun | declaracionF contFun  |
-impresion contFun | condicional contFun | cpara contFun | cmientras contFun | cHacer contFun | seleccion contFun | ;
+contFun: asignacionSimple contFun | declaracion contFun | declaracionF contFun  | impresion contFun | condicional contFun |
+ciclo contFun | seleccion contFun | ;
 
 rompe: 'romper' ';' | 'continuar' ';' | ;
 
@@ -177,12 +177,13 @@ arregloDec: 'lista' ID '=' arreglo;
 arregloAsig: ID '=' arreglo;
 propiedades: ID ':' (ENTERO | REAL | CADENA | dfuncion | arreglo | objeto ) otrasProp;
 otrasProp: ',' ID ':' (ENTERO | REAL | CADENA | dfuncion |  arreglo ) otrasProp | ;
-valor: ENTERO | REAL | CADENA | CARACTER | BOOLEANO | ID | IDCOMPUESTO | arreglo | objeto ;
+valor: ENTERO | REAL | CADENA | CARACTER | BOOLEANO | ID | IDCOMPUESTO | arreglo | objeto | ELEMENTOARR;
 
 objeto: ID 'tiene' propiedades;
 
-TEXTO: '\'' .* '\'';
+TEXTO: '\'' ~[']*  '\'';
 OPERADOR: '&&' | '||' | '<' | '>' | '<=' | '>=' | '==' | '!=' | '+' | '-' | '*' | '/' | '%';
+ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA) ']';
 ENTERO: ('-'|)[0-9]+;
 REAL: ('-'|)[0-9]+'.'[0-9]+;
 CADENA: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#')*'"';
@@ -217,7 +218,7 @@ VALOR:  CADENA_CSS
     | FLOTAMIENTO
     | DIMENSIONES;
 
-CADENA_CSS: ([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' )+;
+CADENA_CSS: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' )+'"';
 
 COLOR: 'rojo' | 'verde' | 'azul' | 'amarillo' | 'violeta' | 'negro' | 'marron' | 'gris' |
  'naranja' | 'rosa' | 'purpura' | 'blanco' | '#' 'rojo' N_COLOR 'verde' N_COLOR 'azul' N_COLOR;
