@@ -39,22 +39,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     }
     
     @Override
-    public T visitElementoCompuesto( JVNWebParser.ElementoCompuestoContext ctx ) {
-        return visitChildren( ctx );
-    }
-    
-    @Override
-    public T visitElementoSimple( JVNWebParser.ElementoSimpleContext ctx ) {
-        return visitChildren( ctx );
-    }
-    
-    @Override
     public T visitReferencia( JVNWebParser.ReferenciaContext ctx ) {
-        return visitChildren( ctx );
-    }
-    
-    @Override
-    public T visitElementoFormulario( JVNWebParser.ElementoFormularioContext ctx ) {
         return visitChildren( ctx );
     }
     
@@ -65,11 +50,6 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitTexto( JVNWebParser.TextoContext ctx ) {
-        return visitChildren( ctx );
-    }
-    
-    @Override
-    public T visitTextoAlternativo( JVNWebParser.TextoAlternativoContext ctx ) {
         return visitChildren( ctx );
     }
     
@@ -85,11 +65,6 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitElementoTabla( JVNWebParser.ElementoTablaContext ctx ) {
-        return visitChildren( ctx );
-    }
-    
-    @Override
-    public T visitMultimedia( JVNWebParser.MultimediaContext ctx ) {
         return visitChildren( ctx );
     }
     
@@ -163,15 +138,65 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitEstilo( JVNWebParser.EstiloContext ctx ) {
-        if ( ctx.ESTILO() != null )
-            write.printf( "%s: %s;", Constantes.estilos.get( ctx.ESTILO().getText() ), ctx.VALOR().getText() );
-        else {
+        if ( ctx.ESTILO() != null ) {
+            write.print( Constantes.estilos.get( ctx.ESTILO().getText() ) + ": " );
+            visitValorEstilo( ctx.valorEstilo() );
+        } else {
             String estiloBooleano = ctx.ESTILO_BOOLEANO().getText();
             if ( estiloBooleano.equals( "cursiva" ) || estiloBooleano.equals( "negrilla" ) )
                 write.printf( "font-style: %s;", Constantes.estilosBooleanos.get( estiloBooleano ) );
             else if ( estiloBooleano.equals( "subrayado" ) || estiloBooleano.equals( "tachado" ) )
                 write.printf( "text-decoration: %s;", Constantes.estilosBooleanos.get( estiloBooleano ) );
         }
+        return null;
+    }
+    
+    @Override
+    public T visitValorEstilo( JVNWebParser.ValorEstiloContext ctx ) {
+        if ( ctx.CADENA_CSS() != null ) {
+            write.print( ctx.CADENA_CSS().getText() );
+        } else if ( ctx.NUMERO() != null ) {
+            write.print( ctx.NUMERO().getText() );
+        } else if ( ctx.COLOR() != null ) {
+            write.print( Constantes.colores.get( ctx.COLOR().getText() ) );
+        } else if ( ctx.VISUALIZACION() != null ) {
+            String valorVisualizacion = ctx.VISUALIZACION().getText();
+            if ( valorVisualizacion.equals( "fila" ) || valorVisualizacion.equals( "columna" ) ) {
+                write.print( "flex; " );
+                write.print( "flex-direction: " + Constantes.valoresVisualizacion.get( valorVisualizacion ) );
+            } else
+                write.print( Constantes.valoresVisualizacion.get( valorVisualizacion ) );
+        } else if ( ctx.POSICION() != null ) {
+            write.print( Constantes.valoresPosicion.get( ctx.POSICION().getText() ) );
+        } else if ( ctx.ubicacion() != null ) {
+            visitUbicacion( ctx.ubicacion() );
+        } else if ( ctx.JUSTIFICADO() != null ) {
+            write.print( Constantes.valoresJustificado.get( ctx.JUSTIFICADO().getText() ) );
+        } else if ( ctx.BORDE() != null ) {
+            write.print( ctx.BORDE().getText() );
+        } else if ( ctx.CURSOR() != null ) {
+            write.print( Constantes.valoresCursor.get( ctx.CURSOR().getText() ) );
+        } else if ( ctx.FLOTAMIENTO() != null ) {
+            write.print( Constantes.valoresFlotamiento.get( ctx.FLOTAMIENTO().getText() ) );
+        } else if ( ctx.dimensiones() != null ) {
+            visitDimensiones( ctx.dimensiones() );
+        }
+        write.print( "; " );
+        return null;
+    }
+    
+    @Override
+    public T visitDimensiones( JVNWebParser.DimensionesContext ctx ) {
+        ctx.dimension().forEach( this::visitDimension );
+        return null;
+    }
+    
+    @Override
+    public T visitDimension( JVNWebParser.DimensionContext ctx ) {
+        write.print( ctx.DIMENSION().getText() 
+            + (ctx.UNIDAD_DIMENSION().getText().equals( "pixeles" ) ? "px" : "%" )
+            + " "
+        );
         return null;
     }
     

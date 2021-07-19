@@ -1,4 +1,4 @@
-// Generated from C:/Users/USUARIO/Documents/2021-I/Lenguajes/Proyecto/grammar\JVNWeb.g4 by ANTLR 4.9.1
+// Generated from C:/Users/usuario/IdeaProjects/JVNWeb/grammar\JVNWeb.g4 by ANTLR 4.9.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -34,17 +34,89 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitContenido(JVNWebParser.ContenidoContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#elementoCompuesto}.
+	 * Visit a parse tree produced by the {@code contenedor}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitElementoCompuesto(JVNWebParser.ElementoCompuestoContext ctx);
+	T visitContenedor(JVNWebParser.ContenedorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#elementoSimple}.
+	 * Visit a parse tree produced by the {@code formulario}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitElementoSimple(JVNWebParser.ElementoSimpleContext ctx);
+	T visitFormulario(JVNWebParser.FormularioContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code listaParrafo}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListaParrafo(JVNWebParser.ListaParrafoContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code listaOrdenada}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListaOrdenada(JVNWebParser.ListaOrdenadaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code listaSinOrden}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListaSinOrden(JVNWebParser.ListaSinOrdenContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code tabla}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTabla(JVNWebParser.TablaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code elementoMultimedia}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementoMultimedia(JVNWebParser.ElementoMultimediaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code elementoTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementoTexto(JVNWebParser.ElementoTextoContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code enlace}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEnlace(JVNWebParser.EnlaceContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code linea}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLinea(JVNWebParser.LineaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code textoConEnfasis}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTextoConEnfasis(JVNWebParser.TextoConEnfasisContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code boton}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBoton(JVNWebParser.BotonContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#referencia}.
 	 * @param ctx the parse tree
@@ -52,11 +124,33 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReferencia(JVNWebParser.ReferenciaContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#elementoFormulario}.
+	 * Visit a parse tree produced by the {@code etiqueta}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitElementoFormulario(JVNWebParser.ElementoFormularioContext ctx);
+	T visitEtiqueta(JVNWebParser.EtiquetaContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code entradaDeTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEntradaDeTexto(JVNWebParser.EntradaDeTextoContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code areaDeTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAreaDeTexto(JVNWebParser.AreaDeTextoContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code selector}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSelector(JVNWebParser.SelectorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#elementoLista}.
 	 * @param ctx the parse tree
@@ -69,12 +163,6 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTexto(JVNWebParser.TextoContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#textoAlternativo}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#contenidoTabla}.
 	 * @param ctx the parse tree
@@ -94,11 +182,26 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitElementoTabla(JVNWebParser.ElementoTablaContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#multimedia}.
+	 * Visit a parse tree produced by the {@code audio}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMultimedia(JVNWebParser.MultimediaContext ctx);
+	T visitAudio(JVNWebParser.AudioContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code video}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVideo(JVNWebParser.VideoContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code imagen}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImagen(JVNWebParser.ImagenContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#mostrarControles}.
 	 * @param ctx the parse tree
@@ -477,4 +580,28 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitObjeto(JVNWebParser.ObjetoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#valorEstilo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValorEstilo(JVNWebParser.ValorEstiloContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#ubicacion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUbicacion(JVNWebParser.UbicacionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#dimensiones}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDimensiones(JVNWebParser.DimensionesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#dimension}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDimension(JVNWebParser.DimensionContext ctx);
 }
