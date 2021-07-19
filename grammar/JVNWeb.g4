@@ -36,8 +36,6 @@ elementoLista:  'ElementoLista' clases? estilos? eventoComun*  (elementoSimple |
 
 texto: TEXTO | ('Texto' clases? estilos? eventoComun* texto* 'FinTexto');
 
-textoAlternativo: 'TextoAlernativo' clases? estilos? eventoComun*  TEXTO 'FinTextoAlternativo' | ;
-
 contenidoTabla: ('EncabezadoTabla' clases? estilos? eventoComun*  elementoTabla 'FinEncabezadoTabla')? filaTabla*;
 
 filaTabla: 'FilaTabla' clases? estilos? eventoComun*  elementoTabla* 'FinFilaTabla';
@@ -78,7 +76,7 @@ atributoImagen:
 
 estilos: '( ''estilos' ':' estilo ('y' estilo)* ')';
 
-estilo: ESTILO 'es' VALOR | ESTILO_BOOLEANO;
+estilo: ESTILO 'es' valor_estilo | ESTILO_BOOLEANO;
 
 eventoComun: '(' EVENTO_COMUN ':' '“' ID '“' ')';
 
@@ -93,9 +91,10 @@ cambioElemento: ID ( 'elemento por' CADENA) ('nuevo contenido es' | 'estilo es')
 
 obtenerElemento: 'obtenerElemento' '(' ELEMENTO | CLASE ')';
 
+// HAY QUE ARREGLAR LO DE TEXTO CON ÉNFASIS PORQUE NO SE SABE A QUÉ h# TRADUCIRLO
 ELEMENTO: ('Contenedor' | 'Formulario' | 'Parrafo' | 'ListaOrdenada' | 'ListaSinOrden' | 'Tabla' | 'Enlace' | 'Linea' |
-            'TextoConEnfasis' | 'EntradaDeTexto' | 'AreaDeTexto' | 'Etiqueta' | 'Boton' | 'Selector' | 'Texto' | 'TextoAlernativo' |
-             'EncabezadoTabla' | 'FilaTabla' | 'ElementoTabla' | 'Audio' | 'Video' | 'Imagen');
+            'TextoConEnfasis' | 'EntradaDeTexto' | 'AreaDeTexto' | 'Etiqueta' | 'Boton' | 'Selector' | 'Texto' |
+            'EncabezadoTabla' | 'FilaTabla' | 'ElementoTabla' | 'Audio' | 'Video' | 'Imagen');
 
 CLASE: '.'[a-zA-Z0-9_][a-zA-Z0-9_-]+;
 
@@ -206,17 +205,24 @@ ESTILO: ('ancho' | 'alto' | 'anchoMinimo' |  'anchoMaximo' | 'alturaMinima' | 'a
 
 ESTILO_BOOLEANO: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
 
-VALOR:  CADENA_CSS
-    | [0-9]+
+valor_estilo:  
+      CADENA_CSS
+    | NUMERO
     | COLOR
     | VISUALIZACION
     | POSICION
-    | UBICACION
+    | ubicacion
     | JUSTIFICADO
     | BORDE
     | CURSOR
     | FLOTAMIENTO
     | DIMENSIONES;
+    
+ubicacion:
+    'superior' valor_estilo 'derecha' valor_estilo 'inferior' valor_estilo 'izquierda' valor_estilo
+    | 'horizontal' valor_estilo 'vertical' valor_estilo;
+
+NUMERO: [0-9]+;
 
 CADENA_CSS: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' )+'"';
 
@@ -225,7 +231,7 @@ COLOR: 'rojo' | 'verde' | 'azul' | 'amarillo' | 'violeta' | 'negro' | 'marron' |
 
 N_COLOR: [0-255];
 
-VISUALIZACION: 'nada' | 'bloque' | 'enlinea' | 'fila' | 'columna';
+VISUALIZACION: 'nada' | 'bloque' | 'enlinea' | 'flexible' | 'fila' | 'columna';
 
 POSICION: 'estatica' | 'relativa' | 'absoluta' | 'fija' ;
 
@@ -233,11 +239,7 @@ FLOTAMIENTO: 'derecha' | 'izquierda' | 'ninguno';
 
 ALINEADO: 'centro' | 'extendido' | 'inicio' | 'final';
 
-JUSTIFICADO: 'centrado' | 'espacioEntre' | 'espacioAlrededor' | 'inicial' | 'final' | 'espacioUniforme';
-
-UBICACION:
-'superior' VALOR  'derecha' VALOR 'inferior' VALOR 'izquierda' VALOR
-| 'horizontal' VALOR 'vertical' VALOR;
+JUSTIFICADO: 'centrado' | 'espacioEntre' | 'espacioAlrededor' | 'inicio' | 'final';
 
 BORDE: CADENA? CADENA COLOR;
 
@@ -245,8 +247,10 @@ CURSOR: 'puntero' | 'texto' | 'esperando' | 'automatico' | 'invisible';
 
 DIMENSIONES: DIMENSION (DIMENSION (DIMENSION DIMENSION)? )?;
 
-DIMENSION: [0-9]+ ('.' [0-9]+)? ('pixeles' | '%');
+DIMENSION: [0-9]+ ('.' [0-9]+)? UNIDAD_DIMENSION;
 
-EVENTO_ENTRADA: ('alModificar' | 'alSeleccionar' );
+UNIDAD_DIMENSION: 'pixeles' | '%';
 
-EVENTO_COMUN: ('alHacerClic' | 'alApuntar' |  'alSalir' );
+EVENTO_ENTRADA: 'alModificar' | 'alSeleccionar';
+
+EVENTO_COMUN: 'alHacerClic' | 'alApuntar' | 'alSalir';
