@@ -78,7 +78,7 @@ atributoImagen:
 
 estilos: '( ''estilos' ':' estilo ('y' estilo)* ')';
 
-estilo: ESTILO 'es' VALOR | ESTILO_BOOLEANO;
+estilo: ESTILO 'es' (valorEstilo | ESTILO_BOOLEANO);
 
 eventoComun: '(' EVENTO_COMUN ':' '“' ID '“' ')';
 
@@ -87,11 +87,11 @@ eventoFormulario: (EVENTO_COMUN | 'alEnviarDatos') ':' '“' ID '“' ')';
 eventoEntrada: '(' EVENTO_ENTRADA ':'  '“' ID '“' ')';
 
 codigo: declaracion codigo | asignacionSimple codigo | lfuncion codigo |
-        condicional codigo | ciclo codigo | seleccion codigo | declaracionF codigo | dfuncion codigo | cambioElemento codigo | ;
+        condicional codigo | ciclo codigo | seleccion codigo | declaracionF codigo | dfuncion codigo | cambioElemento codigo | obtenerElemento codigo | ;
 
-cambioElemento: ID ( 'elemento por' CADENA) ('nuevo contenido es' | 'estilo es') ':';
+cambioElemento: (ID | ELEMENTOARR) ('nuevo contenido es') ':' (valor);
 
-obtenerElemento: 'obtenerElemento' '(' ELEMENTO | CLASE ')';
+obtenerElemento: 'obtenerElemento' '(' (ELEMENTO|CLASE) ')' 'en' ID;
 
 ELEMENTO: ('Contenedor' | 'Formulario' | 'Parrafo' | 'ListaOrdenada' | 'ListaSinOrden' | 'Tabla' | 'Enlace' | 'Linea' |
             'TextoConEnfasis' | 'EntradaDeTexto' | 'AreaDeTexto' | 'Etiqueta' | 'Boton' | 'Selector' | 'Texto' | 'TextoAlernativo' |
@@ -183,7 +183,7 @@ objeto: ID 'tiene' propiedades;
 
 TEXTO: '\'' ~[']*  '\'';
 OPERADOR: '&&' | '||' | '<' | '>' | '<=' | '>=' | '==' | '!=' | '+' | '-' | '*' | '/' | '%';
-ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA) ']';
+ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA) ']' ;
 ENTERO: ('-'|)[0-9]+;
 REAL: ('-'|)[0-9]+'.'[0-9]+;
 CADENA: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#')*'"';
@@ -206,22 +206,25 @@ ESTILO: ('ancho' | 'alto' | 'anchoMinimo' |  'anchoMaximo' | 'alturaMinima' | 'a
 
 ESTILO_BOOLEANO: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
 
-VALOR:  CADENA_CSS
-    | [0-9]+
+valorEstilo:  CADENA_CSS
+    | ENTERO
     | COLOR
     | VISUALIZACION
     | POSICION
     | UBICACION
     | JUSTIFICADO
-    | BORDE
+    | borde
     | CURSOR
     | FLOTAMIENTO
-    | DIMENSIONES;
+    | DIMENSIONES
+    | colorFormato;
 
 CADENA_CSS: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' )+'"';
 
 COLOR: 'rojo' | 'verde' | 'azul' | 'amarillo' | 'violeta' | 'negro' | 'marron' | 'gris' |
- 'naranja' | 'rosa' | 'purpura' | 'blanco' | '#' 'rojo' N_COLOR 'verde' N_COLOR 'azul' N_COLOR;
+ 'naranja' | 'rosa' | 'purpura' | 'blanco' ;
+
+colorFormato: '#' 'rojo' N_COLOR 'verde' N_COLOR 'azul' N_COLOR;
 
 N_COLOR: [0-255];
 
@@ -235,11 +238,11 @@ ALINEADO: 'centro' | 'extendido' | 'inicio' | 'final';
 
 JUSTIFICADO: 'centrado' | 'espacioEntre' | 'espacioAlrededor' | 'inicial' | 'final' | 'espacioUniforme';
 
-UBICACION:
-'superior' VALOR  'derecha' VALOR 'inferior' VALOR 'izquierda' VALOR
-| 'horizontal' VALOR 'vertical' VALOR;
+ubicacion:
+'superior' valorEstilo  'derecha' valorEstilo 'inferior' valorEstilo 'izquierda' valorEstilo
+| 'horizontal' valorEstilo 'vertical' valorEstilo;
 
-BORDE: CADENA? CADENA COLOR;
+borde: CADENA? CADENA (COLOR | colorFormato);
 
 CURSOR: 'puntero' | 'texto' | 'esperando' | 'automatico' | 'invisible';
 

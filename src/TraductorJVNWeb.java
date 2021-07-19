@@ -18,7 +18,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
     }
 
     @Override public T visitMain(JVNWebParser.MainContext ctx) {
-                        
+
         return visitChildren(ctx);
     }
 
@@ -147,7 +147,31 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
     }
 
     @Override public T visitCodigo(JVNWebParser.CodigoContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.codigo() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.lfuncion() != null){
+                visitLfuncion(ctx.lfuncion());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }
+            visitCodigo(ctx.codigo());
+        }
+        return null;
     }
 
     @Override public T visitCambioElemento(JVNWebParser.CambioElementoContext ctx) {

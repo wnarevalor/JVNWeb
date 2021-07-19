@@ -946,6 +946,54 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitObjeto(JVNWebParser.ObjetoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValorEstilos(JVNWebParser.ValorEstilosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValorEstilos(JVNWebParser.ValorEstilosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColorFormato(JVNWebParser.ColorFormatoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColorFormato(JVNWebParser.ColorFormatoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUbicacion(JVNWebParser.UbicacionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUbicacion(JVNWebParser.UbicacionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBorde(JVNWebParser.BordeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBorde(JVNWebParser.BordeContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

@@ -477,4 +477,28 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitObjeto(JVNWebParser.ObjetoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#valorEstilos}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValorEstilos(JVNWebParser.ValorEstilosContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#colorFormato}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColorFormato(JVNWebParser.ColorFormatoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#ubicacion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUbicacion(JVNWebParser.UbicacionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#borde}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBorde(JVNWebParser.BordeContext ctx);
 }
