@@ -1,0 +1,57 @@
+Encabezado Titulo 'text' FinTitulo FinEncabezado
+Cuerpo 'this is a text' FinCuerpo
+Codigo
+    variable code = "codigo"
+    lista arreglo = [1,2,3]
+    objeto carro tiene techo: "rojo", ruedas: "amarillas", numeroPuertas : 2 , colores : ["rojo","negro", "azul"] fin_objeto
+    objeto casa tiene entrada : "azul", :objeto cuarto tiene puertas : 2 fin_objeto , garage : "peque" fin_objeto
+    lista arregloObjetos = ["objeto", n, n.e, n[0], n["carde"], n[1].val.ee, objeto tiene carro: 2 fin_objeto]
+
+    variable codigo = 3, regla = "a", arreglo = 25
+
+    obtenerElemento (.clase) en parrafo
+
+
+    obtenerElemento (Parrafo) en p
+
+    parrafo nuevo contenido es : arreglo[0] , "es un numero" , "<p> This is a paragraph </p>"
+
+    arreglo = [];
+    func(230012, [123,1]);
+    k = !(false)
+    variable function = suma(2,5) + 500
+    si (booleano) entonces
+        lista discos = [12,4,24]
+        continuar;
+    si_no
+        romper;
+    fin_si
+    para(i=3;i<10;29)hacer
+        si(i>5)entonces
+            imprimir("log")fin_imprimir
+        fin_si
+    fin_para
+    objeto casa tiene puertas: 2, ventanas : 5 fin_objeto
+    para (cosa en casa) hacer
+        imprimir casa[cosa] fin_imprimir
+    fin_para
+    variable text = "texto"
+    para (letra de texto) hacer
+        imprimir letra fin_imprimir
+    fin_para
+    mientras (true) hacer
+        romper;
+    fin_mientras
+    hacer romper; mientras (true)
+    variable a = 1
+    seleccionar (a) entre
+        caso 1:
+            imprimir "imprimir nada" fin_imprimir
+        defecto:
+            imprimir "defecto" fin_imprimir
+    fin_seleccionar
+    funcion hacerAlgo () hace
+        retornar a;
+    fin_funcion
+
+FinCodigo

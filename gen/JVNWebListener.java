@@ -347,6 +347,16 @@ public interface JVNWebListener extends ParseTreeListener {
 	 */
 	void exitCambioElemento(JVNWebParser.CambioElementoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JVNWebParser#otrosValores}.
+	 * @param ctx the parse tree
+	 */
+	void enterOtrosValores(JVNWebParser.OtrosValoresContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JVNWebParser#otrosValores}.
+	 * @param ctx the parse tree
+	 */
+	void exitOtrosValores(JVNWebParser.OtrosValoresContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#obtenerElemento}.
 	 * @param ctx the parse tree
 	 */
@@ -356,6 +366,16 @@ public interface JVNWebListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitObtenerElemento(JVNWebParser.ObtenerElementoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JVNWebParser#elemento}.
+	 * @param ctx the parse tree
+	 */
+	void enterElemento(JVNWebParser.ElementoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JVNWebParser#elemento}.
+	 * @param ctx the parse tree
+	 */
+	void exitElemento(JVNWebParser.ElementoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#declaracion}.
 	 * @param ctx the parse tree
@@ -697,25 +717,41 @@ public interface JVNWebListener extends ParseTreeListener {
 	 */
 	void exitContFun(JVNWebParser.ContFunContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#rompe}.
+	 * Enter a parse tree produced by the {@code romper}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
 	 * @param ctx the parse tree
 	 */
-	void enterRompe(JVNWebParser.RompeContext ctx);
+	void enterRomper(JVNWebParser.RomperContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#rompe}.
+	 * Exit a parse tree produced by the {@code romper}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
 	 * @param ctx the parse tree
 	 */
-	void exitRompe(JVNWebParser.RompeContext ctx);
+	void exitRomper(JVNWebParser.RomperContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#objetoDec}.
+	 * Enter a parse tree produced by the {@code continuar}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
 	 * @param ctx the parse tree
 	 */
-	void enterObjetoDec(JVNWebParser.ObjetoDecContext ctx);
+	void enterContinuar(JVNWebParser.ContinuarContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#objetoDec}.
+	 * Exit a parse tree produced by the {@code continuar}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
 	 * @param ctx the parse tree
 	 */
-	void exitObjetoDec(JVNWebParser.ObjetoDecContext ctx);
+	void exitContinuar(JVNWebParser.ContinuarContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code vacio}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
+	 * @param ctx the parse tree
+	 */
+	void enterVacio(JVNWebParser.VacioContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code vacio}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
+	 * @param ctx the parse tree
+	 */
+	void exitVacio(JVNWebParser.VacioContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#arreglo}.
 	 * @param ctx the parse tree
@@ -787,15 +823,25 @@ public interface JVNWebListener extends ParseTreeListener {
 	 */
 	void exitObjeto(JVNWebParser.ObjetoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#valorEstilos}.
+	 * Enter a parse tree produced by {@link JVNWebParser#otroObjeto}.
 	 * @param ctx the parse tree
 	 */
-	void enterValorEstilos(JVNWebParser.ValorEstilosContext ctx);
+	void enterOtroObjeto(JVNWebParser.OtroObjetoContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#valorEstilos}.
+	 * Exit a parse tree produced by {@link JVNWebParser#otroObjeto}.
 	 * @param ctx the parse tree
 	 */
-	void exitValorEstilos(JVNWebParser.ValorEstilosContext ctx);
+	void exitOtroObjeto(JVNWebParser.OtroObjetoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JVNWebParser#valorEstilo}.
+	 * @param ctx the parse tree
+	 */
+	void enterValorEstilo(JVNWebParser.ValorEstiloContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JVNWebParser#valorEstilo}.
+	 * @param ctx the parse tree
+	 */
+	void exitValorEstilo(JVNWebParser.ValorEstiloContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#colorFormato}.
 	 * @param ctx the parse tree
