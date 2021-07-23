@@ -8,14 +8,14 @@ titulo: 'Titulo' TEXTO 'FinTitulo';
 
 contenido: (elementoCompuesto | elementoSimple | elementoFormulario)+;
 
-elementoCompuesto:
+elementoCompuesto://Elementolista antes de eventoComun?
     'Contenedor' clases? estilos? eventoComun*  contenido 'FinContenedor' #contenedor
     | 'Formulario' clases? estilos? eventoFormulario* contenido 'FinFormulario' #formulario
-    | 'Parrafo' clases? estilos? eventoComun*  texto*  'FinParrafo' #listaParrafo
+    | 'Parrafo' clases? estilos? eventoComun*  texto*  'FinParrafo' #parrafo
     | 'ListaOrdenada' clases? estilos? elementoLista* eventoComun*  'FinListaOrdenada' #listaOrdenada
     | 'ListaSinOrden' clases? estilos? elementoLista* eventoComun*  'FinListaSinOrden' #listaSinOrden
     | 'Tabla' clases? estilos? eventoComun* contenidoTabla 'FinTabla' #tabla
-    | multimedia #elementoMultimedia;
+    | multimedia #elementoMultimedia ;
 
 elementoSimple:
     texto #elementoTexto
@@ -23,7 +23,7 @@ elementoSimple:
     | 'Linea' clases? estilos? eventoComun* 'FinLinea' #linea
     | 'TextoConEnfasis' '(' 'enfasis' ':' ENFASIS ')' clases? estilos? eventoComun* texto* 'FinTextoConEnfasis' #textoConEnfasis
     | 'Boton' clases? estilos? eventoComun* texto* 'Boton' #boton;
-
+    
 referencia: '(' 'referencia' ':' '"' TEXTO '"' ')';
 
 elementoFormulario:

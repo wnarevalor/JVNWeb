@@ -48,12 +48,12 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFormulario(JVNWebParser.FormularioContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code listaParrafo}
+	 * Visit a parse tree produced by the {@code parrafo}
 	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitListaParrafo(JVNWebParser.ListaParrafoContext ctx);
+	T visitParrafo(JVNWebParser.ParrafoContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code listaOrdenada}
 	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.

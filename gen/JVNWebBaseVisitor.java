@@ -58,7 +58,7 @@ public class JVNWebBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitListaParrafo(JVNWebParser.ListaParrafoContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParrafo(JVNWebParser.ParrafoContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

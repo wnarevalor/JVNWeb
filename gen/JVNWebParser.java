@@ -203,14 +203,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_main; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterMain(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitMain(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitMain(this);
 			else return visitor.visitChildren(this);
@@ -272,14 +264,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_contenidoEncabezado; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContenidoEncabezado(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContenidoEncabezado(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContenidoEncabezado(this);
 			else return visitor.visitChildren(this);
@@ -313,14 +297,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_titulo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterTitulo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitTitulo(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitTitulo(this);
@@ -376,14 +352,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_contenido; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContenido(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContenido(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContenido(this);
@@ -490,16 +458,34 @@ public class JVNWebParser extends Parser {
 		}
 		public FormularioContext(ElementoCompuestoContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterFormulario(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitFormulario(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitFormulario(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class ParrafoContext extends ElementoCompuestoContext {
+		public ClasesContext clases() {
+			return getRuleContext(ClasesContext.class,0);
+		}
+		public EstilosContext estilos() {
+			return getRuleContext(EstilosContext.class,0);
+		}
+		public List<EventoComunContext> eventoComun() {
+			return getRuleContexts(EventoComunContext.class);
+		}
+		public EventoComunContext eventoComun(int i) {
+			return getRuleContext(EventoComunContext.class,i);
+		}
+		public List<TextoContext> texto() {
+			return getRuleContexts(TextoContext.class);
+		}
+		public TextoContext texto(int i) {
+			return getRuleContext(TextoContext.class,i);
+		}
+		public ParrafoContext(ElementoCompuestoContext ctx) { copyFrom(ctx); }
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitParrafo(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -521,50 +507,8 @@ public class JVNWebParser extends Parser {
 		}
 		public ContenedorContext(ElementoCompuestoContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContenedor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContenedor(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContenedor(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class ListaParrafoContext extends ElementoCompuestoContext {
-		public ClasesContext clases() {
-			return getRuleContext(ClasesContext.class,0);
-		}
-		public EstilosContext estilos() {
-			return getRuleContext(EstilosContext.class,0);
-		}
-		public List<EventoComunContext> eventoComun() {
-			return getRuleContexts(EventoComunContext.class);
-		}
-		public EventoComunContext eventoComun(int i) {
-			return getRuleContext(EventoComunContext.class,i);
-		}
-		public List<TextoContext> texto() {
-			return getRuleContexts(TextoContext.class);
-		}
-		public TextoContext texto(int i) {
-			return getRuleContext(TextoContext.class,i);
-		}
-		public ListaParrafoContext(ElementoCompuestoContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterListaParrafo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitListaParrafo(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitListaParrafo(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -589,14 +533,6 @@ public class JVNWebParser extends Parser {
 		}
 		public ListaOrdenadaContext(ElementoCompuestoContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterListaOrdenada(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitListaOrdenada(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitListaOrdenada(this);
 			else return visitor.visitChildren(this);
@@ -620,14 +556,6 @@ public class JVNWebParser extends Parser {
 		}
 		public TablaContext(ElementoCompuestoContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterTabla(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitTabla(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitTabla(this);
 			else return visitor.visitChildren(this);
@@ -638,14 +566,6 @@ public class JVNWebParser extends Parser {
 			return getRuleContext(MultimediaContext.class,0);
 		}
 		public ElementoMultimediaContext(ElementoCompuestoContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterElementoMultimedia(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitElementoMultimedia(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitElementoMultimedia(this);
@@ -672,14 +592,6 @@ public class JVNWebParser extends Parser {
 			return getRuleContext(EventoComunContext.class,i);
 		}
 		public ListaSinOrdenContext(ElementoCompuestoContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterListaSinOrden(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitListaSinOrden(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitListaSinOrden(this);
@@ -788,7 +700,7 @@ public class JVNWebParser extends Parser {
 				}
 				break;
 			case T__12:
-				_localctx = new ListaParrafoContext(_localctx);
+				_localctx = new ParrafoContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(227);
@@ -1062,14 +974,6 @@ public class JVNWebParser extends Parser {
 		}
 		public EnlaceContext(ElementoSimpleContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterEnlace(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitEnlace(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitEnlace(this);
 			else return visitor.visitChildren(this);
@@ -1097,14 +1001,6 @@ public class JVNWebParser extends Parser {
 		}
 		public TextoConEnfasisContext(ElementoSimpleContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterTextoConEnfasis(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitTextoConEnfasis(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitTextoConEnfasis(this);
 			else return visitor.visitChildren(this);
@@ -1125,14 +1021,6 @@ public class JVNWebParser extends Parser {
 		}
 		public LineaContext(ElementoSimpleContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterLinea(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitLinea(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitLinea(this);
 			else return visitor.visitChildren(this);
@@ -1143,14 +1031,6 @@ public class JVNWebParser extends Parser {
 			return getRuleContext(TextoContext.class,0);
 		}
 		public ElementoTextoContext(ElementoSimpleContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterElementoTexto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitElementoTexto(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitElementoTexto(this);
@@ -1177,14 +1057,6 @@ public class JVNWebParser extends Parser {
 			return getRuleContext(TextoContext.class,i);
 		}
 		public BotonContext(ElementoSimpleContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterBoton(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitBoton(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitBoton(this);
@@ -1457,14 +1329,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_referencia; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterReferencia(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitReferencia(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitReferencia(this);
 			else return visitor.visitChildren(this);
@@ -1536,14 +1400,6 @@ public class JVNWebParser extends Parser {
 		}
 		public EtiquetaContext(ElementoFormularioContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterEtiqueta(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitEtiqueta(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitEtiqueta(this);
 			else return visitor.visitChildren(this);
@@ -1572,14 +1428,6 @@ public class JVNWebParser extends Parser {
 			return getRuleContext(EventoEntradaContext.class,i);
 		}
 		public AreaDeTextoContext(ElementoFormularioContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAreaDeTexto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAreaDeTexto(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAreaDeTexto(this);
@@ -1622,14 +1470,6 @@ public class JVNWebParser extends Parser {
 		}
 		public SelectorContext(ElementoFormularioContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterSelector(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitSelector(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitSelector(this);
 			else return visitor.visitChildren(this);
@@ -1658,14 +1498,6 @@ public class JVNWebParser extends Parser {
 			return getRuleContext(EventoEntradaContext.class,i);
 		}
 		public EntradaDeTextoContext(ElementoFormularioContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterEntradaDeTexto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitEntradaDeTexto(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitEntradaDeTexto(this);
@@ -2042,14 +1874,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_elementoLista; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterElementoLista(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitElementoLista(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitElementoLista(this);
 			else return visitor.visitChildren(this);
@@ -2174,14 +1998,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_texto; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterTexto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitTexto(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitTexto(this);
 			else return visitor.visitChildren(this);
@@ -2304,14 +2120,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_contenidoTabla; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContenidoTabla(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContenidoTabla(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContenidoTabla(this);
 			else return visitor.visitChildren(this);
@@ -2424,14 +2232,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_filaTabla; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterFilaTabla(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitFilaTabla(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitFilaTabla(this);
 			else return visitor.visitChildren(this);
@@ -2539,14 +2339,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elementoTabla; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterElementoTabla(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitElementoTabla(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitElementoTabla(this);
@@ -2686,14 +2478,6 @@ public class JVNWebParser extends Parser {
 		}
 		public ImagenContext(MultimediaContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterImagen(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitImagen(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitImagen(this);
 			else return visitor.visitChildren(this);
@@ -2720,14 +2504,6 @@ public class JVNWebParser extends Parser {
 		}
 		public AudioContext(MultimediaContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAudio(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAudio(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAudio(this);
 			else return visitor.visitChildren(this);
@@ -2753,14 +2529,6 @@ public class JVNWebParser extends Parser {
 			return getRuleContext(EventoComunContext.class,i);
 		}
 		public VideoContext(MultimediaContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterVideo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitVideo(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitVideo(this);
@@ -2984,14 +2752,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_mostrarControles; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterMostrarControles(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitMostrarControles(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitMostrarControles(this);
 			else return visitor.visitChildren(this);
@@ -3036,14 +2796,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_fuente; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterFuente(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitFuente(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitFuente(this);
 			else return visitor.visitChildren(this);
@@ -3085,14 +2837,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_clases; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterClases(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitClases(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitClases(this);
@@ -3140,14 +2884,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_atributoFuente; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAtributoFuente(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAtributoFuente(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAtributoFuente(this);
 			else return visitor.visitChildren(this);
@@ -3193,14 +2929,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_atributoTipo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAtributoTipo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAtributoTipo(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAtributoTipo(this);
@@ -3248,14 +2976,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_atributoNombre; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAtributoNombre(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAtributoNombre(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAtributoNombre(this);
 			else return visitor.visitChildren(this);
@@ -3301,14 +3021,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_atributoValor; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAtributoValor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAtributoValor(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAtributoValor(this);
@@ -3356,14 +3068,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_atributoDescripcion; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAtributoDescripcion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAtributoDescripcion(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAtributoDescripcion(this);
 			else return visitor.visitChildren(this);
@@ -3409,14 +3113,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_atributoFilas; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAtributoFilas(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAtributoFilas(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAtributoFilas(this);
@@ -3464,14 +3160,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_atributoColumnas; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAtributoColumnas(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAtributoColumnas(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAtributoColumnas(this);
 			else return visitor.visitChildren(this);
@@ -3518,14 +3206,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_tipoEntrada; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterTipoEntrada(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitTipoEntrada(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitTipoEntrada(this);
 			else return visitor.visitChildren(this);
@@ -3570,14 +3250,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_atributoImagen; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAtributoImagen(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAtributoImagen(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAtributoImagen(this);
@@ -3626,14 +3298,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_estilos; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterEstilos(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitEstilos(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitEstilos(this);
@@ -3698,14 +3362,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_estilo; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterEstilo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitEstilo(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitEstilo(this);
 			else return visitor.visitChildren(this);
@@ -3760,14 +3416,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_eventoComun; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterEventoComun(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitEventoComun(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitEventoComun(this);
 			else return visitor.visitChildren(this);
@@ -3814,14 +3462,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_eventoFormulario; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterEventoFormulario(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitEventoFormulario(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitEventoFormulario(this);
@@ -3876,14 +3516,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_eventoEntrada; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterEventoEntrada(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitEventoEntrada(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitEventoEntrada(this);
@@ -3971,14 +3603,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_codigo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCodigo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCodigo(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCodigo(this);
@@ -4142,14 +3766,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cambioElemento; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCambioElemento(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCambioElemento(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCambioElemento(this);
 			else return visitor.visitChildren(this);
@@ -4207,14 +3823,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_otrosValores; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterOtrosValores(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitOtrosValores(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitOtrosValores(this);
@@ -4296,14 +3904,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_obtenerElemento; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterObtenerElemento(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitObtenerElemento(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitObtenerElemento(this);
 			else return visitor.visitChildren(this);
@@ -4384,14 +3984,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_elemento; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterElemento(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitElemento(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitElemento(this);
 			else return visitor.visitChildren(this);
@@ -4441,14 +4033,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_declaracion; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterDeclaracion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitDeclaracion(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitDeclaracion(this);
 			else return visitor.visitChildren(this);
@@ -4494,14 +4078,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_otrasDec; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterOtrasDec(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitOtrasDec(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitOtrasDec(this);
@@ -4583,14 +4159,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_asignacion; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAsignacion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAsignacion(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAsignacion(this);
 			else return visitor.visitChildren(this);
@@ -4671,14 +4239,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_asignacionSimple; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAsignacionSimple(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAsignacionSimple(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAsignacionSimple(this);
 			else return visitor.visitChildren(this);
@@ -4729,14 +4289,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_declaracionF; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterDeclaracionF(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitDeclaracionF(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitDeclaracionF(this);
 			else return visitor.visitChildren(this);
@@ -4783,14 +4335,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_argumentos; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterArgumentos(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitArgumentos(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitArgumentos(this);
@@ -4857,14 +4401,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_otrosArg; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterOtrosArg(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitOtrosArg(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitOtrosArg(this);
 			else return visitor.visitChildren(this);
@@ -4926,14 +4462,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterExpresion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitExpresion(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitExpresion(this);
@@ -5043,14 +4571,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_expresionPar; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterExpresionPar(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitExpresionPar(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitExpresionPar(this);
 			else return visitor.visitChildren(this);
@@ -5091,14 +4611,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expresioni; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterExpresioni(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitExpresioni(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitExpresioni(this);
@@ -5182,14 +4694,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_casoIdentificador; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCasoIdentificador(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCasoIdentificador(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCasoIdentificador(this);
 			else return visitor.visitChildren(this);
@@ -5249,14 +4753,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_lfuncion; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterLfuncion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitLfuncion(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitLfuncion(this);
 			else return visitor.visitChildren(this);
@@ -5310,14 +4806,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ciclo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCiclo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCiclo(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCiclo(this);
@@ -5397,14 +4885,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_condicional; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCondicional(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCondicional(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCondicional(this);
@@ -5496,14 +4976,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_contCond; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContCond(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContCond(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContCond(this);
@@ -5665,14 +5137,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_sino; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterSino(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitSino(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitSino(this);
 			else return visitor.visitChildren(this);
@@ -5764,14 +5228,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_contSiNo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContSiNo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContSiNo(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContSiNo(this);
@@ -5943,14 +5399,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cpara; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCpara(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCpara(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCpara(this);
 			else return visitor.visitChildren(this);
@@ -6020,14 +5468,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cparaIn; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCparaIn(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCparaIn(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCparaIn(this);
 			else return visitor.visitChildren(this);
@@ -6089,14 +5529,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cparaOf; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCparaOf(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCparaOf(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCparaOf(this);
 			else return visitor.visitChildren(this);
@@ -6150,14 +5582,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_avance; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterAvance(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitAvance(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitAvance(this);
@@ -6242,14 +5666,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_contPara; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContPara(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContPara(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContPara(this);
@@ -6414,14 +5830,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cmientras; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCmientras(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCmientras(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCmientras(this);
 			else return visitor.visitChildren(this);
@@ -6510,14 +5918,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_contMientras; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContMientras(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContMientras(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContMientras(this);
@@ -6682,14 +6082,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cHacer; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCHacer(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCHacer(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCHacer(this);
 			else return visitor.visitChildren(this);
@@ -6776,14 +6168,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_contHacer; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContHacer(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContHacer(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContHacer(this);
@@ -6942,14 +6326,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_impresion; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterImpresion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitImpresion(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitImpresion(this);
 			else return visitor.visitChildren(this);
@@ -6994,14 +6370,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_seleccion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterSeleccion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitSeleccion(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitSeleccion(this);
@@ -7071,14 +6439,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_casos; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCasos(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCasos(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCasos(this);
@@ -7156,14 +6516,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cdefecto; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterCdefecto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitCdefecto(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitCdefecto(this);
@@ -7258,14 +6610,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_contSelec; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContSelec(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContSelec(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContSelec(this);
@@ -7463,14 +6807,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_contDefecto; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContDefecto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContDefecto(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContDefecto(this);
 			else return visitor.visitChildren(this);
@@ -7635,14 +6971,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_dfuncion; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterDfuncion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitDfuncion(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitDfuncion(this);
 			else return visitor.visitChildren(this);
@@ -7765,14 +7093,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_contFun; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContFun(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContFun(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContFun(this);
@@ -7936,14 +7256,6 @@ public class JVNWebParser extends Parser {
 	public static class VacioContext extends RompeContext {
 		public VacioContext(RompeContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterVacio(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitVacio(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitVacio(this);
 			else return visitor.visitChildren(this);
@@ -7952,14 +7264,6 @@ public class JVNWebParser extends Parser {
 	public static class RomperContext extends RompeContext {
 		public RomperContext(RompeContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterRomper(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitRomper(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitRomper(this);
 			else return visitor.visitChildren(this);
@@ -7967,14 +7271,6 @@ public class JVNWebParser extends Parser {
 	}
 	public static class ContinuarContext extends RompeContext {
 		public ContinuarContext(RompeContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterContinuar(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitContinuar(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitContinuar(this);
@@ -8049,14 +7345,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_arreglo; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterArreglo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitArreglo(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitArreglo(this);
 			else return visitor.visitChildren(this);
@@ -8123,14 +7411,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_arregloDec; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterArregloDec(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitArregloDec(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitArregloDec(this);
 			else return visitor.visitChildren(this);
@@ -8173,14 +7453,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arregloAsig; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterArregloAsig(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitArregloAsig(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitArregloAsig(this);
@@ -8236,14 +7508,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_propiedades; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterPropiedades(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitPropiedades(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitPropiedades(this);
@@ -8353,14 +7617,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_otrasProp; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterOtrasProp(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitOtrasProp(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitOtrasProp(this);
@@ -8484,14 +7740,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_valor; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterValor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitValor(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitValor(this);
 			else return visitor.visitChildren(this);
@@ -8600,14 +7848,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_objeto; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterObjeto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitObjeto(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitObjeto(this);
 			else return visitor.visitChildren(this);
@@ -8652,14 +7892,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_otroObjeto; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterOtroObjeto(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitOtroObjeto(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitOtroObjeto(this);
@@ -8735,14 +7967,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_valorEstilo; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterValorEstilo(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitValorEstilo(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitValorEstilo(this);
@@ -8864,14 +8088,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_colorFormato; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterColorFormato(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitColorFormato(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitColorFormato(this);
 			else return visitor.visitChildren(this);
@@ -8922,14 +8138,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ubicacion; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterUbicacion(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitUbicacion(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitUbicacion(this);
@@ -9007,14 +8215,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_borde; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterBorde(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitBorde(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitBorde(this);
 			else return visitor.visitChildren(this);
@@ -9074,14 +8274,6 @@ public class JVNWebParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_dimensiones; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterDimensiones(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitDimensiones(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitDimensiones(this);
 			else return visitor.visitChildren(this);
@@ -9139,14 +8331,6 @@ public class JVNWebParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_dimension; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).enterDimension(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JVNWebListener ) ((JVNWebListener)listener).exitDimension(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof JVNWebVisitor ) return ((JVNWebVisitor<? extends T>)visitor).visitDimension(this);
