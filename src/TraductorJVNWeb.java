@@ -18,132 +18,822 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
     }
 
     @Override public T visitMain(JVNWebParser.MainContext ctx) {
-                        
-        return visitChildren(ctx);
+
+        write.print("<html>\n");
+        write.print("<head>\n");
+        if(!ctx.contenidoEncabezado().getText().isEmpty()){
+            visitContenidoEncabezado(ctx.contenidoEncabezado());
+        }
+        write.print("</head>\n");
+        write.print("<body>\n");
+        if(!ctx.contenido().getText().isEmpty()){
+            visitContenido(ctx.contenido());
+        }
+        write.print("</body>\n");
+        write.print("</html>\n");
+
+        return null;
+    }
+    @Override
+    public T visitContenido( JVNWebParser.ContenidoContext ctx ) {
+        return visitChildren( ctx );
     }
 
     @Override public T visitContenidoEncabezado(JVNWebParser.ContenidoEncabezadoContext ctx) {
-        return visitChildren(ctx);
+        write.print("<title>\n");
+        if(!ctx.titulo().isEmpty()){
+            visitTitulo(ctx.titulo());
+        }
+        write.print("</title>\n");
+        return null;
     }
 
     @Override public T visitTitulo(JVNWebParser.TituloContext ctx) {
-        return visitChildren(ctx);
+        write.print(ctx.TEXTO().getText());
+        return null;
     }
 
-    @Override public T visitContenido(JVNWebParser.ContenidoContext ctx) {
-        return visitChildren(ctx);
+    @Override public T visitContenedor (JVNWebParser.ContenedorContext ctx) {
+        write.print("<div ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        visitContenido(ctx.contenido());
+
+        write.print("</div>\n");
+        return null;
     }
 
-    @Override public T visitElementoCompuesto(JVNWebParser.ElementoCompuestoContext ctx) {
-        return visitChildren(ctx);
+    @Override public T visitFormulario (JVNWebParser.FormularioContext ctx) {
+        write.print("<form ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoFormulario(1)!=null){
+            for(int i=1; i<ctx.eventoFormulario().size(); i++) {
+                visitEventoFormulario(ctx.eventoFormulario(i));
+            }
+        }else if (ctx.eventoFormulario(0) != null){
+            visitEventoFormulario(ctx.eventoFormulario(0));
+        }
+        write.print(" >\n");
+        if(ctx.contenido().isEmpty()){
+            visitContenido(ctx.contenido());
+        }
+        write.print("</form>\n");
+        return null;
     }
 
-    @Override public T visitElementoSimple(JVNWebParser.ElementoSimpleContext ctx) {
-        return visitChildren(ctx);
+    @Override public T visitParrafo (JVNWebParser.ParrafoContext ctx) {
+        write.print("<p ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+
+        if(ctx.texto(1)!=null){
+            for(int i=1; i<ctx.texto().size(); i++) {
+                visitTexto(ctx.texto(i));
+            }
+        }else if (ctx.texto(0) != null){
+            visitTexto(ctx.texto(0));
+        }
+
+        write.print("</p>\n");
+        return null;
+    }
+
+    @Override public T visitListaOrdenada (JVNWebParser.ListaOrdenadaContext ctx) {
+        write.print("<ol ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+
+        if(ctx.elementoLista(1)!=null){
+            for(int i=1; i<ctx.elementoLista().size(); i++) {
+                visitElementoLista(ctx.elementoLista(i));
+            }
+        }else if (ctx.elementoLista(0) != null){
+            visitElementoLista(ctx.elementoLista(0));
+        }
+
+        write.print("</ol>\n");
+        return null;
+    }
+
+    @Override public T visitListaSinOrden (JVNWebParser.ListaSinOrdenContext ctx) {
+        write.print("<ul ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+
+        if(ctx.elementoLista(1)!=null){
+            for(int i=1; i<ctx.elementoLista().size(); i++) {
+                visitElementoLista(ctx.elementoLista(i));
+            }
+        }else if (ctx.elementoLista(0) != null){
+            visitElementoLista(ctx.elementoLista(0));
+        }
+        write.print("</ul>\n");
+        return null;
+    }
+
+    @Override public T visitTabla (JVNWebParser.TablaContext ctx) {
+        write.print("<table ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()) {
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        visitContenidoTabla(ctx.contenidoTabla());
+        write.print("</table>\n");
+        return null;
+    }
+
+    @Override public T visitElementoTexto (JVNWebParser.ElementoTextoContext ctx) {
+        if(!ctx.texto().isEmpty()){
+            visitTexto(ctx.texto());
+        }
+        return null;
+    }
+
+    @Override public T visitEnlace (JVNWebParser.EnlaceContext ctx) {
+        write.print("<a ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.referencia().isEmpty()){
+            visitReferencia(ctx.referencia());
+        }
+        if(!ctx.estilos().isEmpty()) {
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        write.print(ctx.TEXTO());
+        write.print("</a>\n");
+        return null;
+    }
+
+    @Override public T visitLinea (JVNWebParser.LineaContext ctx) {
+        write.print("<span ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        write.print("</span>\n");
+        return null;
+    }
+
+    @Override public T visitTextoConEnfasis (JVNWebParser.TextoConEnfasisContext ctx) {
+        write.print("<h"+ctx.ENFASIS()+" ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        if(ctx.texto(1)!=null){
+            for(int i=1; i<ctx.texto().size(); i++) {
+                visitTexto(ctx.texto(i));
+            }
+        }else if (ctx.texto(0) != null){
+            visitTexto(ctx.texto(0));
+        }
+        write.print("</h"+ctx.ENFASIS().getText()+">\n");
+        return null;
+    }
+
+    @Override public T visitBoton (JVNWebParser.BotonContext ctx) {
+        write.print("<button ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        if(ctx.texto(1)!=null){
+            for(int i=1; i<ctx.texto().size(); i++) {
+                visitTexto(ctx.texto(i));
+            }
+        }else if (ctx.texto(0) != null){
+            visitTexto(ctx.texto(0));
+        }
+        write.print("</button>\n");
+        return null;
     }
 
     @Override public T visitReferencia(JVNWebParser.ReferenciaContext ctx) {
-        return visitChildren(ctx);
+        write.print(" href=\""+ctx.TEXTO().getText()+"\" ");
+        return null;
     }
 
-    @Override public T visitElementoFormulario(JVNWebParser.ElementoFormularioContext ctx) {
-        return visitChildren(ctx);
+    @Override public T visitEtiqueta (JVNWebParser.EtiquetaContext ctx) {
+        write.print("<label ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+
+        if(ctx.texto(1)!=null){
+            for(int i=1; i<ctx.texto().size(); i++) {
+                visitTexto(ctx.texto(i));
+            }
+        }else if (ctx.texto(0) != null){
+            visitTexto(ctx.texto(0));
+        }
+
+        write.print("</label>\n");
+        return null;
+    }
+
+    @Override public T visitEntradaDeTexto (JVNWebParser.EntradaDeTextoContext ctx) {
+        write.print("<input ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.atributoNombre().isEmpty()){
+            visitAtributoNombre(ctx.atributoNombre());
+        }
+        if(!ctx.atributoValor().isEmpty()){
+            visitAtributoValor(ctx.atributoValor());
+        }
+        if(!ctx.atributoDescripcion().isEmpty()){
+            visitAtributoDescripcion(ctx.atributoDescripcion());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+
+        if(ctx.eventoEntrada(1)!=null){
+            for(int i=1; i<ctx.eventoEntrada().size(); i++) {
+                visitEventoEntrada(ctx.eventoEntrada(i));
+            }
+        }else if (ctx.eventoEntrada(0) != null){
+            visitEventoEntrada(ctx.eventoEntrada(0));
+        }
+        write.print(" >\n");
+        write.print("</input>\n");
+        return null;
+    }
+
+    @Override public T visitAreaDeTexto (JVNWebParser.AreaDeTextoContext ctx) {
+        write.print("<textarea ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.atributoNombre().isEmpty()){
+            visitAtributoNombre(ctx.atributoNombre());
+        }
+        if(!ctx.atributoValor().isEmpty()){
+            visitAtributoValor(ctx.atributoValor());
+        }
+        if(!ctx.atributoDescripcion().isEmpty()){
+            visitAtributoDescripcion(ctx.atributoDescripcion());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoEntrada(1)!=null){
+            for(int i=1; i<ctx.eventoEntrada().size(); i++) {
+                visitEventoEntrada(ctx.eventoEntrada(i));
+            }
+        }else if (ctx.eventoEntrada(0) != null){
+            visitEventoEntrada(ctx.eventoEntrada(0));
+        }
+        write.print(" >\n");
+        write.print("</textarea>\n");
+        return null;
+    }
+
+    @Override public T visitSelector (JVNWebParser.SelectorContext ctx) {
+        write.print("<select ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.atributoNombre().isEmpty()){
+            visitAtributoNombre(ctx.atributoNombre());
+        }
+        if(!ctx.atributoValor(0).isEmpty()){
+            visitAtributoValor(ctx.atributoValor(0));
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoEntrada(1)!=null){
+            for(int i=1; i<ctx.eventoEntrada().size(); i++) {
+                visitEventoEntrada(ctx.eventoEntrada(i));
+            }
+        }else if (ctx.eventoEntrada(0) != null){
+            visitEventoEntrada(ctx.eventoEntrada(0));
+        }
+        write.print(" >\n");
+
+        if(ctx.texto()!=null){
+            write.print("<option ");
+            visitAtributoValor(ctx.atributoValor(1));
+            if(ctx.eventoComun(1)!=null){
+                for(int i=1; i<ctx.eventoComun().size(); i++) {
+                    visitEventoComun(ctx.eventoComun(i));
+                }
+            }else if (ctx.eventoComun(0) != null){
+                visitEventoComun(ctx.eventoComun(0));
+            }
+            write.print(" >\n");
+
+            if(ctx.texto(1)!=null){
+                for(int i=1; i<ctx.texto().size(); i++) {
+                    visitTexto(ctx.texto(i));
+                }
+            }else if (ctx.texto(0) != null){
+                visitTexto(ctx.texto(0));
+            }
+            write.print("</option>\n");
+        }
+
+        write.print("</select>\n");
+        return null;
     }
 
     @Override public T visitElementoLista(JVNWebParser.ElementoListaContext ctx) {
-        return visitChildren(ctx);
+        write.print("<li ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+
+        if(ctx.elementoSimple(1)!=null){
+            for(int i=1; i<ctx.elementoSimple().size(); i++) {
+                visitChildren(ctx.elementoSimple(i));
+            }
+        }else if (ctx.elementoSimple(0) != null){
+            visitChildren(ctx.elementoSimple(0));
+        }
+
+        if(ctx.multimedia(1)!=null){
+            for(int i=1; i<ctx.multimedia().size(); i++) {
+                visitChildren(ctx.multimedia(i));
+            }
+        }else if (ctx.multimedia(0) != null){
+            visitChildren(ctx.multimedia(0));
+        }
+
+        write.print("</li>\n");
+        return null;
     }
 
     @Override public T visitTexto(JVNWebParser.TextoContext ctx) {
-        return visitChildren(ctx);
+        if(ctx.clases() != null){
+            write.print("<span ");
+            if(!ctx.clases().isEmpty()){
+                visitClases(ctx.clases());
+            }
+            if(!ctx.estilos().isEmpty()){
+                visitEstilos(ctx.estilos());
+            }
+            if(ctx.eventoComun(1)!=null){
+                for(int i=1; i<ctx.eventoComun().size(); i++) {
+                    visitEventoComun(ctx.eventoComun(i));
+                }
+            }else if (ctx.eventoComun(0) != null){
+                visitEventoComun(ctx.eventoComun(0));
+            }
+            write.print(" >\n");
+            if(ctx.texto(1)!=null){
+                for(int i=1; i<ctx.texto().size(); i++) {
+                    visitTexto(ctx.texto(i));
+                }
+            }else if (ctx.texto(0) != null){
+                visitTexto(ctx.texto(0));
+            }
+            write.print("</span>\n");
+        }else if(ctx.TEXTO() != null){
+            write.print(ctx.TEXTO().getText());
+        }
+        return null;
     }
 
     @Override public T visitTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx) {
-        return visitChildren(ctx);
+        write.print("<hr ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        write.print(ctx.TEXTO().getText());
+        write.print("</hr>\n");
+        return null;
     }
 
     @Override public T visitContenidoTabla(JVNWebParser.ContenidoTablaContext ctx) {
-        return visitChildren(ctx);
+
+        if(ctx.clases()!=null){
+            write.print("<tr ");
+            if(!ctx.clases().isEmpty()){
+                visitClases(ctx.clases());
+            }
+            if(!ctx.estilos().isEmpty()){
+                visitEstilos(ctx.estilos());
+            }
+            if(ctx.eventoComun(1)!=null){
+                for(int i=1; i<ctx.eventoComun().size(); i++) {
+                    visitEventoComun(ctx.eventoComun(i));
+                }
+            }else if (ctx.eventoComun(0) != null){
+                visitEventoComun(ctx.eventoComun(0));
+            }
+            write.print(" >\n");
+            visitElementoTabla(ctx.elementoTabla());
+            write.print("</tr>\n");
+        }
+        if(ctx.filaTabla(1)!=null){
+            for(int i=1; i<ctx.filaTabla().size(); i++) {
+                visitFilaTabla(ctx.filaTabla(i));
+            }
+        }else if (ctx.filaTabla(0) != null){
+            visitFilaTabla(ctx.filaTabla(0));
+        }
+        return null;
     }
 
     @Override public T visitFilaTabla(JVNWebParser.FilaTablaContext ctx) {
-        return visitChildren(ctx);
+        write.print("<td ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        if(ctx.elementoTabla(1)!=null){
+            for(int i=1; i<ctx.elementoTabla().size(); i++) {
+                visitElementoTabla(ctx.elementoTabla(i));
+            }
+        }else if (ctx.elementoTabla(0) != null){
+            visitElementoTabla(ctx.elementoTabla(0));
+        }
+
+        write.print("</td>\n");
+
+        return null;
     }
 
     @Override public T visitElementoTabla(JVNWebParser.ElementoTablaContext ctx) {
-        return visitChildren(ctx);
+        write.print("<td ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        if(ctx.elementoSimple(1)!=null){
+            for(int i=1; i<ctx.elementoSimple().size(); i++) {
+                visitChildren(ctx.elementoSimple(i));
+            }
+        }else if (ctx.elementoSimple(0) != null){
+            visitChildren(ctx.elementoSimple(0));
+        }
+
+        if(ctx.multimedia(1)!=null){
+            for(int i=1; i<ctx.multimedia().size(); i++) {
+                visitChildren(ctx.multimedia(i));
+            }
+        }else if (ctx.multimedia(0) != null){
+            visitChildren(ctx.multimedia(0));
+        }
+
+        write.print("</td>\n");
+        return null;
     }
 
-    @Override public T visitMultimedia(JVNWebParser.MultimediaContext ctx) {
-        return visitChildren(ctx);
+    @Override public T visitAudio(JVNWebParser.AudioContext ctx) {
+        write.print("<audio ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.mostrarControles().isEmpty()){
+            visitMostrarControles(ctx.mostrarControles());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        visitFuente(ctx.fuente());
+        write.print("</audio>\n");
+    }
+
+    @Override public T visitVideo(JVNWebParser.VideoContext ctx) {
+        write.print("<video ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        if(!ctx.mostrarControles().isEmpty()){
+            visitMostrarControles(ctx.mostrarControles());
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
+        visitFuente(ctx.fuente());
+        write.print("</video>\n");
+    }
+
+    @Override public T visitImagen(JVNWebParser.ImagenContext ctx) {
+        write.print("<img ");
+        if(!ctx.clases().isEmpty()){
+            visitClases(ctx.clases());
+        }
+        visitAtributoFuente(ctx.atributoFuente());
+
+        if(ctx.atributoImagen(1)!=null){
+            for(int i=1; i<ctx.atributoImagen().size(); i++) {
+                visitAtributoImagen(ctx.atributoImagen(i));
+                write.print(" = \""+ctx.TEXTO()+"\"");
+            }
+        }else if (ctx.atributoImagen(0) != null){
+            visitAtributoImagen(ctx.atributoImagen(0));
+            write.print(" = \""+ctx.TEXTO()+"\"");
+        }
+        if(!ctx.estilos().isEmpty()){
+            visitEstilos(ctx.estilos());
+        }
+        if(ctx.eventoComun(1)!=null){
+            for(int i=1; i<ctx.eventoComun().size(); i++) {
+                visitEventoComun(ctx.eventoComun(i));
+            }
+        }else if (ctx.eventoComun(0) != null){
+            visitEventoComun(ctx.eventoComun(0));
+        }
+        write.print(" >\n");
     }
 
     @Override public T visitMostrarControles(JVNWebParser.MostrarControlesContext ctx) {
-        return visitChildren(ctx);
+        write.print(" controls ");
+        return null;
     }
 
     @Override public T visitFuente(JVNWebParser.FuenteContext ctx) {
-        return visitChildren(ctx);
+        write.print("<source ");
+        visitAtributoFuente(ctx.atributoFuente());
+        visitAtributoTipo(ctx.atributoTipo());
+        write.print(" >\n");
+        write.print(ctx.TEXTO().getText());
+        write.print("</source>\n");
+        return null;
     }
 
     @Override public T visitClases(JVNWebParser.ClasesContext ctx) {
-        return visitChildren(ctx);
+        write.print(" class = \""+ctx.CADENA().getText()  +"\"");
+        return null;
     }
 
     @Override public T visitAtributoFuente(JVNWebParser.AtributoFuenteContext ctx) {
-        return visitChildren(ctx);
+        write.print(" src= \""+ctx.CADENA().getText() +"\"");
+        return null;
     }
 
     @Override public T visitAtributoTipo(JVNWebParser.AtributoTipoContext ctx) {
-        return visitChildren(ctx);
+        write.print(" type= \""+ctx.TEXTO().getText() +"\"");
+        return null;
     }
 
     @Override public T visitAtributoNombre(JVNWebParser.AtributoNombreContext ctx) {
-        return visitChildren(ctx);
+        write.print(" name= \""+ctx.TEXTO().getText() +"\"");
+        return null;
     }
 
     @Override public T visitAtributoValor(JVNWebParser.AtributoValorContext ctx) {
-        return visitChildren(ctx);
+        write.print(" value= \""+ctx.TEXTO().getText() +"\"");
+        return null;
     }
-
+//ni idea
     @Override public T visitAtributoDescripcion(JVNWebParser.AtributoDescripcionContext ctx) {
-        return visitChildren(ctx);
+        write.print(" ????= \""+ctx.TEXTO().getText() +"\"");
+        return null;
     }
 
     @Override public T visitAtributoFilas(JVNWebParser.AtributoFilasContext ctx) {
-        return visitChildren(ctx);
+        write.print(" rows= \""+ctx.NUMERO().getText() +"\"");
+        return null;
     }
 
     @Override public T visitAtributoColumnas(JVNWebParser.AtributoColumnasContext ctx) {
-        return visitChildren(ctx);
+        write.print(" cols= \""+ctx.NUMERO().getText() +"\"");
+        return null;
     }
-
+//ni idea
     @Override public T visitTipoEntrada(JVNWebParser.TipoEntradaContext ctx) {
-        return visitChildren(ctx);
+        write.print(" ????= \""+ctx.TIPO_ENTRADA().getText() +"\"");
+        return null;
     }
 
     @Override public T visitAtributoImagen(JVNWebParser.AtributoImagenContext ctx) {
-        return visitChildren(ctx);
+        if(ctx.getText().equals("textoAlternativo")){
+            write.print(" ");
+        }
+        if(ctx.getText().equals("ancho")){
+            write.print(" ");
+        }
+        if(ctx.getText().equals("alto")){
+            write.print(" ");
+        }
+
+        return null;
     }
 
     @Override public T visitEstilos(JVNWebParser.EstilosContext ctx) {
-        return visitChildren(ctx);
+        return null;
     }
 
     @Override public T visitEstilo(JVNWebParser.EstiloContext ctx) {
-        return visitChildren(ctx);
+        return null;
     }
 
     @Override public T visitEventoComun(JVNWebParser.EventoComunContext ctx) {
-        return visitChildren(ctx);
+        if(ctx.getText().equals("alHacerClic")){
+            write.print(" onclick= ");
+        }else if (ctx.getText().equals("alApuntar")){
+            write.print(" onhover= ");
+        }
+        else if (ctx.getText().equals("alSalir")){
+            write.print(" onexit= ");
+        }
+        write.print("\""+ctx.ID().getText()  +"\"");
+        return null;
     }
 
     @Override public T visitEventoFormulario(JVNWebParser.EventoFormularioContext ctx) {
-        return visitChildren(ctx);
+        if(ctx.getText().equals("alEnviarDatos")){
+            write.print(" onsubmit= ");
+        }else if(!ctx.isEmpty()){
+            if(ctx.getText().equals("alHacerClic")){
+                write.print(" onclick= ");
+            }else if (ctx.getText().equals("alApuntar")){
+                write.print(" onhover= ");
+            }
+            else if (ctx.getText().equals("alSalir")){
+                write.print(" onexit= ");
+            }
+        }
+        write.print("\""+ctx.ID().getText()  +"\"");
+        return null;
     }
 
     @Override public T visitEventoEntrada(JVNWebParser.EventoEntradaContext ctx) {
-        return visitChildren(ctx);
+        if(ctx.getText().equals("alModificar")){
+            write.print(" onchange= ");
+        }else if (ctx.getText().equals("alSeleccionar")){
+            write.print(" onselect= ");
+        }
+        write.print("\""+ctx.ID().getText()  +"\"");
+        return null;
     }
 
     @Override public T visitCodigo(JVNWebParser.CodigoContext ctx) {

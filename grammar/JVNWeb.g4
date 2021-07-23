@@ -8,29 +8,29 @@ titulo: 'Titulo' TEXTO 'FinTitulo';
 
 contenido: (elementoCompuesto | elementoSimple | elementoFormulario)+;
 
-elementoCompuesto:
-    'Contenedor' clases? estilos? eventoComun*  contenido 'FinContenedor'
-    | 'Formulario' clases? estilos? eventoFormulario* contenido 'FinFormulario'
-    | 'Parrafo' clases? estilos? eventoComun*  texto*  'FinParrafo'
-    | 'ListaOrdenada' clases? estilos? elementoLista* eventoComun*  'FinListaOrdenada'
-    | 'ListaSinOrden' clases? estilos? elementoLista* eventoComun*  'FinListaSinOrden'
-    | 'Tabla' clases? estilos? eventoComun* contenidoTabla 'FinTabla'
-    | multimedia;
+elementoCompuesto://Elementolista antes de eventoComun?
+    'Contenedor' clases? estilos? eventoComun*  contenido 'FinContenedor' #contenedor
+    | 'Formulario' clases? estilos? eventoFormulario* contenido 'FinFormulario' #formulario
+    | 'Parrafo' clases? estilos? eventoComun*  texto*  'FinParrafo' #parrafo
+    | 'ListaOrdenada' clases? estilos? elementoLista* eventoComun*  'FinListaOrdenada' #listaOrdenada
+    | 'ListaSinOrden' clases? estilos? elementoLista* eventoComun*  'FinListaSinOrden' #listaSinOrden
+    | 'Tabla' clases? estilos? eventoComun* contenidoTabla 'FinTabla' #tabla
+    | multimedia #elementoMultimedia ;
 
-elementoSimple:
-    texto
-    | 'Enlace' clases? referencia? estilos? eventoComun* TEXTO 'FinEnlace'
-    | 'Linea' clases? estilos? eventoComun* 'FinLinea'
-    | 'TextoConEnfasis' '(' 'enfasis' ':' ENFASIS ')' clases? estilos? eventoComun* texto* 'FinTextoConEnfasis'
-    | 'Boton' clases? estilos? eventoComun* texto* 'Boton';
+elementoSimple://linea sin contenido ?
+    texto #elementoTexto
+    | 'Enlace' clases? referencia? estilos? eventoComun* TEXTO 'FinEnlace' #enlace
+    | 'Linea' clases? estilos? eventoComun* 'FinLinea' #linea
+    | 'TextoConEnfasis' '(' 'enfasis' ':' ENFASIS ')' clases? estilos? eventoComun* texto* 'FinTextoConEnfasis' #textoConEnfasis
+    | 'Boton' clases? estilos? eventoComun* texto* 'Boton' #boton ;
 
 referencia: '(' 'referencia' ':' '"' TEXTO '"' ')';
 
 elementoFormulario:
-     'Etiqueta' clases? estilos? eventoComun* texto* 'FinEtiqueta'
-    | 'EntradaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada* 'FinEntradaDeTexto'
-    | 'AreaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada*  'FinAreaDeTexto'
-    | 'Selector' clases? atributoNombre? atributoValor? estilos? eventoEntrada* ('Opcion' atributoValor eventoComun* texto* 'FinOpcion')* 'FinSelector';
+     'Etiqueta' clases? estilos? eventoComun* texto* 'FinEtiqueta' #etiqueta
+    | 'EntradaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada* 'FinEntradaDeTexto' #entradaDeTexto
+    | 'AreaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada*  'FinAreaDeTexto' #areaDeTexto
+    | 'Selector' clases? atributoNombre? atributoValor? estilos? eventoEntrada* ('Opcion' atributoValor eventoComun* texto* 'FinOpcion')* 'FinSelector' #selector;
 
 elementoLista:  'ElementoLista' clases? estilos? eventoComun*  (elementoSimple | multimedia)* 'FinElementoLista';
 
@@ -45,9 +45,9 @@ filaTabla: 'FilaTabla' clases? estilos? eventoComun*  elementoTabla* 'FinFilaTab
 elementoTabla: 'ElementoTabla' clases? estilos? eventoComun*  (elementoSimple | multimedia)* 'FinElementoTabla';
 
 multimedia:
-    'Audio' clases? mostrarControles? estilos? eventoComun*  fuente 'FinAudio'
-    | 'Video' clases? mostrarControles? estilos? eventoComun*  fuente 'FinVideo'
-    | 'Imagen' clases? atributoFuente  ( '(' atributoImagen ':' '“' TEXTO '“' ')' )* estilos?               eventoComun*  'FinImagen';
+    'Audio' clases? mostrarControles? estilos? eventoComun*  fuente 'FinAudio' #audio
+    | 'Video' clases? mostrarControles? estilos? eventoComun*  fuente 'FinVideo' #video
+    | 'Imagen' clases? atributoFuente  ( '(' atributoImagen ':' '“' TEXTO '“' ')' )* estilos? eventoComun*  'FinImagen' #imagen;
 
 mostrarControles: '(' 'conControles' ')';
 
