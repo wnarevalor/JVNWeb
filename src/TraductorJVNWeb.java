@@ -276,10 +276,10 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
             visitAtributoDescripcion(ctx.atributoDescripcion());
         }
         if(!ctx.atributoFilas().isEmpty()){
-            visitAtributoFilas(ctx.atributoFilas);
+            visitAtributoFilas(ctx.atributoFilas());
         }
         if(!ctx.atributoColumnas().isEmpty()){
-            visitAtributoColumnas(ctx.atributoColumnas);
+            visitAtributoColumnas(ctx.atributoColumnas());
         }
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
