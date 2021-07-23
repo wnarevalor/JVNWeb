@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
 
@@ -17,149 +18,20 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         }
     }
 
-    @Override public T visitMain(JVNWebParser.MainContext ctx) {
-
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitContenidoEncabezado(JVNWebParser.ContenidoEncabezadoContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitTitulo(JVNWebParser.TituloContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitContenido(JVNWebParser.ContenidoContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitElementoCompuesto(JVNWebParser.ElementoCompuestoContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitElementoSimple(JVNWebParser.ElementoSimpleContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitReferencia(JVNWebParser.ReferenciaContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitElementoFormulario(JVNWebParser.ElementoFormularioContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitElementoLista(JVNWebParser.ElementoListaContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitTexto(JVNWebParser.TextoContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitContenidoTabla(JVNWebParser.ContenidoTablaContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitFilaTabla(JVNWebParser.FilaTablaContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitElementoTabla(JVNWebParser.ElementoTablaContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitMultimedia(JVNWebParser.MultimediaContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitMostrarControles(JVNWebParser.MostrarControlesContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitFuente(JVNWebParser.FuenteContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitClases(JVNWebParser.ClasesContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitAtributoFuente(JVNWebParser.AtributoFuenteContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitAtributoTipo(JVNWebParser.AtributoTipoContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitAtributoNombre(JVNWebParser.AtributoNombreContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitAtributoValor(JVNWebParser.AtributoValorContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitAtributoDescripcion(JVNWebParser.AtributoDescripcionContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitAtributoFilas(JVNWebParser.AtributoFilasContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitAtributoColumnas(JVNWebParser.AtributoColumnasContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitTipoEntrada(JVNWebParser.TipoEntradaContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitAtributoImagen(JVNWebParser.AtributoImagenContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitEstilos(JVNWebParser.EstilosContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitEstilo(JVNWebParser.EstiloContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitEventoComun(JVNWebParser.EventoComunContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitEventoFormulario(JVNWebParser.EventoFormularioContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitEventoEntrada(JVNWebParser.EventoEntradaContext ctx) {
-        return visitChildren(ctx);
-    }
-
     @Override public T visitCodigo(JVNWebParser.CodigoContext ctx) {
         if (ctx.codigo() != null){
             if (ctx.declaracion() != null){
                 visitDeclaracion(ctx.declaracion());
             }else if(ctx.asignacionSimple() != null){
                 visitAsignacionSimple(ctx.asignacionSimple());
-            }else if(ctx.lfuncion() != null){
-                visitLfuncion(ctx.lfuncion());
             }else if(ctx.condicional() != null){
                 visitCondicional(ctx.condicional());
             }else if(ctx.ciclo() != null){
                 visitCiclo(ctx.ciclo());
             }else if(ctx.seleccion() != null){
                 visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
             }else if(ctx.declaracionF() != null){
                 visitDeclaracionF(ctx.declaracionF());
             }else if(ctx.dfuncion() != null){
@@ -168,190 +40,707 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
                 visitCambioElemento(ctx.cambioElemento());
             }else if(ctx.obtenerElemento() != null){
                 visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
             }
             visitCodigo(ctx.codigo());
         }
+        write.close();
         return null;
     }
 
     @Override public T visitCambioElemento(JVNWebParser.CambioElementoContext ctx) {
-        return visitChildren(ctx);
+
+        if (ctx.ID() != null){
+            write.print(ctx.ID().getText() + ".innerHTML = " + ctx.valor().getText());
+            if (!ctx.otrosValores().getText().isEmpty()){
+                visitOtrosValores(ctx.otrosValores());
+            }
+            write.write("; \n");
+        }else if (ctx.ELEMENTOARR() != null){
+            write.print(ctx.ID().getText() + ".innerHTML = " + ctx.ELEMENTOARR().getText());
+            if (!ctx.otrosValores().getText().isEmpty()){
+                visitOtrosValores(ctx.otrosValores());
+            }
+            write.write("; \n");
+        }
+        return null;
+    }
+
+    @Override public T visitOtrosValores(JVNWebParser.OtrosValoresContext ctx) {
+
+        if (ctx.otrosValores() != null){
+            write.print(" + " + ctx.valor().getText());
+            visitOtrosValores(ctx.otrosValores());
+        }
+        return null;
     }
 
     @Override public T visitObtenerElemento(JVNWebParser.ObtenerElementoContext ctx) {
-        return visitChildren(ctx);
+
+        write.print("var " + ctx.ID().getText() + " = document.querySelectorAll('");
+        if (ctx.elemento() != null){
+            write.print( Constantes.elementos.get(ctx.elemento().getText()) + "'); \n");
+        }else if (ctx.CLASE() != null){
+            write.print(ctx.CLASE().getText() + "'); \n");
+        }
+        return null;
     }
 
     @Override public T visitDeclaracion(JVNWebParser.DeclaracionContext ctx) {
-        return visitChildren(ctx);
+        write.print("var "+ ctx.ID().getText());
+        visitAsignacion(ctx.asignacion());
+        if (ctx.otrasDec() != null){
+            visitOtrasDec(ctx.otrasDec());
+        }
+        write.print(";\n");
+        return null;
     }
 
     @Override public T visitOtrasDec(JVNWebParser.OtrasDecContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.otrasDec() != null){
+            write.print(", " + ctx.ID().getText());
+            visitAsignacion(ctx.asignacion());
+            visitOtrasDec(ctx.otrasDec());
+        }
+        return null;
     }
 
     @Override public T visitAsignacion(JVNWebParser.AsignacionContext ctx) {
-        return visitChildren(ctx);
+        if(ctx.expresion() != null){
+            write.print(" = " +  ctx.expresion().getText());
+        }
+        return null;
     }
 
     @Override public T visitAsignacionSimple(JVNWebParser.AsignacionSimpleContext ctx) {
-        return visitChildren(ctx);
+        if(ctx.ID() != null){
+            write.print(ctx.ID().getText() + " = " + ctx.expresion().getText() + "; \n");
+        }else if (ctx.IDCOMPUESTO() != null){
+            write.print(ctx.IDCOMPUESTO().getText() + " = " + ctx.expresion().getText() + "; \n");
+        }
+        return null;
     }
 
     @Override public T visitDeclaracionF(JVNWebParser.DeclaracionFContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitArgumentos(JVNWebParser.ArgumentosContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitOtrosArg(JVNWebParser.OtrosArgContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitExpresion(JVNWebParser.ExpresionContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitExpresionPar(JVNWebParser.ExpresionParContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitExpresioni(JVNWebParser.ExpresioniContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitCasoIdentificador(JVNWebParser.CasoIdentificadorContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitLfuncion(JVNWebParser.LfuncionContext ctx) {
-        return visitChildren(ctx);
+        write.print(ctx.ID().getText() + "(");
+        if (!ctx.argumentos().getText().isEmpty()){
+            write.print(ctx.argumentos().getText() + ");\n");
+        }else{
+            write.print("); \n");
+        }
+        return null;
     }
 
     @Override public T visitCiclo(JVNWebParser.CicloContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.cpara() != null){
+            visitCpara(ctx.cpara());
+        }else if(ctx.cmientras() != null){
+            visitCmientras(ctx.cmientras());
+        }else if(ctx.cHacer() != null){
+            visitCHacer(ctx.cHacer());
+        }else if(ctx.cparaOf() != null){
+            visitCparaOf(ctx.cparaOf());
+        }else if(ctx.cparaIn() != null){
+            visitCparaIn(ctx.cparaIn());
+        }
+        return null;
     }
 
     @Override public T visitCondicional(JVNWebParser.CondicionalContext ctx) {
-        return visitChildren(ctx);
+        write.print("if (" + ctx.expresion().getText() + "){\n");
+        if (!ctx.contCond().getText().isEmpty()){
+            visitContCond(ctx.contCond());
+        }
+        if(!ctx.rompe().getText().isEmpty()) {
+            visit(ctx.rompe());
+        }
+        write.print("}\n");
+        if (!ctx.sino().getText().isEmpty()){
+            visitSino(ctx.sino());
+        }
+        return null;
     }
 
     @Override public T visitContCond(JVNWebParser.ContCondContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.contCond() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
+            }
+            visitContCond(ctx.contCond());
+        }
+        return null;
     }
 
     @Override public T visitSino(JVNWebParser.SinoContext ctx) {
-        return visitChildren(ctx);
+
+        write.write("else{ \n");
+        if (!ctx.contSiNo().getText().isEmpty()){
+            visitContSiNo(ctx.contSiNo());
+        }
+        if (!ctx.rompe().getText().isEmpty()){
+            visit(ctx.rompe());
+        }
+        write.write("}\n");
+        return null;
     }
 
     @Override public T visitContSiNo(JVNWebParser.ContSiNoContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.contSiNo() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
+            }
+            visitContSiNo(ctx.contSiNo());
+        }
+        return null;
     }
 
     @Override public T visitCpara(JVNWebParser.CparaContext ctx) {
-        return visitChildren(ctx);
+
+        write.print("for(let " + ctx.ID().getText() + " = " + ctx.expresion(0).getText() + "; " + ctx.expresion(1).getText() + "; " +
+                ctx.ID().getText() + "+= ");
+        visitAvance(ctx.avance());
+        write.print("){ \n");
+        if (!ctx.contPara().getText().isEmpty()){
+            visitContPara(ctx.contPara());
+        }
+        if (!ctx.rompe().getText().isEmpty()){
+            visit(ctx.rompe());
+        }
+        write.print("} \n");
+        return null;
     }
 
     @Override public T visitCparaIn(JVNWebParser.CparaInContext ctx) {
-        return visitChildren(ctx);
+        write.print("for(let " + ctx.ID(0).getText() + " in " + ctx.ID(1).getText() +  "){\n");
+        if (!ctx.contPara().getText().isEmpty()){
+            visitContPara(ctx.contPara());
+        }
+        if (!ctx.rompe().getText().isEmpty()){
+            visit(ctx.rompe());
+        }
+        write.print("} \n");
+        return null;
     }
 
     @Override public T visitCparaOf(JVNWebParser.CparaOfContext ctx) {
-        return visitChildren(ctx);
+        write.print("for(let " + ctx.ID(0).getText() + " of " + ctx.ID(1).getText() +  "){\n");
+        if (!ctx.contPara().getText().isEmpty()){
+            visitContPara(ctx.contPara());
+        }
+        if (!ctx.rompe().getText().isEmpty()){
+            visit(ctx.rompe());
+        }
+        write.print("} \n");
+        return null;
     }
 
     @Override public T visitAvance(JVNWebParser.AvanceContext ctx) {
-        return visitChildren(ctx);
+        if(ctx.ENTERO() != null){
+            write.print(ctx.ENTERO().getText());
+        }else if (ctx.REAL() != null){
+            write.print(ctx.REAL().getText());
+        }else{
+            write.print(ctx.ID().getText());
+        }
+        return null;
     }
 
     @Override public T visitContPara(JVNWebParser.ContParaContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.contPara() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
+            }
+            visitContPara(ctx.contPara());
+        }
+        return null;
     }
 
     @Override public T visitCmientras(JVNWebParser.CmientrasContext ctx) {
-        return visitChildren(ctx);
+        write.print("while(" + ctx.expresion().getText() + "){ \n");
+        if (!ctx.contMientras().getText().isEmpty()){
+            visitContMientras(ctx.contMientras());
+        }
+        if(!ctx.rompe().getText().isEmpty()) {
+            visit(ctx.rompe());
+        }
+        write.print("}\n");
+        return null;
     }
 
     @Override public T visitContMientras(JVNWebParser.ContMientrasContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.contMientras() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
+            }
+            visitContMientras(ctx.contMientras());
+        }
+        return null;
     }
 
     @Override public T visitCHacer(JVNWebParser.CHacerContext ctx) {
-        return visitChildren(ctx);
+        write.print("do {\n");
+        if (!ctx.contHacer().getText().isEmpty()){
+            visitContHacer(ctx.contHacer());
+        }
+        if(!ctx.rompe().getText().isEmpty()) {
+            visit(ctx.rompe());
+        }
+        write.print("\n}\n");
+        write.print("while(" + ctx.expresion().getText() + ");\n");
+        return null;
     }
 
     @Override public T visitContHacer(JVNWebParser.ContHacerContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.contHacer() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
+            }
+            visitContHacer(ctx.contHacer());
+        }
+        return null;
     }
 
     @Override public T visitImpresion(JVNWebParser.ImpresionContext ctx) {
-        return visitChildren(ctx);
+        write.print("console.log(" + ctx.expresion().getText() + "); \n");
+        return null;
     }
 
     @Override public T visitSeleccion(JVNWebParser.SeleccionContext ctx) {
-        return visitChildren(ctx);
+        write.print("switch(");
+        if (ctx.ID() != null){
+            write.print(ctx.ID().getText() + "){ \n");
+        }
+        if (ctx.IDCOMPUESTO() != null){
+            write.print(ctx.IDCOMPUESTO().getText() + "){ \n");
+        }
+        if(!ctx.casos().getText().isEmpty()){
+            visitCasos(ctx.casos());
+        }
+        if(!ctx.cdefecto().getText().isEmpty()){
+            visitCdefecto(ctx.cdefecto());
+        }
+        write.print("\n}\n");
+        return null;
     }
 
     @Override public T visitCasos(JVNWebParser.CasosContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.casos() != null){
+            write.print("case ");
+            if (ctx.valor() != null){
+                write.print(ctx.valor().getText() + ":\n");
+            } else if (ctx.ID() != null) {
+                write.print( ctx.ID().getText() + ":\n" );
+            }
+            if (!ctx.contSelec().getText().isEmpty()){
+                visitContSelec(ctx.contSelec());
+            }
+            if(!ctx.rompe().getText().isEmpty()) {
+                visit(ctx.rompe());
+            }
+            visitCasos(ctx.casos());
+        }
+        return null;
     }
 
     @Override public T visitCdefecto(JVNWebParser.CdefectoContext ctx) {
-        return visitChildren(ctx);
+        write.print("default: \n");
+        if (!ctx.contDefecto().getText().isEmpty() && !ctx.rompe().getText().isEmpty()){
+            visitContDefecto(ctx.contDefecto());
+            visit(ctx.rompe());
+        }else if(!ctx.contDefecto().getText().isEmpty() && ctx.rompe().getText().isEmpty()){
+            visitContDefecto(ctx.contDefecto());
+        }else{
+            write.print("break; \n");
+        }
+        return null;
     }
 
     @Override public T visitContSelec(JVNWebParser.ContSelecContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.contSelec() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
+            }
+            visitContSelec(ctx.contSelec());
+        }
+        return null;
     }
 
     @Override public T visitContDefecto(JVNWebParser.ContDefectoContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.contDefecto() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
+            }
+            visitContDefecto(ctx.contDefecto());
+        }
+        return null;
+    }
+
+    @Override public T visitContinuar(JVNWebParser.ContinuarContext ctx) {
+        write.print("continue; \n");
+        return null;
+    }
+
+    @Override public T visitRomper(JVNWebParser.RomperContext ctx) {
+        write.print("break; \n");
+        return null;
     }
 
     @Override public T visitDfuncion(JVNWebParser.DfuncionContext ctx) {
-        return visitChildren(ctx);
+        write.print("function ");
+        if (ctx.ID() != null){
+            write.print(ctx.ID().getText());
+        }
+        if (!ctx.argumentos().getText().isEmpty()){
+            write.print("(" + ctx.argumentos().getText() + "){\n");
+        }else{
+            write.print("( ){\n");
+        }
+        if (!ctx.contFun().getText().isEmpty()){
+            visitContFun(ctx.contFun());
+        }
+        if (ctx.expresion() != null){
+            write.print("return " + ctx.expresion().getText() + "; \n}");
+        }else {
+            write.print("\n}\n");
+        }
+        return null;
     }
 
     @Override public T visitContFun(JVNWebParser.ContFunContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitRompe(JVNWebParser.RompeContext ctx) {
-        return visitChildren(ctx);
-    }
-
-    @Override public T visitObjetoDec(JVNWebParser.ObjetoDecContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.contFun() != null){
+            if (ctx.declaracion() != null){
+                visitDeclaracion(ctx.declaracion());
+            }else if(ctx.asignacionSimple() != null){
+                visitAsignacionSimple(ctx.asignacionSimple());
+            }else if(ctx.condicional() != null){
+                visitCondicional(ctx.condicional());
+            }else if(ctx.ciclo() != null){
+                visitCiclo(ctx.ciclo());
+            }else if(ctx.seleccion() != null){
+                visitSeleccion(ctx.seleccion());
+            }else if(ctx.impresion() != null){
+                visitImpresion(ctx.impresion());
+            }else if(ctx.declaracionF() != null){
+                visitDeclaracionF(ctx.declaracionF());
+            }else if(ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if(ctx.cambioElemento() != null){
+                visitCambioElemento(ctx.cambioElemento());
+            }else if(ctx.obtenerElemento() != null){
+                visitObtenerElemento(ctx.obtenerElemento());
+            }else if(ctx.objeto() != null){
+                visitObjeto(ctx.objeto());
+            }else if(ctx.arregloAsig() != null){
+                visitArregloAsig(ctx.arregloAsig());
+            }else if(ctx.arregloDec() != null){
+                visitArregloDec(ctx.arregloDec());
+            }
+            visitContFun(ctx.contFun());
+        }
+        return null;
     }
 
     @Override public T visitArreglo(JVNWebParser.ArregloContext ctx) {
-        return visitChildren(ctx);
+        write.print("[");
+        if(ctx.valor(1) != null){
+            visitValor(ctx.valor(0));
+            for (int i=1; i<ctx.valor().size() ; i++){
+                write.print(", ");
+                visitValor(ctx.valor(i));
+            }
+        }else {
+            if (ctx.valor(0) != null) {
+                visitValor(ctx.valor(0));
+            }
+        }
+        write.print("]");
+        return null;
     }
 
     @Override public T visitArregloDec(JVNWebParser.ArregloDecContext ctx) {
-        return visitChildren(ctx);
+        write.print("const " + ctx.ID().getText() + " = ");
+        visitArreglo(ctx.arreglo());
+        write.print(";\n");
+        return null;
     }
 
     @Override public T visitArregloAsig(JVNWebParser.ArregloAsigContext ctx) {
-        return visitChildren(ctx);
+        write.print(ctx.ID().getText() + " = ");
+        visitArreglo(ctx.arreglo());
+        write.print("; \n");
+        return null;
     }
 
     @Override public T visitPropiedades(JVNWebParser.PropiedadesContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.ID() != null) {
+            write.print(ctx.ID().getText() + ": ");
+        }
+        if (ctx.ENTERO() != null){
+            write.print(ctx.ENTERO().getText());
+        }else if( ctx.REAL() != null){
+            write.print(ctx.REAL().getText());
+        }else if( ctx.CADENA() != null){
+            write.print(ctx.CADENA().getText());
+        }else if( ctx.dfuncion() != null){
+            visitDfuncion(ctx.dfuncion());
+        }else if( ctx.arreglo() != null){
+            visitArreglo(ctx.arreglo());
+        }else if( ctx.otroObjeto() != null){
+            visitOtroObjeto(ctx.otroObjeto());
+        }
+        if (!ctx.otrasProp().getText().isEmpty()){
+            visitOtrasProp(ctx.otrasProp());
+        }
+        return null;
+    }
+
+    @Override public T visitOtroObjeto(JVNWebParser.OtroObjetoContext ctx) {
+        if (ctx.ID() != null) {
+            write.print(ctx.ID().getText() + ": { \n");
+            if (ctx.propiedades() != null) {
+                visitPropiedades(ctx.propiedades());
+            }
+            write.print("\n}");
+        }else{
+            write.print("{ ");
+            if (ctx.propiedades() != null) {
+                visitPropiedades(ctx.propiedades());
+            }
+            write.print("}");
+        }
+        return null;
     }
 
     @Override public T visitOtrasProp(JVNWebParser.OtrasPropContext ctx) {
-        return visitChildren(ctx);
+
+        if (ctx.otrasProp() != null) {
+            write.print(", ");
+            if (ctx.ID() != null) {
+                write.print(ctx.ID().getText() + ": ");
+            }
+            if (ctx.ENTERO() != null){
+                write.print(ctx.ENTERO().getText());
+            }else if( ctx.REAL() != null){
+                write.print(ctx.REAL().getText());
+            }else if( ctx.CADENA() != null){
+                write.print(ctx.CADENA().getText());
+            }else if( ctx.dfuncion() != null){
+                visitDfuncion(ctx.dfuncion());
+            }else if( ctx.arreglo() != null){
+                visitArreglo(ctx.arreglo());
+            }else if( ctx.otroObjeto() != null){
+                visitOtroObjeto(ctx.otroObjeto());
+            }
+            visitOtrasProp(ctx.otrasProp());
+        }
+        return null;
     }
 
     @Override public T visitValor(JVNWebParser.ValorContext ctx) {
-        return visitChildren(ctx);
+        if (ctx.ENTERO() != null){
+            write.print(ctx.ENTERO().getText());
+        }else if(ctx.REAL() != null){
+            write.print(ctx.REAL().getText());
+        }else if(ctx.CADENA() != null){
+            write.print(ctx.CADENA().getText());
+        }else if(ctx.CARACTER() != null){
+            write.print(ctx.CADENA().getText());
+        }else if(ctx.BOOLEANO() != null){
+            write.print(ctx.BOOLEANO().getText());
+        }else if(ctx.ID() != null){
+            write.print(ctx.ID().getText());
+        }else if(ctx.IDCOMPUESTO() != null){
+            write.print(ctx.IDCOMPUESTO().getText());
+        }else if(ctx.ELEMENTOARR() != null){
+            write.print(ctx.ELEMENTOARR().getText());
+        }else if(ctx.arreglo()!= null){
+            visitArreglo(ctx.arreglo());
+        }else if(ctx.otroObjeto() != null) {
+            visitOtroObjeto(ctx.otroObjeto());
+        }
+        return null;
     }
 
     @Override public T visitObjeto(JVNWebParser.ObjetoContext ctx) {
-        return visitChildren(ctx);
+        write.print("var " +  ctx.ID().getText() + "= { \n");
+        if (ctx.propiedades() != null){
+            visitPropiedades(ctx.propiedades());
+        }
+        write.print("\n};\n");
+        return null;
     }
 
 }

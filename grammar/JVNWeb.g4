@@ -86,16 +86,18 @@ eventoFormulario: (EVENTO_COMUN | 'alEnviarDatos') ':' '“' ID '“' ')';
 
 eventoEntrada: '(' EVENTO_ENTRADA ':'  '“' ID '“' ')';
 
-codigo: declaracion codigo | asignacionSimple codigo | lfuncion codigo |
-        condicional codigo | ciclo codigo | seleccion codigo | declaracionF codigo | dfuncion codigo | cambioElemento codigo | obtenerElemento codigo | ;
+codigo: declaracion codigo | asignacionSimple codigo | condicional codigo | ciclo codigo | seleccion codigo | declaracionF codigo |
+        dfuncion codigo | cambioElemento codigo | obtenerElemento codigo | impresion codigo | objeto codigo | arregloDec codigo | arregloAsig codigo | ;
 
-cambioElemento: (ID | ELEMENTOARR) ('nuevo contenido es') ':' (valor);
+cambioElemento: (ID | ELEMENTOARR) ('nuevoContenido') ':' valor otrosValores ;
 
-obtenerElemento: 'obtenerElemento' '(' (ELEMENTO|CLASE) ')' 'en' ID;
+otrosValores: ',' valor otrosValores | ;
 
-ELEMENTO: ('Contenedor' | 'Formulario' | 'Parrafo' | 'ListaOrdenada' | 'ListaSinOrden' | 'Tabla' | 'Enlace' | 'Linea' |
-            'TextoConEnfasis' | 'EntradaDeTexto' | 'AreaDeTexto' | 'Etiqueta' | 'Boton' | 'Selector' | 'Texto' | 'TextoAlernativo' |
-             'EncabezadoTabla' | 'FilaTabla' | 'ElementoTabla' | 'Audio' | 'Video' | 'Imagen');
+obtenerElemento: 'asignarElemento' '(' (elemento|CLASE) ')' 'a' ID;
+
+elemento: ('Contenedor' | 'Formulario' | 'Parrafo' | 'ListaOrdenada' | 'ListaSinOrden' | 'Tabla' | 'Enlace' | 'Linea' |
+           'TextoConEnfasis' | 'EntradaDeTexto' | 'AreaDeTexto' | 'Etiqueta' | 'Boton' | 'Selector' | 'Texto' | 'TextoAlernativo' |
+           'EncabezadoTabla' | 'FilaTabla' | 'ElementoTabla' | 'Audio' | 'Video' | 'Imagen');
 
 CLASE: '.'[a-zA-Z0-9_][a-zA-Z0-9_-]+;
 
@@ -113,9 +115,9 @@ argumentos: expresion otrosArg | ;
 
 otrosArg: ',' expresion otrosArg | ;
 
-expresion: ( NEG | ) ( ( valor | casoIdentificador ) expresioni | '(' expresionPar );
+expresion: ( '!' | ) ( ( valor | casoIdentificador ) expresioni | '(' expresionPar );
 
-expresionPar: expresion '(' expresioni ;
+expresionPar: expresion ')' expresioni ;
 
 expresioni: OPERADOR expresion | ;
 
@@ -128,69 +130,79 @@ ciclo: cpara | cmientras | cHacer | cparaOf | cparaIn;
 condicional: 'si' '(' expresion ')' 'entonces' contCond rompe sino 'fin_si';
 
 contCond: asignacionSimple contCond | declaracion contCond | declaracionF contCond | impresion contCond | condicional contCond | ciclo contCond |
-seleccion contCond |;
+          seleccion contCond | dfuncion contCond | cambioElemento contCond | obtenerElemento contCond | objeto contCond | arregloDec contCond |
+          arregloAsig contCond | ;
 
-sino: 'si_no' contSiNo rompe;
+sino: 'si_no' contSiNo rompe | ;
 
 contSiNo: asignacionSimple contSiNo | declaracion contSiNo | declaracionF contSiNo | impresion contSiNo | condicional contSiNo | ciclo contSiNo |
-seleccion contSiNo |;
+          seleccion contSiNo | dfuncion contSiNo | cambioElemento contSiNo | obtenerElemento contSiNo | objeto contSiNo | arregloDec contSiNo |
+          arregloAsig contSiNo |  ;
 
 cpara: 'para' '(' ID '=' expresion ';' expresion ';' avance ')' 'hacer' contPara rompe 'fin_para';
 
-cparaIn: 'para' ( ID 'en' ID) contPara 'fin_para';
+cparaIn: 'para' '(' ID 'en' ID ')' 'hacer' contPara rompe 'fin_para';
 
-cparaOf: 'para' ( ID 'de' ID) contPara 'fin_para';
+cparaOf: 'para' '(' ID 'de' ID ')' 'hacer' contPara rompe 'fin_para';
 
 avance: ID | ENTERO | REAL;
 
 contPara: asignacionSimple contPara | declaracion contPara | declaracionF contPara | impresion contPara | condicional contPara | ciclo contPara |
-seleccion contPara |;
+          seleccion contPara | dfuncion contPara | cambioElemento contPara | obtenerElemento contPara | objeto contPara | arregloDec contPara |
+          arregloAsig contPara | ;
 
 cmientras: 'mientras' '(' expresion ')' 'hacer' contMientras rompe 'fin_mientras';
 
 contMientras: asignacionSimple contMientras | declaracion contMientras | declaracionF contMientras | impresion contMientras | condicional contMientras |
-ciclo contMientras| seleccion contMientras |;
+              ciclo contMientras | seleccion contMientras | dfuncion contMientras | cambioElemento contMientras | obtenerElemento contMientras |
+              objeto contMientras | arregloDec contMientras | arregloAsig contMientras |  ;
 
 cHacer: 'hacer' contHacer rompe 'mientras' '(' expresion ')';
 
-contHacer: asignacionSimple contHacer | declaracion contHacer | declaracionF contHacer | ciclo contHacer | seleccion contHacer |;
+contHacer: asignacionSimple contHacer | declaracion contHacer | declaracionF contHacer | ciclo contHacer | seleccion contHacer | impresion contHacer |
+           condicional contHacer | dfuncion contHacer | cambioElemento contHacer | obtenerElemento contHacer | objeto contHacer | arregloDec contHacer |
+           arregloAsig contHacer | ;
 
 impresion: 'imprimir' expresion 'fin_imprimir';
 
 seleccion: 'seleccionar' '(' (ID | IDCOMPUESTO) ')' 'entre' casos cdefecto 'fin_seleccionar';
-casos: 'caso' (ID | valor) ':' contSelec 'romper' casos |;
-cdefecto: 'defecto' ':' contDefecto 'romper' |;
-contSelec: asignacionSimple contSelec | declaracion contSelec | declaracionF contSelec |
-impresion contSelec | condicional contSelec | ciclo contSelec | seleccion contSelec |;
-contDefecto: asignacionSimple contDefecto | declaracion contDefecto | declaracionF contDefecto |
-impresion contDefecto | condicional contDefecto | ciclo contDefecto | seleccion contDefecto |;
+casos: 'caso' (ID | valor) ':' contSelec rompe casos |;
+cdefecto: 'defecto' ':' contDefecto rompe |;
+contSelec: asignacionSimple contSelec | declaracion contSelec | declaracionF contSelec | impresion contSelec | condicional contSelec | ciclo contSelec |
+           seleccion contSelec | dfuncion contSelec | cambioElemento contSelec | obtenerElemento contSelec | objeto contSelec | arregloDec contSelec |
+           arregloAsig contSelec | ;
+contDefecto: asignacionSimple contDefecto | declaracion contDefecto | declaracionF contDefecto | impresion contDefecto | condicional contDefecto |
+             ciclo contDefecto | seleccion contDefecto | dfuncion contDefecto | cambioElemento contDefecto | obtenerElemento contDefecto | objeto contDefecto |
+             arregloDec contDefecto | arregloAsig contDefecto | ;
 
 dfuncion: 'funcion' (ID | ) '(' argumentos ')' 'hace' contFun ('retornar' expresion ';' |  ) 'fin_funcion';
 contFun: asignacionSimple contFun | declaracion contFun | declaracionF contFun  | impresion contFun | condicional contFun |
-ciclo contFun | seleccion contFun | ;
+         ciclo contFun | seleccion contFun | dfuncion contFun | cambioElemento contFun | obtenerElemento contFun | objeto contFun | arregloDec contFun |
+         arregloAsig contFun |  ;
 
-rompe: 'romper' ';' | 'continuar' ';' | ;
+rompe: 'romper' ';' #romper
+        | 'continuar' ';' #continuar
+        | #vacio ;
 
-objetoDec: 'objeto' ID 'tiene' propiedades;
 arreglo: '[' ( valor ( ',' valor)* )? ']';
 arregloDec: 'lista' ID '=' arreglo;
-arregloAsig: ID '=' arreglo;
-propiedades: ID ':' (ENTERO | REAL | CADENA | dfuncion | arreglo | objeto ) otrasProp;
-otrasProp: ',' ID ':' (ENTERO | REAL | CADENA | dfuncion |  arreglo ) otrasProp | ;
-valor: ENTERO | REAL | CADENA | CARACTER | BOOLEANO | ID | IDCOMPUESTO | arreglo | objeto | ELEMENTOARR;
-
-objeto: ID 'tiene' propiedades;
+arregloAsig: ID '=' arreglo ';';
+propiedades: (ID| ) ':' (ENTERO | REAL | CADENA | dfuncion | arreglo | otroObjeto ) otrasProp;
+otrasProp: ',' (ID | ) ':' (ENTERO | REAL | CADENA | dfuncion |  arreglo | otroObjeto ) otrasProp | ;
+valor: ENTERO | REAL | CADENA | CARACTER | BOOLEANO | ID | IDCOMPUESTO | arreglo | otroObjeto | ELEMENTOARR;
+objeto: 'objeto' ID 'tiene' propiedades 'fin_objeto';
+otroObjeto: 'objeto' (ID | ) 'tiene' propiedades 'fin_objeto';
 
 TEXTO: '\'' ~[']*  '\'';
 OPERADOR: '&&' | '||' | '<' | '>' | '<=' | '>=' | '==' | '!=' | '+' | '-' | '*' | '/' | '%';
-ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA) ']' ;
+ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA | ID) ']' ('.' (ID))* ;
 ENTERO: ('-'|)[0-9]+;
 REAL: ('-'|)[0-9]+'.'[0-9]+;
-CADENA: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#')*'"';
+CADENA: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '<' | '>' | '/')*'"';
 CARACTER: '\''([a-zA-Z0-9] | ' ' | '_' | '\\n' | '\\t') '\'';
-BOOLEANO: 'falso' | 'verdadero';
+BOOLEANO: 'true' | 'false';
 ID: ('-'|)[a-zA-Z]+( '_'*[a-zA-Z0-9]+)*;
-IDCOMPUESTO: ('-'|)[a-zA-Z]+( '_'*[a-zA-Z0-9]+)* ('.' [a-zA-Z]+( '_'*[a-zA-Z0-9]+)* )+;
+IDCOMPUESTO: (('-'|)[a-zA-Z]+( '_'*[a-zA-Z0-9]+)* ('.' [a-zA-Z]+( '_'*[a-zA-Z0-9]+)* )+);
 Whitespace: [ \t]+ -> skip;
 Newline: ('\r' '\n'? | '\n') -> skip;
 BlockComment: '/*' .*? '*/' -> skip;

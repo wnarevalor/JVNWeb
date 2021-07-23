@@ -214,11 +214,23 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCambioElemento(JVNWebParser.CambioElementoContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#otrosValores}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOtrosValores(JVNWebParser.OtrosValoresContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#obtenerElemento}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitObtenerElemento(JVNWebParser.ObtenerElementoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#elemento}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElemento(JVNWebParser.ElementoContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#declaracion}.
 	 * @param ctx the parse tree
@@ -424,17 +436,26 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitContFun(JVNWebParser.ContFunContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#rompe}.
+	 * Visit a parse tree produced by the {@code romper}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRompe(JVNWebParser.RompeContext ctx);
+	T visitRomper(JVNWebParser.RomperContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#objetoDec}.
+	 * Visit a parse tree produced by the {@code continuar}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitObjetoDec(JVNWebParser.ObjetoDecContext ctx);
+	T visitContinuar(JVNWebParser.ContinuarContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code vacio}
+	 * labeled alternative in {@link JVNWebParser#rompe}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVacio(JVNWebParser.VacioContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#arreglo}.
 	 * @param ctx the parse tree
@@ -478,11 +499,17 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitObjeto(JVNWebParser.ObjetoContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#valorEstilos}.
+	 * Visit a parse tree produced by {@link JVNWebParser#otroObjeto}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValorEstilos(JVNWebParser.ValorEstilosContext ctx);
+	T visitOtroObjeto(JVNWebParser.OtroObjetoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#valorEstilo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValorEstilo(JVNWebParser.ValorEstiloContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#colorFormato}.
 	 * @param ctx the parse tree

@@ -423,6 +423,18 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterOtrosValores(JVNWebParser.OtrosValoresContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOtrosValores(JVNWebParser.OtrosValoresContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterObtenerElemento(JVNWebParser.ObtenerElementoContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -430,6 +442,18 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitObtenerElemento(JVNWebParser.ObtenerElementoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElemento(JVNWebParser.ElementoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElemento(JVNWebParser.ElementoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -843,25 +867,37 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRompe(JVNWebParser.RompeContext ctx) { }
+	@Override public void enterRomper(JVNWebParser.RomperContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRompe(JVNWebParser.RompeContext ctx) { }
+	@Override public void exitRomper(JVNWebParser.RomperContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterObjetoDec(JVNWebParser.ObjetoDecContext ctx) { }
+	@Override public void enterContinuar(JVNWebParser.ContinuarContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitObjetoDec(JVNWebParser.ObjetoDecContext ctx) { }
+	@Override public void exitContinuar(JVNWebParser.ContinuarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVacio(JVNWebParser.VacioContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVacio(JVNWebParser.VacioContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -951,13 +987,25 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValorEstilos(JVNWebParser.ValorEstilosContext ctx) { }
+	@Override public void enterOtroObjeto(JVNWebParser.OtroObjetoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValorEstilos(JVNWebParser.ValorEstilosContext ctx) { }
+	@Override public void exitOtroObjeto(JVNWebParser.OtroObjetoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValorEstilo(JVNWebParser.ValorEstiloContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValorEstilo(JVNWebParser.ValorEstiloContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
