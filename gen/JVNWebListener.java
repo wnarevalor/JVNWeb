@@ -1,4 +1,4 @@
-// Generated from C:/Users/USUARIO/Documents/2021-I/Lenguajes/Proyecto/grammar\JVNWeb.g4 by ANTLR 4.9.1
+// Generated from C:/Users/usuario/IdeaProjects/JVNWeb/grammar\JVNWeb.g4 by ANTLR 4.9.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -47,25 +47,149 @@ public interface JVNWebListener extends ParseTreeListener {
 	 */
 	void exitContenido(JVNWebParser.ContenidoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#elementoCompuesto}.
+	 * Enter a parse tree produced by the {@code contenedor}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
 	 * @param ctx the parse tree
 	 */
-	void enterElementoCompuesto(JVNWebParser.ElementoCompuestoContext ctx);
+	void enterContenedor(JVNWebParser.ContenedorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#elementoCompuesto}.
+	 * Exit a parse tree produced by the {@code contenedor}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
 	 * @param ctx the parse tree
 	 */
-	void exitElementoCompuesto(JVNWebParser.ElementoCompuestoContext ctx);
+	void exitContenedor(JVNWebParser.ContenedorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#elementoSimple}.
+	 * Enter a parse tree produced by the {@code formulario}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
 	 * @param ctx the parse tree
 	 */
-	void enterElementoSimple(JVNWebParser.ElementoSimpleContext ctx);
+	void enterFormulario(JVNWebParser.FormularioContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#elementoSimple}.
+	 * Exit a parse tree produced by the {@code formulario}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
 	 * @param ctx the parse tree
 	 */
-	void exitElementoSimple(JVNWebParser.ElementoSimpleContext ctx);
+	void exitFormulario(JVNWebParser.FormularioContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code listaParrafo}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void enterListaParrafo(JVNWebParser.ListaParrafoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code listaParrafo}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void exitListaParrafo(JVNWebParser.ListaParrafoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code listaOrdenada}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void enterListaOrdenada(JVNWebParser.ListaOrdenadaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code listaOrdenada}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void exitListaOrdenada(JVNWebParser.ListaOrdenadaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code listaSinOrden}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void enterListaSinOrden(JVNWebParser.ListaSinOrdenContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code listaSinOrden}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void exitListaSinOrden(JVNWebParser.ListaSinOrdenContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code tabla}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void enterTabla(JVNWebParser.TablaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code tabla}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void exitTabla(JVNWebParser.TablaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code elementoMultimedia}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementoMultimedia(JVNWebParser.ElementoMultimediaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code elementoMultimedia}
+	 * labeled alternative in {@link JVNWebParser#elementoCompuesto}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementoMultimedia(JVNWebParser.ElementoMultimediaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code elementoTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementoTexto(JVNWebParser.ElementoTextoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code elementoTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementoTexto(JVNWebParser.ElementoTextoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code enlace}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnlace(JVNWebParser.EnlaceContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code enlace}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnlace(JVNWebParser.EnlaceContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code linea}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void enterLinea(JVNWebParser.LineaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code linea}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void exitLinea(JVNWebParser.LineaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code textoConEnfasis}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void enterTextoConEnfasis(JVNWebParser.TextoConEnfasisContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code textoConEnfasis}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void exitTextoConEnfasis(JVNWebParser.TextoConEnfasisContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code boton}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void enterBoton(JVNWebParser.BotonContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code boton}
+	 * labeled alternative in {@link JVNWebParser#elementoSimple}.
+	 * @param ctx the parse tree
+	 */
+	void exitBoton(JVNWebParser.BotonContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#referencia}.
 	 * @param ctx the parse tree
@@ -77,15 +201,53 @@ public interface JVNWebListener extends ParseTreeListener {
 	 */
 	void exitReferencia(JVNWebParser.ReferenciaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#elementoFormulario}.
+	 * Enter a parse tree produced by the {@code etiqueta}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
 	 * @param ctx the parse tree
 	 */
-	void enterElementoFormulario(JVNWebParser.ElementoFormularioContext ctx);
+	void enterEtiqueta(JVNWebParser.EtiquetaContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#elementoFormulario}.
+	 * Exit a parse tree produced by the {@code etiqueta}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
 	 * @param ctx the parse tree
 	 */
-	void exitElementoFormulario(JVNWebParser.ElementoFormularioContext ctx);
+	void exitEtiqueta(JVNWebParser.EtiquetaContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code entradaDeTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 */
+	void enterEntradaDeTexto(JVNWebParser.EntradaDeTextoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code entradaDeTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 */
+	void exitEntradaDeTexto(JVNWebParser.EntradaDeTextoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code areaDeTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 */
+	void enterAreaDeTexto(JVNWebParser.AreaDeTextoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code areaDeTexto}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 */
+	void exitAreaDeTexto(JVNWebParser.AreaDeTextoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code selector}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 */
+	void enterSelector(JVNWebParser.SelectorContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code selector}
+	 * labeled alternative in {@link JVNWebParser#elementoFormulario}.
+	 * @param ctx the parse tree
+	 */
+	void exitSelector(JVNWebParser.SelectorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#elementoLista}.
 	 * @param ctx the parse tree
@@ -106,16 +268,6 @@ public interface JVNWebListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTexto(JVNWebParser.TextoContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#textoAlternativo}.
-	 * @param ctx the parse tree
-	 */
-	void enterTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#textoAlternativo}.
-	 * @param ctx the parse tree
-	 */
-	void exitTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#contenidoTabla}.
 	 * @param ctx the parse tree
@@ -147,15 +299,41 @@ public interface JVNWebListener extends ParseTreeListener {
 	 */
 	void exitElementoTabla(JVNWebParser.ElementoTablaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#multimedia}.
+	 * Enter a parse tree produced by the {@code audio}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultimedia(JVNWebParser.MultimediaContext ctx);
+	void enterAudio(JVNWebParser.AudioContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#multimedia}.
+	 * Exit a parse tree produced by the {@code audio}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultimedia(JVNWebParser.MultimediaContext ctx);
+	void exitAudio(JVNWebParser.AudioContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code video}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
+	 * @param ctx the parse tree
+	 */
+	void enterVideo(JVNWebParser.VideoContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code video}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
+	 * @param ctx the parse tree
+	 */
+	void exitVideo(JVNWebParser.VideoContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code imagen}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
+	 * @param ctx the parse tree
+	 */
+	void enterImagen(JVNWebParser.ImagenContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code imagen}
+	 * labeled alternative in {@link JVNWebParser#multimedia}.
+	 * @param ctx the parse tree
+	 */
+	void exitImagen(JVNWebParser.ImagenContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#mostrarControles}.
 	 * @param ctx the parse tree
@@ -872,4 +1050,24 @@ public interface JVNWebListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBorde(JVNWebParser.BordeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JVNWebParser#dimensiones}.
+	 * @param ctx the parse tree
+	 */
+	void enterDimensiones(JVNWebParser.DimensionesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JVNWebParser#dimensiones}.
+	 * @param ctx the parse tree
+	 */
+	void exitDimensiones(JVNWebParser.DimensionesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JVNWebParser#dimension}.
+	 * @param ctx the parse tree
+	 */
+	void enterDimension(JVNWebParser.DimensionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JVNWebParser#dimension}.
+	 * @param ctx the parse tree
+	 */
+	void exitDimension(JVNWebParser.DimensionContext ctx);
 }

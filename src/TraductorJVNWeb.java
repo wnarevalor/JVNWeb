@@ -3,21 +3,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
-
+public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
+    
     private StringBuilder builder;
     private PrintWriter write;
-
-    public TraductorJVNWeb(){
-        File jvn = new File("jvncode.html");
+    
+    public TraductorJVNWeb() {
+        File jvn = new File( "jvncode.html" );
         builder = new StringBuilder();
         try {
-            write = new PrintWriter(jvn);
-        }catch(IOException e){
+            write = new PrintWriter( jvn );
+        } catch ( IOException e ) {
             e.printStackTrace();
         }
     }
-
+    
     @Override public T visitCodigo(JVNWebParser.CodigoContext ctx) {
         if (ctx.codigo() != null){
             if (ctx.declaracion() != null){
@@ -742,5 +742,87 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         write.print("\n};\n");
         return null;
     }
-
+    
+    @Override
+    public T visitEstilos( JVNWebParser.EstilosContext ctx ) {
+        write.print( "style=\"" );
+        ctx.estilo().forEach( this::visitEstilo );
+        write.print( "\" " );
+        return null;
+    }
+    
+    @Override
+    public T visitEstilo( JVNWebParser.EstiloContext ctx ) {
+        if ( ctx.ESTILO() != null ) {
+            write.print( Constantes.estilos.get( ctx.ESTILO().getText() ) + ": " );
+            visitValorEstilo( ctx.valorEstilo() );
+        } else {
+            String estiloBooleano = ctx.ESTILO_BOOLEANO().getText();
+            if ( estiloBooleano.equals( "cursiva" ) || estiloBooleano.equals( "negrilla" ) )
+                write.printf( "font-style: %s;", Constantes.estilosBooleanos.get( estiloBooleano ) );
+            else if ( estiloBooleano.equals( "subrayado" ) || estiloBooleano.equals( "tachado" ) )
+                write.printf( "text-decoration: %s;", Constantes.estilosBooleanos.get( estiloBooleano ) );
+        }
+        return null;
+    }
+    
+    @Override
+    public T visitValorEstilo( JVNWebParser.ValorEstiloContext ctx ) {
+        if ( ctx.CADENA_CSS() != null ) {
+            write.print( ctx.CADENA_CSS().getText() );
+        } else if ( ctx.ENTERO() != null ) {
+            write.print( ctx.ENTERO().getText() );
+        } else if ( ctx.COLOR() != null ) {
+            write.print( Constantes.colores.get( ctx.COLOR().getText() ) );
+        } else if ( ctx.VISUALIZACION() != null ) {
+            String valorVisualizacion = ctx.VISUALIZACION().getText();
+            if ( valorVisualizacion.equals( "fila" ) || valorVisualizacion.equals( "columna" ) ) {
+                write.print( "flex; " );
+                write.print( "flex-direction: " + Constantes.valoresVisualizacion.get( valorVisualizacion ) );
+            } else
+                write.print( Constantes.valoresVisualizacion.get( valorVisualizacion ) );
+        } else if ( ctx.POSICION() != null ) {
+            write.print( Constantes.valoresPosicion.get( ctx.POSICION().getText() ) );
+        } else if ( ctx.ubicacion() != null ) {
+            visitUbicacion( ctx.ubicacion() );
+        } else if ( ctx.JUSTIFICADO() != null ) {
+            write.print( Constantes.valoresJustificado.get( ctx.JUSTIFICADO().getText() ) );
+        } else if ( ctx.borde() != null ) {
+            visitBorde( ctx.borde() );
+        } else if ( ctx.CURSOR() != null ) {
+            write.print( Constantes.valoresCursor.get( ctx.CURSOR().getText() ) );
+        } else if ( ctx.FLOTAMIENTO() != null ) {
+            write.print( Constantes.valoresFlotamiento.get( ctx.FLOTAMIENTO().getText() ) );
+        } else if ( ctx.dimensiones() != null ) {
+            visitDimensiones( ctx.dimensiones() );
+        }
+        write.print( "; " );
+        return null;
+    }
+    
+    @Override
+    public T visitBorde( JVNWebParser.BordeContext ctx ) {
+        visitDimension(  ctx.dimension() );
+        write.print(ctx.CADENA() + "");
+        if (ctx.COLOR() != null)
+            write.print( Constantes.colores.get( ctx.COLOR() ) + ";" );
+        else
+            visitColorFormato( ctx.colorFormato() );
+        return null;
+    }
+    
+    @Override
+    public T visitDimensiones( JVNWebParser.DimensionesContext ctx ) {
+        ctx.dimension().forEach( this::visitDimension );
+        return null;
+    }
+    
+    @Override
+    public T visitDimension( JVNWebParser.DimensionContext ctx ) {
+        write.print( ctx.DIMENSION().getText()
+            + (ctx.UNIDAD_DIMENSION().getText().equals( "pixeles" ) ? "px" : "%" )
+            + " "
+        );
+        return null;
+    }
 }

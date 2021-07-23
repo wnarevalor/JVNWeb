@@ -9,34 +9,32 @@ titulo: 'Titulo' TEXTO 'FinTitulo';
 contenido: (elementoCompuesto | elementoSimple | elementoFormulario)+;
 
 elementoCompuesto:
-    'Contenedor' clases? estilos? eventoComun*  contenido 'FinContenedor'
-    | 'Formulario' clases? estilos? eventoFormulario* contenido 'FinFormulario'
-    | 'Parrafo' clases? estilos? eventoComun*  texto*  'FinParrafo'
-    | 'ListaOrdenada' clases? estilos? elementoLista* eventoComun*  'FinListaOrdenada'
-    | 'ListaSinOrden' clases? estilos? elementoLista* eventoComun*  'FinListaSinOrden'
-    | 'Tabla' clases? estilos? eventoComun* contenidoTabla 'FinTabla'
-    | multimedia;
+    'Contenedor' clases? estilos? eventoComun*  contenido 'FinContenedor' #contenedor
+    | 'Formulario' clases? estilos? eventoFormulario* contenido 'FinFormulario' #formulario
+    | 'Parrafo' clases? estilos? eventoComun*  texto*  'FinParrafo' #listaParrafo
+    | 'ListaOrdenada' clases? estilos? elementoLista* eventoComun*  'FinListaOrdenada' #listaOrdenada
+    | 'ListaSinOrden' clases? estilos? elementoLista* eventoComun*  'FinListaSinOrden' #listaSinOrden
+    | 'Tabla' clases? estilos? eventoComun* contenidoTabla 'FinTabla' #tabla
+    | multimedia #elementoMultimedia;
 
 elementoSimple:
-    texto
-    | 'Enlace' clases? referencia? estilos? eventoComun* TEXTO 'FinEnlace'
-    | 'Linea' clases? estilos? eventoComun* 'FinLinea'
-    | 'TextoConEnfasis' '(' 'enfasis' ':' ENFASIS ')' clases? estilos? eventoComun* texto* 'FinTextoConEnfasis'
-    | 'Boton' clases? estilos? eventoComun* texto* 'Boton';
+    texto #elementoTexto
+    | 'Enlace' clases? referencia? estilos? eventoComun* TEXTO 'FinEnlace' #enlace
+    | 'Linea' clases? estilos? eventoComun* 'FinLinea' #linea
+    | 'TextoConEnfasis' '(' 'enfasis' ':' ENFASIS ')' clases? estilos? eventoComun* texto* 'FinTextoConEnfasis' #textoConEnfasis
+    | 'Boton' clases? estilos? eventoComun* texto* 'Boton' #boton;
 
 referencia: '(' 'referencia' ':' '"' TEXTO '"' ')';
 
 elementoFormulario:
-     'Etiqueta' clases? estilos? eventoComun* texto* 'FinEtiqueta'
-    | 'EntradaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada* 'FinEntradaDeTexto'
-    | 'AreaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada*  'FinAreaDeTexto'
-    | 'Selector' clases? atributoNombre? atributoValor? estilos? eventoEntrada* ('Opcion' atributoValor eventoComun* texto* 'FinOpcion')* 'FinSelector';
+     'Etiqueta' clases? estilos? eventoComun* texto* 'FinEtiqueta' #etiqueta
+    | 'EntradaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada* 'FinEntradaDeTexto' #entradaDeTexto
+    | 'AreaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada*  'FinAreaDeTexto' #areaDeTexto
+    | 'Selector' clases? atributoNombre? atributoValor? estilos? eventoEntrada* ('Opcion' atributoValor eventoComun* texto* 'FinOpcion')* 'FinSelector' #selector;
 
 elementoLista:  'ElementoLista' clases? estilos? eventoComun*  (elementoSimple | multimedia)* 'FinElementoLista';
 
 texto: TEXTO | ('Texto' clases? estilos? eventoComun* texto* 'FinTexto');
-
-textoAlternativo: 'TextoAlernativo' clases? estilos? eventoComun*  TEXTO 'FinTextoAlternativo' | ;
 
 contenidoTabla: ('EncabezadoTabla' clases? estilos? eventoComun*  elementoTabla 'FinEncabezadoTabla')? filaTabla*;
 
@@ -45,9 +43,9 @@ filaTabla: 'FilaTabla' clases? estilos? eventoComun*  elementoTabla* 'FinFilaTab
 elementoTabla: 'ElementoTabla' clases? estilos? eventoComun*  (elementoSimple | multimedia)* 'FinElementoTabla';
 
 multimedia:
-    'Audio' clases? mostrarControles? estilos? eventoComun*  fuente 'FinAudio'
-    | 'Video' clases? mostrarControles? estilos? eventoComun*  fuente 'FinVideo'
-    | 'Imagen' clases? atributoFuente  ( '(' atributoImagen ':' '“' TEXTO '“' ')' )* estilos?               eventoComun*  'FinImagen';
+    'Audio' clases? mostrarControles? estilos? eventoComun*  fuente 'FinAudio' #audio
+    | 'Video' clases? mostrarControles? estilos? eventoComun*  fuente 'FinVideo' #video
+    | 'Imagen' clases? atributoFuente  ( '(' atributoImagen ':' '“' TEXTO '“' ')' )* estilos? eventoComun*  'FinImagen' #imagen;
 
 mostrarControles: '(' 'conControles' ')';
 
@@ -78,7 +76,7 @@ atributoImagen:
 
 estilos: '( ''estilos' ':' estilo ('y' estilo)* ')';
 
-estilo: ESTILO 'es' (valorEstilo | ESTILO_BOOLEANO);
+estilo: ESTILO 'es' valorEstilo | ESTILO_BOOLEANO;
 
 eventoComun: '(' EVENTO_COMUN ':' '“' ID '“' ')';
 
@@ -218,20 +216,23 @@ ESTILO: ('ancho' | 'alto' | 'anchoMinimo' |  'anchoMaximo' | 'alturaMinima' | 'a
 
 ESTILO_BOOLEANO: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
 
-valorEstilo:  CADENA_CSS
+valorEstilo:
+      CADENA_CSS
     | ENTERO
     | COLOR
     | VISUALIZACION
     | POSICION
-    | UBICACION
+    | ubicacion
     | JUSTIFICADO
     | borde
     | CURSOR
     | FLOTAMIENTO
-    | DIMENSIONES
-    | colorFormato;
-
+    | colorFormato
+    | dimensiones;
+    
 CADENA_CSS: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' )+'"';
+
+NUMERO: [0-9]+;
 
 COLOR: 'rojo' | 'verde' | 'azul' | 'amarillo' | 'violeta' | 'negro' | 'marron' | 'gris' |
  'naranja' | 'rosa' | 'purpura' | 'blanco' ;
@@ -240,7 +241,7 @@ colorFormato: '#' 'rojo' N_COLOR 'verde' N_COLOR 'azul' N_COLOR;
 
 N_COLOR: [0-255];
 
-VISUALIZACION: 'nada' | 'bloque' | 'enlinea' | 'fila' | 'columna';
+VISUALIZACION: 'nada' | 'bloque' | 'enlinea' | 'flexible' | 'fila' | 'columna';
 
 POSICION: 'estatica' | 'relativa' | 'absoluta' | 'fija' ;
 
@@ -248,20 +249,24 @@ FLOTAMIENTO: 'derecha' | 'izquierda' | 'ninguno';
 
 ALINEADO: 'centro' | 'extendido' | 'inicio' | 'final';
 
-JUSTIFICADO: 'centrado' | 'espacioEntre' | 'espacioAlrededor' | 'inicial' | 'final' | 'espacioUniforme';
+JUSTIFICADO: 'centrado' | 'espacioEntre' | 'espacioAlrededor' | 'inicio' | 'final';
 
 ubicacion:
-'superior' valorEstilo  'derecha' valorEstilo 'inferior' valorEstilo 'izquierda' valorEstilo
-| 'horizontal' valorEstilo 'vertical' valorEstilo;
+    'superior' valorEstilo 'derecha' valorEstilo 'inferior' valorEstilo 'izquierda' valorEstilo
+    | 'horizontal' valorEstilo 'vertical' valorEstilo;
 
-borde: CADENA? CADENA (COLOR | colorFormato);
+borde: dimension CADENA (COLOR | colorFormato);
 
 CURSOR: 'puntero' | 'texto' | 'esperando' | 'automatico' | 'invisible';
 
-DIMENSIONES: DIMENSION (DIMENSION (DIMENSION DIMENSION)? )?;
+dimensiones: dimension (dimension (dimension dimension)? )?;
 
-DIMENSION: [0-9]+ ('.' [0-9]+)? ('pixeles' | '%');
+dimension: DIMENSION UNIDAD_DIMENSION;
 
-EVENTO_ENTRADA: ('alModificar' | 'alSeleccionar' );
+DIMENSION: [0-9]+ ('.' [0-9]+)?;
 
-EVENTO_COMUN: ('alHacerClic' | 'alApuntar' |  'alSalir' );
+UNIDAD_DIMENSION: 'pixeles' | '%';
+
+EVENTO_ENTRADA: 'alModificar' | 'alSeleccionar';
+
+EVENTO_COMUN: 'alHacerClic' | 'alApuntar' | 'alSalir';

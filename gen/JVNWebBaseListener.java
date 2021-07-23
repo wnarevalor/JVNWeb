@@ -1,4 +1,4 @@
-// Generated from C:/Users/USUARIO/Documents/2021-I/Lenguajes/Proyecto/grammar\JVNWeb.g4 by ANTLR 4.9.1
+// Generated from C:/Users/usuario/IdeaProjects/JVNWeb/grammar\JVNWeb.g4 by ANTLR 4.9.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -63,25 +63,145 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterElementoCompuesto(JVNWebParser.ElementoCompuestoContext ctx) { }
+	@Override public void enterContenedor(JVNWebParser.ContenedorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitElementoCompuesto(JVNWebParser.ElementoCompuestoContext ctx) { }
+	@Override public void exitContenedor(JVNWebParser.ContenedorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterElementoSimple(JVNWebParser.ElementoSimpleContext ctx) { }
+	@Override public void enterFormulario(JVNWebParser.FormularioContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitElementoSimple(JVNWebParser.ElementoSimpleContext ctx) { }
+	@Override public void exitFormulario(JVNWebParser.FormularioContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListaParrafo(JVNWebParser.ListaParrafoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListaParrafo(JVNWebParser.ListaParrafoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListaOrdenada(JVNWebParser.ListaOrdenadaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListaOrdenada(JVNWebParser.ListaOrdenadaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListaSinOrden(JVNWebParser.ListaSinOrdenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListaSinOrden(JVNWebParser.ListaSinOrdenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTabla(JVNWebParser.TablaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTabla(JVNWebParser.TablaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElementoMultimedia(JVNWebParser.ElementoMultimediaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElementoMultimedia(JVNWebParser.ElementoMultimediaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElementoTexto(JVNWebParser.ElementoTextoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElementoTexto(JVNWebParser.ElementoTextoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEnlace(JVNWebParser.EnlaceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEnlace(JVNWebParser.EnlaceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLinea(JVNWebParser.LineaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLinea(JVNWebParser.LineaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTextoConEnfasis(JVNWebParser.TextoConEnfasisContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTextoConEnfasis(JVNWebParser.TextoConEnfasisContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBoton(JVNWebParser.BotonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBoton(JVNWebParser.BotonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -99,13 +219,49 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterElementoFormulario(JVNWebParser.ElementoFormularioContext ctx) { }
+	@Override public void enterEtiqueta(JVNWebParser.EtiquetaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitElementoFormulario(JVNWebParser.ElementoFormularioContext ctx) { }
+	@Override public void exitEtiqueta(JVNWebParser.EtiquetaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEntradaDeTexto(JVNWebParser.EntradaDeTextoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEntradaDeTexto(JVNWebParser.EntradaDeTextoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAreaDeTexto(JVNWebParser.AreaDeTextoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAreaDeTexto(JVNWebParser.AreaDeTextoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSelector(JVNWebParser.SelectorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSelector(JVNWebParser.SelectorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -130,18 +286,6 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTexto(JVNWebParser.TextoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -183,13 +327,37 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMultimedia(JVNWebParser.MultimediaContext ctx) { }
+	@Override public void enterAudio(JVNWebParser.AudioContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMultimedia(JVNWebParser.MultimediaContext ctx) { }
+	@Override public void exitAudio(JVNWebParser.AudioContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVideo(JVNWebParser.VideoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVideo(JVNWebParser.VideoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterImagen(JVNWebParser.ImagenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitImagen(JVNWebParser.ImagenContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1042,6 +1210,30 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBorde(JVNWebParser.BordeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDimensiones(JVNWebParser.DimensionesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDimensiones(JVNWebParser.DimensionesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDimension(JVNWebParser.DimensionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDimension(JVNWebParser.DimensionContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

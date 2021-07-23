@@ -24,7 +24,12 @@ public final class Constantes {
         elementos.put( "Tabla", "table" );
         elementos.put( "Enlace", "a" );
         elementos.put( "Linea", "hr" );
-        elementos.put( "TextoConEnfasis", "h" );
+        elementos.put( "TextoConEnfasis1", "h1" );
+        elementos.put( "TextoConEnfasis2", "h2" );
+        elementos.put( "TextoConEnfasis3", "h3" );
+        elementos.put( "TextoConEnfasis4", "h4" );
+        elementos.put( "TextoConEnfasis5", "h5" );
+        elementos.put( "TextoConEnfasis6", "h6" );
         elementos.put( "EntradaDeTexto", "input" );
         elementos.put( "AreaDeTexto", "textarea" );
         elementos.put( "Etiqueta", "label" );
@@ -58,7 +63,7 @@ public final class Constantes {
         tiposDeEntrada.put( "color", "color" );
         tiposDeEntrada.put( "mes", "month" );
         tiposDeEntrada.put( "envio", "submit" );
-
+        
         colores = new HashMap<>();
         colores.put( "rojo", "#ff0000" );
         colores.put( "verde", "#008000" );
@@ -80,7 +85,7 @@ public final class Constantes {
         valoresVisualizacion.put( "fila", "row" );
         valoresVisualizacion.put( "columna", "column" );
         valoresVisualizacion.put( "flexible", "flex" );
-
+        
         valoresPosicion = new HashMap<>();
         valoresPosicion.put( "estatica", "static" );
         valoresPosicion.put( "relativa", "relative" );
