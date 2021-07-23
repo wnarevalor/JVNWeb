@@ -89,11 +89,11 @@ eventoEntrada: '(' EVENTO_ENTRADA ':'  '“' ID '“' ')';
 codigo: declaracion codigo | asignacionSimple codigo | condicional codigo | ciclo codigo | seleccion codigo | declaracionF codigo |
         dfuncion codigo | cambioElemento codigo | obtenerElemento codigo | impresion codigo | objeto codigo | arregloDec codigo | arregloAsig codigo | ;
 
-cambioElemento: (ID | ELEMENTOARR) ('nuevo contenido es') ':' valor otrosValores ;
+cambioElemento: (ID | ELEMENTOARR) ('nuevoContenido') ':' valor otrosValores ;
 
 otrosValores: ',' valor otrosValores | ;
 
-obtenerElemento: 'obtenerElemento' '(' (elemento|CLASE) ')' 'en' ID;
+obtenerElemento: 'asignarElemento' '(' (elemento|CLASE) ')' 'a' ID;
 
 elemento: ('Contenedor' | 'Formulario' | 'Parrafo' | 'ListaOrdenada' | 'ListaSinOrden' | 'Tabla' | 'Enlace' | 'Linea' |
            'TextoConEnfasis' | 'EntradaDeTexto' | 'AreaDeTexto' | 'Etiqueta' | 'Boton' | 'Selector' | 'Texto' | 'TextoAlernativo' |
@@ -195,7 +195,7 @@ otroObjeto: 'objeto' (ID | ) 'tiene' propiedades 'fin_objeto';
 
 TEXTO: '\'' ~[']*  '\'';
 OPERADOR: '&&' | '||' | '<' | '>' | '<=' | '>=' | '==' | '!=' | '+' | '-' | '*' | '/' | '%';
-ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA | ID) ']' ('.' (ID | IDCOMPUESTO))* ;
+ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA | ID) ']' ('.' (ID))* ;
 ENTERO: ('-'|)[0-9]+;
 REAL: ('-'|)[0-9]+'.'[0-9]+;
 CADENA: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '<' | '>' | '/')*'"';
