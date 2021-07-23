@@ -805,7 +805,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         visitDimension(  ctx.dimension() );
         write.print(ctx.CADENA() + "");
         if (ctx.COLOR() != null)
-            write.print( Constantes.colores.get( ctx.COLOR() ) + ";" );
+            write.print( Constantes.colores.get( ctx.COLOR() ) );
         else
             visitColorFormato( ctx.colorFormato() );
         return null;
@@ -823,6 +823,13 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
             + (ctx.UNIDAD_DIMENSION().getText().equals( "pixeles" ) ? "px" : "%" )
             + " "
         );
+        return null;
+    }
+    
+    @Override
+    public T visitColorFormato(JVNWebParser.ColorFormatoContext ctx) {
+        write.print( "rgb(" + ctx.N_COLOR(0) + ", " + ctx.N_COLOR(1) 
+            + "," + ctx.N_COLOR(2) + ")" );
         return null;
     }
 }

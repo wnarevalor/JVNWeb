@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69774313-4e73-4b06-a409-9ff214bb64ca" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JVNWeb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JVNWeb.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWeb.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWeb.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWebBaseListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWebBaseVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWebLexer.interp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWebLexer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWebLexer.tokens" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWebListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWebParser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gen/JVNWebVisitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/grammar/JVNWeb.g4" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/JVNWeb.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Constantes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TraductorJVNWeb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TraductorJVNWeb.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +59,7 @@
       <updated>1626727561042</updated>
       <workItem from="1626727563095" duration="8709000" />
       <workItem from="1627050737622" duration="4953000" />
-      <workItem from="1627071087992" duration="3470000" />
+      <workItem from="1627071087992" duration="3817000" />
     </task>
     <task id="LOCAL-00001" summary="Añadida tabla de traducciones y traducción de estilos">
       <created>1626733391470</created>
