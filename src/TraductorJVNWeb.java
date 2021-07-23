@@ -61,13 +61,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
         visitContenido(ctx.contenido());
 
@@ -83,13 +78,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoFormulario(1)!=null){
-            for(int i=1; i<ctx.eventoFormulario().size(); i++) {
-                visitEventoFormulario(ctx.eventoFormulario(i));
-            }
-        }else if (ctx.eventoFormulario(0) != null){
-            visitEventoFormulario(ctx.eventoFormulario(0));
-        }
+        ctx.eventoFormulario().forEach(this::visitEventoFormulario);
+
         write.print(" >\n");
         if(ctx.contenido().isEmpty()){
             visitContenido(ctx.contenido());
@@ -106,23 +96,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
-
-        if(ctx.texto(1)!=null){
-            for(int i=1; i<ctx.texto().size(); i++) {
-                visitTexto(ctx.texto(i));
-            }
-        }else if (ctx.texto(0) != null){
-            visitTexto(ctx.texto(0));
-        }
-
+        ctx.texto().forEach(this::visitTexto);
         write.print("</p>\n");
         return null;
     }
@@ -135,24 +111,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
-
-        if(ctx.elementoLista(1)!=null){
-            for(int i=1; i<ctx.elementoLista().size(); i++) {
-                visitElementoLista(ctx.elementoLista(i));
-            }
-        }else if (ctx.elementoLista(0) != null){
-            visitElementoLista(ctx.elementoLista(0));
-        }
-
+        ctx.elementoLista().forEach(this::visitElementoLista);
         write.print("</ol>\n");
         return null;
     }
@@ -165,23 +126,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
-
-        if(ctx.elementoLista(1)!=null){
-            for(int i=1; i<ctx.elementoLista().size(); i++) {
-                visitElementoLista(ctx.elementoLista(i));
-            }
-        }else if (ctx.elementoLista(0) != null){
-            visitElementoLista(ctx.elementoLista(0));
-        }
+        ctx.elementoLista().forEach(this::visitElementoLista);
         write.print("</ul>\n");
         return null;
     }
@@ -194,13 +141,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()) {
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
         visitContenidoTabla(ctx.contenidoTabla());
         write.print("</table>\n");
@@ -225,13 +166,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()) {
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
         write.print(ctx.TEXTO());
         write.print("</a>\n");
@@ -239,22 +174,15 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
     }
 
     @Override public T visitLinea (JVNWebParser.LineaContext ctx) {
-        write.print("<span ");
+        write.print("<hr ");
         if(!ctx.clases().isEmpty()){
             visitClases(ctx.clases());
         }
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
-        write.print(" >\n");
-        write.print("</span>\n");
+        ctx.eventoComun().forEach(this::visitEventoComun);
+        write.print(" />\n");
         return null;
     }
 
@@ -266,21 +194,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
-        if(ctx.texto(1)!=null){
-            for(int i=1; i<ctx.texto().size(); i++) {
-                visitTexto(ctx.texto(i));
-            }
-        }else if (ctx.texto(0) != null){
-            visitTexto(ctx.texto(0));
-        }
+        ctx.texto().forEach(this::visitTexto);
         write.print("</h"+ctx.ENFASIS().getText()+">\n");
         return null;
     }
@@ -293,21 +209,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
-        if(ctx.texto(1)!=null){
-            for(int i=1; i<ctx.texto().size(); i++) {
-                visitTexto(ctx.texto(i));
-            }
-        }else if (ctx.texto(0) != null){
-            visitTexto(ctx.texto(0));
-        }
+        ctx.texto().forEach(this::visitTexto);
         write.print("</button>\n");
         return null;
     }
@@ -325,23 +229,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
-
-        if(ctx.texto(1)!=null){
-            for(int i=1; i<ctx.texto().size(); i++) {
-                visitTexto(ctx.texto(i));
-            }
-        }else if (ctx.texto(0) != null){
-            visitTexto(ctx.texto(0));
-        }
-
+        ctx.texto().forEach(this::visitTexto);
         write.print("</label>\n");
         return null;
     }
@@ -360,19 +250,14 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.atributoDescripcion().isEmpty()){
             visitAtributoDescripcion(ctx.atributoDescripcion());
         }
+        if(!ctx.tipoEntrada().isEmpty()){
+            visitTipoEntrada(ctx.tipoEntrada());
+        }
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-
-        if(ctx.eventoEntrada(1)!=null){
-            for(int i=1; i<ctx.eventoEntrada().size(); i++) {
-                visitEventoEntrada(ctx.eventoEntrada(i));
-            }
-        }else if (ctx.eventoEntrada(0) != null){
-            visitEventoEntrada(ctx.eventoEntrada(0));
-        }
+        ctx.eventoEntrada().forEach(this::visitEventoEntrada);
         write.print(" >\n");
-        write.print("</input>\n");
         return null;
     }
 
@@ -390,16 +275,16 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.atributoDescripcion().isEmpty()){
             visitAtributoDescripcion(ctx.atributoDescripcion());
         }
+        if(!ctx.atributoFilas().isEmpty()){
+            visitAtributoFilas(ctx.atributoFilas);
+        }
+        if(!ctx.atributoColumnas().isEmpty()){
+            visitAtributoColumnas(ctx.atributoColumnas);
+        }
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoEntrada(1)!=null){
-            for(int i=1; i<ctx.eventoEntrada().size(); i++) {
-                visitEventoEntrada(ctx.eventoEntrada(i));
-            }
-        }else if (ctx.eventoEntrada(0) != null){
-            visitEventoEntrada(ctx.eventoEntrada(0));
-        }
+        ctx.eventoEntrada().forEach(this::visitEventoEntrada);
         write.print(" >\n");
         write.print("</textarea>\n");
         return null;
@@ -419,34 +304,14 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoEntrada(1)!=null){
-            for(int i=1; i<ctx.eventoEntrada().size(); i++) {
-                visitEventoEntrada(ctx.eventoEntrada(i));
-            }
-        }else if (ctx.eventoEntrada(0) != null){
-            visitEventoEntrada(ctx.eventoEntrada(0));
-        }
+        ctx.eventoEntrada().forEach(this::visitEventoEntrada);
         write.print(" >\n");
-
         if(ctx.texto()!=null){
             write.print("<option ");
             visitAtributoValor(ctx.atributoValor(1));
-            if(ctx.eventoComun(1)!=null){
-                for(int i=1; i<ctx.eventoComun().size(); i++) {
-                    visitEventoComun(ctx.eventoComun(i));
-                }
-            }else if (ctx.eventoComun(0) != null){
-                visitEventoComun(ctx.eventoComun(0));
-            }
+            ctx.eventoComun().forEach(this::visitEventoComun);
             write.print(" >\n");
-
-            if(ctx.texto(1)!=null){
-                for(int i=1; i<ctx.texto().size(); i++) {
-                    visitTexto(ctx.texto(i));
-                }
-            }else if (ctx.texto(0) != null){
-                visitTexto(ctx.texto(0));
-            }
+            ctx.texto().forEach(this::visitTexto);
             write.print("</option>\n");
         }
 
@@ -462,31 +327,10 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
-
-        if(ctx.elementoSimple(1)!=null){
-            for(int i=1; i<ctx.elementoSimple().size(); i++) {
-                visitChildren(ctx.elementoSimple(i));
-            }
-        }else if (ctx.elementoSimple(0) != null){
-            visitChildren(ctx.elementoSimple(0));
-        }
-
-        if(ctx.multimedia(1)!=null){
-            for(int i=1; i<ctx.multimedia().size(); i++) {
-                visitChildren(ctx.multimedia(i));
-            }
-        }else if (ctx.multimedia(0) != null){
-            visitChildren(ctx.multimedia(0));
-        }
-
+        ctx.elementoSimple().forEach(this::visitChildren);
+        ctx.multimedia().forEach(this::visitChildren);
         write.print("</li>\n");
         return null;
     }
@@ -500,21 +344,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
             if(!ctx.estilos().isEmpty()){
                 visitEstilos(ctx.estilos());
             }
-            if(ctx.eventoComun(1)!=null){
-                for(int i=1; i<ctx.eventoComun().size(); i++) {
-                    visitEventoComun(ctx.eventoComun(i));
-                }
-            }else if (ctx.eventoComun(0) != null){
-                visitEventoComun(ctx.eventoComun(0));
-            }
+            ctx.eventoComun().forEach(this::visitEventoComun);
             write.print(" >\n");
-            if(ctx.texto(1)!=null){
-                for(int i=1; i<ctx.texto().size(); i++) {
-                    visitTexto(ctx.texto(i));
-                }
-            }else if (ctx.texto(0) != null){
-                visitTexto(ctx.texto(0));
-            }
+            ctx.texto().forEach(this::visitTexto);
             write.print("</span>\n");
         }else if(ctx.TEXTO() != null){
             write.print(ctx.TEXTO().getText());
@@ -522,73 +354,35 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         return null;
     }
 
-    @Override public T visitTextoAlternativo(JVNWebParser.TextoAlternativoContext ctx) {
-        write.print("<hr ");
-        if(!ctx.clases().isEmpty()){
-            visitClases(ctx.clases());
-        }
-        if(!ctx.estilos().isEmpty()){
-            visitEstilos(ctx.estilos());
-        }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
-        write.print(" >\n");
-        write.print(ctx.TEXTO().getText());
-        write.print("</hr>\n");
-        return null;
-    }
-
     @Override public T visitContenidoTabla(JVNWebParser.ContenidoTablaContext ctx) {
 
-        if(ctx.clases()!=null){
-            write.print("<tr ");
+        if(ctx.elementoTabla()!=null){
+            write.print("<th ");
             if(!ctx.clases().isEmpty()){
                 visitClases(ctx.clases());
             }
             if(!ctx.estilos().isEmpty()){
                 visitEstilos(ctx.estilos());
             }
-            if(ctx.eventoComun(1)!=null){
-                for(int i=1; i<ctx.eventoComun().size(); i++) {
-                    visitEventoComun(ctx.eventoComun(i));
-                }
-            }else if (ctx.eventoComun(0) != null){
-                visitEventoComun(ctx.eventoComun(0));
-            }
+            ctx.eventoComun().forEach(this::visitEventoComun);
             write.print(" >\n");
             visitElementoTabla(ctx.elementoTabla());
-            write.print("</tr>\n");
+            write.print("</th>\n");
         }
-        if(ctx.filaTabla(1)!=null){
-            for(int i=1; i<ctx.filaTabla().size(); i++) {
-                visitFilaTabla(ctx.filaTabla(i));
-            }
-        }else if (ctx.filaTabla(0) != null){
-            visitFilaTabla(ctx.filaTabla(0));
-        }
+        ctx.filaTabla().forEach(this::visitFilaTabla);
+
         return null;
     }
 
     @Override public T visitFilaTabla(JVNWebParser.FilaTablaContext ctx) {
-        write.print("<td ");
+        write.print("<tr ");
         if(!ctx.clases().isEmpty()){
             visitClases(ctx.clases());
         }
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
         if(ctx.elementoTabla(1)!=null){
             for(int i=1; i<ctx.elementoTabla().size(); i++) {
@@ -598,7 +392,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
             visitElementoTabla(ctx.elementoTabla(0));
         }
 
-        write.print("</td>\n");
+        write.print("</tr>\n");
 
         return null;
     }
@@ -611,30 +405,10 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
-        if(ctx.elementoSimple(1)!=null){
-            for(int i=1; i<ctx.elementoSimple().size(); i++) {
-                visitChildren(ctx.elementoSimple(i));
-            }
-        }else if (ctx.elementoSimple(0) != null){
-            visitChildren(ctx.elementoSimple(0));
-        }
-
-        if(ctx.multimedia(1)!=null){
-            for(int i=1; i<ctx.multimedia().size(); i++) {
-                visitChildren(ctx.multimedia(i));
-            }
-        }else if (ctx.multimedia(0) != null){
-            visitChildren(ctx.multimedia(0));
-        }
-
+        ctx.elementoSimple().forEach(this::visitChildren);
+        ctx.multimedia().forEach(this::visitChildren);
         write.print("</td>\n");
         return null;
     }
@@ -650,16 +424,11 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
         visitFuente(ctx.fuente());
         write.print("</audio>\n");
+        return null;
     }
 
     @Override public T visitVideo(JVNWebParser.VideoContext ctx) {
@@ -673,16 +442,11 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
         visitFuente(ctx.fuente());
         write.print("</video>\n");
+        return null;
     }
 
     @Override public T visitImagen(JVNWebParser.ImagenContext ctx) {
@@ -704,14 +468,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         if(!ctx.estilos().isEmpty()){
             visitEstilos(ctx.estilos());
         }
-        if(ctx.eventoComun(1)!=null){
-            for(int i=1; i<ctx.eventoComun().size(); i++) {
-                visitEventoComun(ctx.eventoComun(i));
-            }
-        }else if (ctx.eventoComun(0) != null){
-            visitEventoComun(ctx.eventoComun(0));
-        }
+        ctx.eventoComun().forEach(this::visitEventoComun);
         write.print(" >\n");
+        return null;
     }
 
     @Override public T visitMostrarControles(JVNWebParser.MostrarControlesContext ctx) {
@@ -753,9 +512,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         write.print(" value= \""+ctx.TEXTO().getText() +"\"");
         return null;
     }
-//ni idea
+
     @Override public T visitAtributoDescripcion(JVNWebParser.AtributoDescripcionContext ctx) {
-        write.print(" ????= \""+ctx.TEXTO().getText() +"\"");
+        write.print(" placeholder= \""+ctx.TEXTO().getText() +"\"");
         return null;
     }
 
@@ -768,9 +527,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T>{
         write.print(" cols= \""+ctx.NUMERO().getText() +"\"");
         return null;
     }
-//ni idea
+
     @Override public T visitTipoEntrada(JVNWebParser.TipoEntradaContext ctx) {
-        write.print(" ????= \""+ctx.TIPO_ENTRADA().getText() +"\"");
+        write.print(" type= \""+ctx.TIPO_ENTRADA().getText() +"\"");
         return null;
     }
 

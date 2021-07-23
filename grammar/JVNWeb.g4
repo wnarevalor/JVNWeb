@@ -8,28 +8,28 @@ titulo: 'Titulo' TEXTO 'FinTitulo';
 
 contenido: (elementoCompuesto | elementoSimple | elementoFormulario)+;
 
-elementoCompuesto://Elementolista antes de eventoComun?
+elementoCompuesto:
     'Contenedor' clases? estilos? eventoComun*  contenido 'FinContenedor' #contenedor
     | 'Formulario' clases? estilos? eventoFormulario* contenido 'FinFormulario' #formulario
     | 'Parrafo' clases? estilos? eventoComun*  texto*  'FinParrafo' #parrafo
-    | 'ListaOrdenada' clases? estilos? elementoLista* eventoComun*  'FinListaOrdenada' #listaOrdenada
-    | 'ListaSinOrden' clases? estilos? elementoLista* eventoComun*  'FinListaSinOrden' #listaSinOrden
+    | 'ListaOrdenada' clases? estilos? eventoComun* elementoLista* 'FinListaOrdenada' #listaOrdenada
+    | 'ListaSinOrden' clases? estilos? eventoComun* elementoLista* 'FinListaSinOrden' #listaSinOrden
     | 'Tabla' clases? estilos? eventoComun* contenidoTabla 'FinTabla' #tabla
     | multimedia #elementoMultimedia ;
 
-elementoSimple://linea sin contenido ?
+elementoSimple:
     texto #elementoTexto
     | 'Enlace' clases? referencia? estilos? eventoComun* TEXTO 'FinEnlace' #enlace
     | 'Linea' clases? estilos? eventoComun* 'FinLinea' #linea
-    | 'TextoConEnfasis' '(' 'enfasis' ':' ENFASIS ')' clases? estilos? eventoComun* texto* 'FinTextoConEnfasis' #textoConEnfasis
+    | 'TextoConEnfasis' ENFASIS  clases? estilos? eventoComun* texto* 'FinTextoConEnfasis' #textoConEnfasis
     | 'Boton' clases? estilos? eventoComun* texto* 'Boton' #boton ;
 
 referencia: '(' 'referencia' ':' '"' TEXTO '"' ')';
 
 elementoFormulario:
      'Etiqueta' clases? estilos? eventoComun* texto* 'FinEtiqueta' #etiqueta
-    | 'EntradaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada* 'FinEntradaDeTexto' #entradaDeTexto
-    | 'AreaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada*  'FinAreaDeTexto' #areaDeTexto
+    | 'EntradaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? tipoEntrada? estilos? eventoEntrada* 'FinEntradaDeTexto' #entradaDeTexto
+    | 'AreaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? atributoFilas? atributoColumnas? estilos? eventoEntrada*  'FinAreaDeTexto' #areaDeTexto
     | 'Selector' clases? atributoNombre? atributoValor? estilos? eventoEntrada* ('Opcion' atributoValor eventoComun* texto* 'FinOpcion')* 'FinSelector' #selector;
 
 elementoLista:  'ElementoLista' clases? estilos? eventoComun*  (elementoSimple | multimedia)* 'FinElementoLista';
