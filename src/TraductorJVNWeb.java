@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
+import java.io.Writer;
 
 public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
@@ -23,23 +23,20 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         write.print( "<!DOCTYPE html>\n" );
         write.print( "<html lang=\"es\">\n" );
         write.print( "<head>\n" );
-        if ( !ctx.contenidoEncabezado().getText().isEmpty() ) {
+        if ( !ctx.contenidoEncabezado().getText().isEmpty() )
             visitContenidoEncabezado( ctx.contenidoEncabezado() );
-        }
         write.print( "<meta charset=\"UTF-8\">\n" );
         write.print( "</head>\n" );
         write.print( "<body>\n" );
-        if ( !ctx.contenido().getText().isEmpty() ) {
+        if ( !ctx.contenido().getText().isEmpty() )
             visitContenido( ctx.contenido() );
-        }
         write.print( "</body>\n" );
         write.print( "</html>\n" );
         if ( ctx.codigo() != null ) {
             write.print( "<script>\n" );
             visitCodigo( ctx.codigo() );
             write.print( "</script>\n" );
-        } else
-            write.close();
+        } else write.close();
         return null;
     }
     
@@ -51,9 +48,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitContenidoEncabezado( JVNWebParser.ContenidoEncabezadoContext ctx ) {
         write.print( "<title>\n" );
-        if ( !ctx.titulo().isEmpty() ) {
-            visitTitulo( ctx.titulo() );
-        }
+        if ( !ctx.titulo().isEmpty() ) visitTitulo( ctx.titulo() );
         write.print( "</title>\n" );
         return null;
     }
@@ -66,159 +61,60 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitContenedor( JVNWebParser.ContenedorContext ctx ) {
-        write.print( "<div " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        visitContenido( ctx.contenido() );
-        
+        write.print( "<div" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        if ( !ctx.contenido().isEmpty() ) visitContenido( ctx.contenido() );
         write.print( "</div>\n" );
         return null;
     }
     
     @Override
     public T visitFormulario( JVNWebParser.FormularioContext ctx ) {
-        write.print( "<form " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoFormulario( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoFormulario().size(); i++ ) {
-                visitEventoFormulario( ctx.eventoFormulario( i ) );
-            }
-        } else if ( ctx.eventoFormulario( 0 ) != null ) {
-            visitEventoFormulario( ctx.eventoFormulario( 0 ) );
-        }
-        write.print( " >\n" );
-        if ( ctx.contenido().isEmpty() ) {
-            visitContenido( ctx.contenido() );
-        }
+        write.print( "<form" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        ctx.eventoFormulario().forEach( this::visitEventoFormulario );
+        write.print( ">\n" );
+        if ( !ctx.contenido().isEmpty() ) visitContenido( ctx.contenido() );
         write.print( "</form>\n" );
         return null;
     }
     
     @Override
     public T visitParrafo( JVNWebParser.ParrafoContext ctx ) {
-        write.print( "<p " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        
-        if ( ctx.texto( 1 ) != null ) {
-            for ( int i = 1; i < ctx.texto().size(); i++ ) {
-                visitTexto( ctx.texto( i ) );
-            }
-        } else if ( ctx.texto( 0 ) != null ) {
-            visitTexto( ctx.texto( 0 ) );
-        }
-        
+        write.print( "<p" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.texto().forEach( this::visitTexto );
         write.print( "</p>\n" );
         return null;
     }
     
     @Override
     public T visitListaOrdenada( JVNWebParser.ListaOrdenadaContext ctx ) {
-        write.print( "<ol " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        
-        if ( ctx.elementoLista( 1 ) != null ) {
-            for ( int i = 1; i < ctx.elementoLista().size(); i++ ) {
-                visitElementoLista( ctx.elementoLista( i ) );
-            }
-        } else if ( ctx.elementoLista( 0 ) != null ) {
-            visitElementoLista( ctx.elementoLista( 0 ) );
-        }
-        
+        write.print( "<ol" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.elementoLista().forEach( this::visitElementoLista );
         write.print( "</ol>\n" );
         return null;
     }
     
     @Override
     public T visitListaSinOrden( JVNWebParser.ListaSinOrdenContext ctx ) {
-        write.print( "<ul " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        
-        if ( ctx.elementoLista( 1 ) != null ) {
-            for ( int i = 1; i < ctx.elementoLista().size(); i++ ) {
-                visitElementoLista( ctx.elementoLista( i ) );
-            }
-        } else if ( ctx.elementoLista( 0 ) != null ) {
-            visitElementoLista( ctx.elementoLista( 0 ) );
-        }
+        write.print( "<ul" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.elementoLista().forEach( this::visitElementoLista );
         write.print( "</ul>\n" );
         return null;
     }
     
     @Override
     public T visitTabla( JVNWebParser.TablaContext ctx ) {
-        write.print( "<table " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
+        write.print( "<table" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
         visitContenidoTabla( ctx.contenidoTabla() );
         write.print( "</table>\n" );
         return null;
@@ -226,508 +122,205 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitElementoTexto( JVNWebParser.ElementoTextoContext ctx ) {
-        if ( !ctx.texto().isEmpty() ) {
-            visitTexto( ctx.texto() );
-        }
+        visitTexto( ctx.texto() );
         return null;
     }
     
     @Override
     public T visitEnlace( JVNWebParser.EnlaceContext ctx ) {
-        write.print( "<a " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.referencia().isEmpty() ) {
-            visitReferencia( ctx.referencia() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        write.print( ctx.TEXTO() );
+        write.print( "<a" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        ctx.referencia().forEach( this::visitReferencia );
+        write.print( ">\n" );
+        ctx.texto().forEach( this::visitTexto );
         write.print( "</a>\n" );
         return null;
     }
     
     @Override
     public T visitLinea( JVNWebParser.LineaContext ctx ) {
-        write.print( "<span " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        write.print( "</span>\n" );
+        write.print( "<hr" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( "/>\n" );
         return null;
     }
     
     @Override
     public T visitTextoConEnfasis( JVNWebParser.TextoConEnfasisContext ctx ) {
-        write.print( "<h" + ctx.enfasis().getText() + " " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        if ( ctx.texto( 1 ) != null ) {
-            for ( int i = 1; i < ctx.texto().size(); i++ ) {
-                visitTexto( ctx.texto( i ) );
-            }
-        } else if ( ctx.texto( 0 ) != null ) {
-            visitTexto( ctx.texto( 0 ) );
-        }
+        write.print( "<h" + ctx.enfasis().getText() );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.texto().forEach( this::visitTexto );
         write.print( "</h" + ctx.enfasis().getText() + ">\n" );
         return null;
     }
     
     @Override
     public T visitBoton( JVNWebParser.BotonContext ctx ) {
-        write.print( "<button " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        if ( ctx.texto( 1 ) != null ) {
-            for ( int i = 1; i < ctx.texto().size(); i++ ) {
-                visitTexto( ctx.texto( i ) );
-            }
-        } else if ( ctx.texto( 0 ) != null ) {
-            visitTexto( ctx.texto( 0 ) );
-        }
+        write.print( "<button" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.texto().forEach( this::visitTexto );
         write.print( "</button>\n" );
         return null;
     }
     
     @Override
     public T visitReferencia( JVNWebParser.ReferenciaContext ctx ) {
-        write.print( " href=\"" + ctx.TEXTO().getText() + "\" " );
+        write.print( " href=" + ctx.CADENA_HTML().getText() + " " );
         return null;
     }
     
     @Override
     public T visitEtiqueta( JVNWebParser.EtiquetaContext ctx ) {
-        write.print( "<label " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        
-        if ( ctx.texto( 1 ) != null ) {
-            for ( int i = 1; i < ctx.texto().size(); i++ ) {
-                visitTexto( ctx.texto( i ) );
-            }
-        } else if ( ctx.texto( 0 ) != null ) {
-            visitTexto( ctx.texto( 0 ) );
-        }
-        
+        write.print( "<label" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.texto().forEach( this::visitTexto );
         write.print( "</label>\n" );
         return null;
     }
     
     @Override
     public T visitEntradaDeTexto( JVNWebParser.EntradaDeTextoContext ctx ) {
-        write.print( "<input " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.atributoNombre().isEmpty() ) {
-            visitAtributoNombre( ctx.atributoNombre() );
-        }
-        if ( !ctx.atributoValor().isEmpty() ) {
-            visitAtributoValor( ctx.atributoValor() );
-        }
-        if ( !ctx.atributoDescripcion().isEmpty() ) {
-            visitAtributoDescripcion( ctx.atributoDescripcion() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        
-        if ( ctx.eventoEntrada( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoEntrada().size(); i++ ) {
-                visitEventoEntrada( ctx.eventoEntrada( i ) );
-            }
-        } else if ( ctx.eventoEntrada( 0 ) != null ) {
-            visitEventoEntrada( ctx.eventoEntrada( 0 ) );
-        }
-        write.print( " >\n" );
+        write.print( "<input" );
+        ctx.atributosEntradaDeTexto().forEach( this::visitAtributosEntradaDeTexto );
+        write.print( ">\n" );
         write.print( "</input>\n" );
         return null;
     }
     
     @Override
     public T visitAreaDeTexto( JVNWebParser.AreaDeTextoContext ctx ) {
-        write.print( "<textarea " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.atributoNombre().isEmpty() ) {
-            visitAtributoNombre( ctx.atributoNombre() );
-        }
-        if ( !ctx.atributoValor().isEmpty() ) {
-            visitAtributoValor( ctx.atributoValor() );
-        }
-        if ( !ctx.atributoDescripcion().isEmpty() ) {
-            visitAtributoDescripcion( ctx.atributoDescripcion() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoEntrada( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoEntrada().size(); i++ ) {
-                visitEventoEntrada( ctx.eventoEntrada( i ) );
-            }
-        } else if ( ctx.eventoEntrada( 0 ) != null ) {
-            visitEventoEntrada( ctx.eventoEntrada( 0 ) );
-        }
-        write.print( " >\n" );
+        write.print( "<textarea" );
+        ctx.atributosAreaDeTexto().forEach( this::visitAtributosAreaDeTexto );
+        write.print( ">\n" );
         write.print( "</textarea>\n" );
         return null;
     }
     
     @Override
     public T visitSelector( JVNWebParser.SelectorContext ctx ) {
-        write.print( "<select " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.atributoNombre().isEmpty() ) {
-            visitAtributoNombre( ctx.atributoNombre() );
-        }
-        if ( !ctx.atributoValor( 0 ).isEmpty() ) {
-            visitAtributoValor( ctx.atributoValor( 0 ) );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoEntrada( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoEntrada().size(); i++ ) {
-                visitEventoEntrada( ctx.eventoEntrada( i ) );
-            }
-        } else if ( ctx.eventoEntrada( 0 ) != null ) {
-            visitEventoEntrada( ctx.eventoEntrada( 0 ) );
-        }
-        write.print( " >\n" );
-        
-        if ( ctx.texto() != null ) {
-            write.print( "<option " );
-            visitAtributoValor( ctx.atributoValor( 1 ) );
-            if ( ctx.eventoComun( 1 ) != null ) {
-                for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                    visitEventoComun( ctx.eventoComun( i ) );
-                }
-            } else if ( ctx.eventoComun( 0 ) != null ) {
-                visitEventoComun( ctx.eventoComun( 0 ) );
-            }
-            write.print( " >\n" );
-            
-            if ( ctx.texto( 1 ) != null ) {
-                for ( int i = 1; i < ctx.texto().size(); i++ ) {
-                    visitTexto( ctx.texto( i ) );
-                }
-            } else if ( ctx.texto( 0 ) != null ) {
-                visitTexto( ctx.texto( 0 ) );
-            }
+        write.print( "<select" );
+        ctx.atributosSelector().forEach( this::visitAtributosSelector );
+        write.print( ">\n" );
+        if ( !ctx.texto().isEmpty() ) {
+            write.print( "<option" );
+            ctx.atributoValor().forEach( this::visitAtributoValor );
+            ctx.atributosComunes().forEach( this::visitAtributosComunes );
+            write.print( ">\n" );
+            ctx.texto().forEach( this::visitTexto );
             write.print( "</option>\n" );
         }
-        
         write.print( "</select>\n" );
         return null;
     }
     
     @Override
     public T visitElementoLista( JVNWebParser.ElementoListaContext ctx ) {
-        write.print( "<li " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        
-        if ( ctx.elementoSimple( 1 ) != null ) {
-            for ( int i = 1; i < ctx.elementoSimple().size(); i++ ) {
-                visitChildren( ctx.elementoSimple( i ) );
-            }
-        } else if ( ctx.elementoSimple( 0 ) != null ) {
-            visitChildren( ctx.elementoSimple( 0 ) );
-        }
-        
-        if ( ctx.multimedia( 1 ) != null ) {
-            for ( int i = 1; i < ctx.multimedia().size(); i++ ) {
-                visitChildren( ctx.multimedia( i ) );
-            }
-        } else if ( ctx.multimedia( 0 ) != null ) {
-            visitChildren( ctx.multimedia( 0 ) );
-        }
-        
+        write.print( "<li" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.contenidoElementoListaYTabla().forEach( this::visitContenidoElementoListaYTabla );
         write.print( "</li>\n" );
         return null;
     }
     
     @Override
+    public T visitContenidoElementoListaYTabla( JVNWebParser.ContenidoElementoListaYTablaContext ctx ) {
+        if ( ctx.elementoSimple().isEmpty() ) visit( ctx.elementoSimple() );
+        else visitChildren( ctx );
+        return null;
+    }
+    
+    @Override
     public T visitTexto( JVNWebParser.TextoContext ctx ) {
-        if ( ctx.clases() != null ) {
-            write.print( "<span " );
-            if ( !ctx.clases().isEmpty() ) {
-                visitClases( ctx.clases() );
-            }
-            if ( !ctx.estilos().isEmpty() ) {
-                visitEstilos( ctx.estilos() );
-            }
-            if ( ctx.eventoComun( 1 ) != null ) {
-                for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                    visitEventoComun( ctx.eventoComun( i ) );
-                }
-            } else if ( ctx.eventoComun( 0 ) != null ) {
-                visitEventoComun( ctx.eventoComun( 0 ) );
-            }
-            write.print( " >\n" );
-            if ( ctx.texto( 1 ) != null ) {
-                for ( int i = 1; i < ctx.texto().size(); i++ ) {
-                    visitTexto( ctx.texto( i ) );
-                }
-            } else if ( ctx.texto( 0 ) != null ) {
-                visitTexto( ctx.texto( 0 ) );
-            }
-            write.print( "</span>\n" );
-        } else if ( ctx.TEXTO() != null ) {
+        if ( ctx.TEXTO() != null )
             write.print( ctx.TEXTO().getText() );
+        else {
+            write.print( "<span" );
+            ctx.atributosComunes().forEach( this::visitAtributosComunes );
+            write.print( ">\n" );
+            ctx.texto().forEach( this::visitTexto );
+            write.print( "</span>\n" );
         }
         return null;
     }
     
     @Override
     public T visitContenidoTabla( JVNWebParser.ContenidoTablaContext ctx ) {
-        
-        if ( ctx.clases() != null ) {
-            write.print( "<tr " );
-            if ( !ctx.clases().isEmpty() ) {
-                visitClases( ctx.clases() );
-            }
-            if ( !ctx.estilos().isEmpty() ) {
-                visitEstilos( ctx.estilos() );
-            }
-            if ( ctx.eventoComun( 1 ) != null ) {
-                for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                    visitEventoComun( ctx.eventoComun( i ) );
-                }
-            } else if ( ctx.eventoComun( 0 ) != null ) {
-                visitEventoComun( ctx.eventoComun( 0 ) );
-            }
-            write.print( " >\n" );
-            visitElementoTabla( ctx.elementoTabla() );
-            write.print( "</tr>\n" );
-        }
-        if ( ctx.filaTabla( 1 ) != null ) {
-            for ( int i = 1; i < ctx.filaTabla().size(); i++ ) {
-                visitFilaTabla( ctx.filaTabla( i ) );
-            }
-        } else if ( ctx.filaTabla( 0 ) != null ) {
-            visitFilaTabla( ctx.filaTabla( 0 ) );
-        }
+        if ( !ctx.encabezadoTabla().isEmpty() )
+            visitEncabezadoTabla( ctx.encabezadoTabla() );
+        ctx.filaTabla().forEach( this::visitFilaTabla );
+        return null;
+    }
+    
+    @Override
+    public T visitEncabezadoTabla( JVNWebParser.EncabezadoTablaContext ctx ) {
+        write.print( "<th" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.contenidoEncabezadoTabla().forEach( this::visitContenidoEncabezadoTabla );
+        write.print( "</th>\n" );
+        return null;
+    }
+    
+    @Override
+    public T visitContenidoEncabezadoTabla( JVNWebParser.ContenidoEncabezadoTablaContext ctx ) {
+        if ( !ctx.elementoTabla().isEmpty() ) visitElementoTabla( ctx.elementoTabla() );
+        else visitFilaTabla( ctx.filaTabla() );
         return null;
     }
     
     @Override
     public T visitFilaTabla( JVNWebParser.FilaTablaContext ctx ) {
-        write.print( "<td " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        if ( ctx.elementoTabla( 1 ) != null ) {
-            for ( int i = 1; i < ctx.elementoTabla().size(); i++ ) {
-                visitElementoTabla( ctx.elementoTabla( i ) );
-            }
-        } else if ( ctx.elementoTabla( 0 ) != null ) {
-            visitElementoTabla( ctx.elementoTabla( 0 ) );
-        }
-        
-        write.print( "</td>\n" );
-        
+        write.print( "<tr" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.elementoTabla().forEach( this::visitElementoTabla );
+        write.print( "</tr>\n" );
         return null;
     }
     
     @Override
     public T visitElementoTabla( JVNWebParser.ElementoTablaContext ctx ) {
-        write.print( "<td " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        if ( ctx.elementoSimple( 1 ) != null ) {
-            for ( int i = 1; i < ctx.elementoSimple().size(); i++ ) {
-                visitChildren( ctx.elementoSimple( i ) );
-            }
-        } else if ( ctx.elementoSimple( 0 ) != null ) {
-            visitChildren( ctx.elementoSimple( 0 ) );
-        }
-        
-        if ( ctx.multimedia( 1 ) != null ) {
-            for ( int i = 1; i < ctx.multimedia().size(); i++ ) {
-                visitChildren( ctx.multimedia( i ) );
-            }
-        } else if ( ctx.multimedia( 0 ) != null ) {
-            visitChildren( ctx.multimedia( 0 ) );
-        }
-        
+        write.print( "<td" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
+        ctx.contenidoElementoListaYTabla().forEach( this::visitContenidoElementoListaYTabla );
         write.print( "</td>\n" );
         return null;
     }
     
     @Override
     public T visitAudio( JVNWebParser.AudioContext ctx ) {
-        write.print( "<audio " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.mostrarControles().isEmpty() ) {
-            visitMostrarControles( ctx.mostrarControles() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        visitFuente( ctx.fuente() );
+        write.print( "<audio" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        ctx.mostrarControles().forEach( this::visitMostrarControles );
+        write.print( ">\n" );
+        ctx.fuente().forEach( this::visitFuente );
         write.print( "</audio>\n" );
         return null;
     }
     
     @Override
     public T visitVideo( JVNWebParser.VideoContext ctx ) {
-        write.print( "<video " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        if ( !ctx.mostrarControles().isEmpty() ) {
-            visitMostrarControles( ctx.mostrarControles() );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
-        visitFuente( ctx.fuente() );
+        write.print( "<video" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        ctx.mostrarControles().forEach( this::visitMostrarControles );
+        write.print( ">\n" );
+        ctx.fuente().forEach( this::visitFuente );
         write.print( "</video>\n" );
         return null;
     }
     
     @Override
     public T visitImagen( JVNWebParser.ImagenContext ctx ) {
-        write.print( "<img " );
-        if ( !ctx.clases().isEmpty() ) {
-            visitClases( ctx.clases() );
-        }
-        visitAtributoFuente( ctx.atributoFuente() );
-        
-        if ( ctx.atributoImagen( 1 ) != null ) {
-            for ( int i = 1; i < ctx.atributoImagen().size(); i++ ) {
-                visitAtributoImagen( ctx.atributoImagen( i ) );
-                write.print( " = \"" + ctx.TEXTO() + "\"" );
-            }
-        } else if ( ctx.atributoImagen( 0 ) != null ) {
-            visitAtributoImagen( ctx.atributoImagen( 0 ) );
-            write.print( " = \"" + ctx.TEXTO() + "\"" );
-        }
-        if ( !ctx.estilos().isEmpty() ) {
-            visitEstilos( ctx.estilos() );
-        }
-        if ( ctx.eventoComun( 1 ) != null ) {
-            for ( int i = 1; i < ctx.eventoComun().size(); i++ ) {
-                visitEventoComun( ctx.eventoComun( i ) );
-            }
-        } else if ( ctx.eventoComun( 0 ) != null ) {
-            visitEventoComun( ctx.eventoComun( 0 ) );
-        }
-        write.print( " >\n" );
+        write.print( "<img" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        ctx.atributoFuente().forEach( this::visitAtributoFuente );
+        ctx.atributoImagen().forEach( this::visitAtributoImagen );
+        write.print( ">\n" );
         return null;
     }
     
@@ -739,10 +332,10 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitFuente( JVNWebParser.FuenteContext ctx ) {
-        write.print( "<source " );
+        write.print( "<source" );
         visitAtributoFuente( ctx.atributoFuente() );
         visitAtributoTipo( ctx.atributoTipo() );
-        write.print( " >\n" );
+        write.print( ">\n" );
         write.print( ctx.TEXTO().getText() );
         write.print( "</source>\n" );
         return null;
@@ -750,72 +343,112 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitClases( JVNWebParser.ClasesContext ctx ) {
-        write.print( " class = \"" + ctx.CADENA().getText() + "\"" );
+        write.print( " class=" + ctx.CADENA_HTML().getText() );
+        return null;
+    }
+    
+    @Override
+    public T visitAtributosComunes( JVNWebParser.AtributosComunesContext ctx ) {
+        if ( !ctx.clases().isEmpty() ) visitClases( ctx.clases() );
+        else if ( !ctx.estilos().isEmpty() ) visitEstilos( ctx.estilos() );
+        else visitEventoComun( ctx.eventoComun() );
+        return null;
+    }
+    
+    @Override
+    public T visitAtributosEntrada( JVNWebParser.AtributosEntradaContext ctx ) {
+        if ( !ctx.atributoNombre().isEmpty() ) visitAtributoNombre( ctx.atributoNombre() );
+        else if ( !ctx.atributoValor().isEmpty() ) visitAtributoValor( ctx.atributoValor() );
+        else if ( !ctx.atributoDescripcion().isEmpty() ) visitAtributoDescripcion( ctx.atributoDescripcion() );
+        else visitEventoEntrada( ctx.eventoEntrada() );
+        return null;
+    }
+    
+    @Override
+    public T visitAtributosEntradaDeTexto( JVNWebParser.AtributosEntradaDeTextoContext ctx ) {
+        if ( !ctx.atributosComunes().isEmpty() ) visitAtributosComunes( ctx.atributosComunes() );
+        else if ( !ctx.atributosEntrada().isEmpty() ) visitAtributosEntrada( ctx.atributosEntrada() );
+        else visitTipoEntrada( ctx.tipoEntrada() );
+        return null;
+    }
+    
+    @Override
+    public T visitAtributosAreaDeTexto( JVNWebParser.AtributosAreaDeTextoContext ctx ) {
+        if ( !ctx.atributosComunes().isEmpty() ) visitAtributosComunes( ctx.atributosComunes() );
+        else if ( !ctx.atributosEntrada().isEmpty() ) visitAtributosEntrada( ctx.atributosEntrada() );
+        else if ( !ctx.atributoFilas().isEmpty() ) visitAtributoFilas( ctx.atributoFilas() );
+        else visitAtributoColumnas( ctx.atributoColumnas() );
+        return null;
+    }
+    
+    @Override
+    public T visitAtributosSelector( JVNWebParser.AtributosSelectorContext ctx ) {
+        if ( !ctx.atributosComunes().isEmpty() ) visitAtributosComunes( ctx.atributosComunes() );
+        else if ( !ctx.atributoNombre().isEmpty() ) visitAtributoNombre( ctx.atributoNombre() );
+        else if ( !ctx.atributoValor().isEmpty() ) visitAtributoValor( ctx.atributoValor() );
+        else visitEventoEntrada( ctx.eventoEntrada() );
         return null;
     }
     
     @Override
     public T visitAtributoFuente( JVNWebParser.AtributoFuenteContext ctx ) {
-        write.print( " src= \"" + ctx.CADENA().getText() + "\"" );
+        write.print( " src=" + ctx.CADENA_HTML().getText() );
         return null;
     }
     
     @Override
     public T visitAtributoTipo( JVNWebParser.AtributoTipoContext ctx ) {
-        write.print( " type= \"" + ctx.TEXTO().getText() + "\"" );
+        write.print( " type=" + ctx.CADENA_HTML().getText() );
         return null;
     }
     
     @Override
     public T visitAtributoNombre( JVNWebParser.AtributoNombreContext ctx ) {
-        write.print( " name= \"" + ctx.TEXTO().getText() + "\"" );
+        write.print( " name=" + ctx.CADENA_HTML().getText() );
         return null;
     }
     
     @Override
     public T visitAtributoValor( JVNWebParser.AtributoValorContext ctx ) {
-        write.print( " value= \"" + ctx.TEXTO().getText() + "\"" );
+        write.print( " value=" + ctx.CADENA_HTML().getText() );
         return null;
     }
     
     //ni idea
     @Override
     public T visitAtributoDescripcion( JVNWebParser.AtributoDescripcionContext ctx ) {
-        write.print( " ????= \"" + ctx.TEXTO().getText() + "\"" );
+        write.print( " placeholder=" + ctx.CADENA_HTML().getText() );
         return null;
     }
     
     @Override
     public T visitAtributoFilas( JVNWebParser.AtributoFilasContext ctx ) {
-        write.print( " rows= \"" + ctx.NUMERO().getText() + "\"" );
+        write.print( " rows=\"" + ctx.ENTERO().getText() + "\"" );
         return null;
     }
     
     @Override
     public T visitAtributoColumnas( JVNWebParser.AtributoColumnasContext ctx ) {
-        write.print( " cols= \"" + ctx.NUMERO().getText() + "\"" );
+        write.print( " cols=\"" + ctx.ENTERO().getText() + "\"" );
         return null;
     }
     
     //ni idea
     @Override
     public T visitTipoEntrada( JVNWebParser.TipoEntradaContext ctx ) {
-        write.print( " ????= \"" + ctx.TIPO_ENTRADA().getText() + "\"" );
+        write.print( " type=\"" + ctx.tipoEntradaValor().getText() + "\"" );
         return null;
     }
     
     @Override
     public T visitAtributoImagen( JVNWebParser.AtributoImagenContext ctx ) {
-        if ( ctx.getText().equals( "textoAlternativo" ) ) {
-            write.print( " " );
-        }
-        if ( ctx.getText().equals( "ancho" ) ) {
-            write.print( " " );
-        }
-        if ( ctx.getText().equals( "alto" ) ) {
-            write.print( " " );
-        }
-        
+        if ( ctx.ATRIBUTO_IMAGEN() != null ) {
+            write.print( ( ctx.ATRIBUTO_IMAGEN().getText().equals( "ancho" ) ? " width" : " height" )
+                + "=\"" );
+            visitDimension( ctx.dimension() );
+            write.print( "\"" );
+        } else
+            write.print( " alt=" + ctx.CADENA_HTML().getText() );
         return null;
     }
     
@@ -1636,11 +1269,11 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitEstilo( JVNWebParser.EstiloContext ctx ) {
-        if ( ctx.ESTILO() != null ) {
-            write.print( Constantes.estilos.get( ctx.ESTILO().getText() ) + ": " );
+        if ( !ctx.nombreEstilo().isEmpty() ) {
+            write.print( Constantes.estilos.get( ctx.nombreEstilo().getText() ) + ": " );
             visitValorEstilo( ctx.valorEstilo() );
         } else {
-            String estiloBooleano = ctx.ESTILO_BOOLEANO().getText();
+            String estiloBooleano = ctx.estiloBooleano().getText();
             if ( estiloBooleano.equals( "cursiva" ) || estiloBooleano.equals( "negrilla" ) )
                 write.printf( "font-style: %s;", Constantes.estilosBooleanos.get( estiloBooleano ) );
             else if ( estiloBooleano.equals( "subrayado" ) || estiloBooleano.equals( "tachado" ) )
@@ -1651,34 +1284,30 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitValorEstilo( JVNWebParser.ValorEstiloContext ctx ) {
-        if ( ctx.CADENA_CSS() != null ) {
-            write.print( ctx.CADENA_CSS().getText() );
-        } else if ( ctx.ENTERO() != null ) {
-            write.print( ctx.ENTERO().getText() );
-        } else if ( ctx.COLOR() != null ) {
-            write.print( Constantes.colores.get( ctx.COLOR().getText() ) );
-        } else if ( ctx.VISUALIZACION() != null ) {
+        if ( ctx.ENTERO() != null ) write.print( ctx.ENTERO().getText() );
+        else if ( ctx.VISUALIZACION() != null ) {
             String valorVisualizacion = ctx.VISUALIZACION().getText();
             if ( valorVisualizacion.equals( "fila" ) || valorVisualizacion.equals( "columna" ) ) {
                 write.print( "flex; " );
                 write.print( "flex-direction: " + Constantes.valoresVisualizacion.get( valorVisualizacion ) );
             } else
                 write.print( Constantes.valoresVisualizacion.get( valorVisualizacion ) );
-        } else if ( ctx.POSICION() != null ) {
+        } else if ( ctx.POSICION() != null )
             write.print( Constantes.valoresPosicion.get( ctx.POSICION().getText() ) );
-        } else if ( ctx.ubicacion() != null ) {
-            visitUbicacion( ctx.ubicacion() );
-        } else if ( ctx.JUSTIFICADO() != null ) {
+        else if ( ctx.JUSTIFICADO() != null )
             write.print( Constantes.valoresJustificado.get( ctx.JUSTIFICADO().getText() ) );
-        } else if ( ctx.borde() != null ) {
-            visitBorde( ctx.borde() );
-        } else if ( ctx.CURSOR() != null ) {
+        else if ( ctx.ALINEADO() != null )
+            write.print( Constantes.valoresAlineado.get( ctx.ALINEADO().getText() ) );
+        else if ( ctx.CURSOR() != null )
             write.print( Constantes.valoresCursor.get( ctx.CURSOR().getText() ) );
-        } else if ( ctx.FLOTAMIENTO() != null ) {
-            write.print( Constantes.valoresFlotamiento.get( ctx.FLOTAMIENTO().getText() ) );
-        } else if ( ctx.dimensiones() != null ) {
-            visitDimensiones( ctx.dimensiones() );
-        }
+        else if ( !ctx.color().isEmpty() ) visitColor( ctx.color() );
+        else if ( !ctx.borde().isEmpty() ) visitBorde( ctx.borde() );
+        else if ( !ctx.ubicacion().isEmpty() ) visitUbicacion( ctx.ubicacion() );
+        else if ( !ctx.dimension().isEmpty() ) visitDimension( ctx.dimension() );
+        else if ( !ctx.flotamiento().isEmpty() ) visitFlotamiento( ctx.flotamiento() );
+        else if ( !ctx.colorFormato().isEmpty() ) visitColorFormato( ctx.colorFormato() );
+        else if ( !ctx.dimensiones().isEmpty() ) visitDimensiones( ctx.dimensiones() );
+        else if ( ctx.CADENA_HTML() != null ) write.print( ctx.CADENA_HTML().getText() );
         write.print( "; " );
         return null;
     }
@@ -1686,9 +1315,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitBorde( JVNWebParser.BordeContext ctx ) {
         visitDimension( ctx.dimension() );
-        write.print( ctx.CADENA() + "" );
-        if ( ctx.COLOR() != null )
-            write.print( Constantes.colores.get( ctx.COLOR() ) );
+        write.print( ctx.CADENA() + " " );
+        if ( ctx.color() != null )
+            write.print( Constantes.colores.get( ctx.color().getText() ) );
         else
             visitColorFormato( ctx.colorFormato() );
         return null;
@@ -1702,17 +1331,17 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitDimension( JVNWebParser.DimensionContext ctx ) {
-        write.print( ctx.DIMENSION().getText()
-            + ( ctx.UNIDAD_DIMENSION().getText().equals( "pixeles" ) ? "px" : "%" )
-            + " "
+        write.print( 
+            ( ctx.ENTERO() != null ? ctx.ENTERO() : ctx.REAL() ).getText() 
+            + ( ctx.UNIDAD().getText().equals( "pixeles" ) ? "px " : "% " )
         );
         return null;
     }
     
     @Override
     public T visitColorFormato( JVNWebParser.ColorFormatoContext ctx ) {
-        write.print( "rgb(" + ctx.N_COLOR( 0 ) + ", " + ctx.N_COLOR( 1 )
-            + "," + ctx.N_COLOR( 2 ) + ")" );
+        write.print( "rgb(" + ctx.ENTERO( 0 ) + ", " + ctx.ENTERO( 1 )
+            + "," + ctx.ENTERO( 2 ) + ")" );
         return null;
     }
 }
