@@ -1,4 +1,5 @@
 grammar JVNWeb;
+import JVNWebLexerRules;
 
 main: 'Encabezado' contenidoEncabezado 'FinEncabezado' 'Cuerpo' contenido 'FinCuerpo' ('Codigo' codigo 'FinCodigo')?;
 
@@ -9,80 +10,85 @@ titulo: 'Titulo' TEXTO 'FinTitulo';
 contenido: (elementoCompuesto | elementoSimple | elementoFormulario)+;
 
 elementoCompuesto://Elementolista antes de eventoComun?
-    'Contenedor' clases? estilos? eventoComun*  contenido 'FinContenedor' #contenedor
-    | 'Formulario' clases? estilos? eventoFormulario* contenido 'FinFormulario' #formulario
-    | 'Parrafo' clases? estilos? eventoComun*  texto*  'FinParrafo' #parrafo
-    | 'ListaOrdenada' clases? estilos? elementoLista* eventoComun*  'FinListaOrdenada' #listaOrdenada
-    | 'ListaSinOrden' clases? estilos? elementoLista* eventoComun*  'FinListaSinOrden' #listaSinOrden
-    | 'Tabla' clases? estilos? eventoComun* contenidoTabla 'FinTabla' #tabla
+    'Contenedor' ('(' atributosComunes (',' atributosComunes)* ')')* contenido 'FinContenedor' #contenedor
+    | 'Formulario' ('(' (atributosComunes | eventoFormulario) (',' (atributosComunes | eventoFormulario))* ')')* 
+        contenido 'FinFormulario' #formulario
+    | 'Parrafo' ('(' atributosComunes ')')* texto* 'FinParrafo' #parrafo
+    | 'ListaOrdenada' ('(' atributosComunes ')')* elementoLista* 'FinListaOrdenada' #listaOrdenada
+    | 'ListaSinOrden' ('(' atributosComunes ')')* elementoLista*  'FinListaSinOrden' #listaSinOrden
+    | 'Tabla' ('(' atributosComunes)* contenidoTabla 'FinTabla' #tabla
     | multimedia #elementoMultimedia ;
 
 elementoSimple:
     texto #elementoTexto
-    | 'Enlace' clases? referencia? estilos? eventoComun* TEXTO 'FinEnlace' #enlace
-    | 'Linea' clases? estilos? eventoComun* 'FinLinea' #linea
-    | 'TextoConEnfasis' '(' 'enfasis' ':' ENFASIS ')' clases? estilos? eventoComun* texto* 'FinTextoConEnfasis' #textoConEnfasis
-    | 'Boton' clases? estilos? eventoComun* texto* 'Boton' #boton;
+    | 'Enlace' ('(' atributosComunes | referencia ')')* TEXTO 'FinEnlace' #enlace
+    | 'Linea' ('(' atributosComunes ')')* 'FinLinea' #linea
+    | 'TextoConEnfasis' enfasis ('(' atributosComunes ')')* texto* 'FinTextoConEnfasis' #textoConEnfasis
+    | 'Boton' ('(' atributosComunes ')')* texto* 'Boton' #boton;
     
-referencia: '(' 'referencia' ':' '"' TEXTO '"' ')';
+referencia: '(' 'referencia' ':' CADENA_HTML ')';
 
 elementoFormulario:
-     'Etiqueta' clases? estilos? eventoComun* texto* 'FinEtiqueta' #etiqueta
-    | 'EntradaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada* 'FinEntradaDeTexto' #entradaDeTexto
-    | 'AreaDeTexto' clases? atributoNombre? atributoValor? atributoDescripcion? estilos? eventoEntrada*  'FinAreaDeTexto' #areaDeTexto
-    | 'Selector' clases? atributoNombre? atributoValor? estilos? eventoEntrada* ('Opcion' atributoValor eventoComun* texto* 'FinOpcion')* 'FinSelector' #selector;
+     'Etiqueta' ('(' atributosComunes ')')* texto* 'FinEtiqueta' #etiqueta
+    | 'EntradaDeTexto' ('(' (atributosComunes | atributosEntrada | tipoEntrada) ')')* 'FinEntradaDeTexto' #entradaDeTexto
+    | 'AreaDeTexto' ('(' atributosAreaDeTexto (',' atributosAreaDeTexto)* ')')* 'FinAreaDeTexto' #areaDeTexto
+    | 'Selector' ('(' atributosComunes | atributoNombre | atributoValor | eventoEntrada ')')* 
+      ('Opcion' ('(' atributosComunes | atributoValor ')')* texto* 'FinOpcion')* 'FinSelector' #selector;
 
-elementoLista:  'ElementoLista' clases? estilos? eventoComun*  (elementoSimple | multimedia)* 'FinElementoLista';
+elementoLista:  'ElementoLista' ('(' atributosComunes ')')* (elementoSimple | multimedia)* 'FinElementoLista';
 
-texto: TEXTO | ('Texto' clases? estilos? eventoComun* texto* 'FinTexto');
+texto: TEXTO | ('Texto' ('(' atributosComunes ')')* texto* 'FinTexto');
 
-contenidoTabla: ('EncabezadoTabla' clases? estilos? eventoComun*  elementoTabla 'FinEncabezadoTabla')? filaTabla*;
+contenidoTabla: ('EncabezadoTabla' ('(' atributosComunes ')')*  elementoTabla* 'FinEncabezadoTabla')? filaTabla*;
 
-filaTabla: 'FilaTabla' clases? estilos? eventoComun*  elementoTabla* 'FinFilaTabla';
+filaTabla: 'FilaTabla' ('(' atributosComunes ')')* elementoTabla* 'FinFilaTabla';
 
-elementoTabla: 'ElementoTabla' clases? estilos? eventoComun*  (elementoSimple | multimedia)* 'FinElementoTabla';
+elementoTabla: 'ElementoTabla' ('(' atributosComunes ')')* (elementoSimple | multimedia)* 'FinElementoTabla';
 
 multimedia:
-    'Audio' clases? mostrarControles? estilos? eventoComun*  fuente 'FinAudio' #audio
-    | 'Video' clases? mostrarControles? estilos? eventoComun*  fuente 'FinVideo' #video
-    | 'Imagen' clases? atributoFuente  ( '(' atributoImagen ':' '“' TEXTO '“' ')' )* estilos? eventoComun*  'FinImagen' #imagen;
+    'Audio' ('(' atributosComunes | mostrarControles ')')* fuente 'FinAudio' #audio
+    | 'Video' ('(' atributosComunes | mostrarControles ')')*  fuente 'FinVideo' #video
+    | 'Imagen' ('(' atributosComunes | atributoFuente | atributoImagen ')')*  'FinImagen' #imagen;
 
-mostrarControles: '(' 'conControles' ')';
+atributosComunes: clases | estilos | eventoComun;
+
+atributosEntrada: atributoNombre | atributoValor | atributoDescripcion | eventoEntrada;
+
+atributosAreaDeTexto: atributosComunes | atributosEntrada | atributoFilas | atributoColumnas;
+
+mostrarControles: 'conControles';
 
 fuente:  'Fuente' atributoFuente atributoTipo TEXTO 'FinFuente';
 
-clases: '(' 'clases' ':' '“' CADENA '“' ')';
+clases: 'clases' ':' CADENA_HTML;
 
-atributoFuente: '(' 'fuente' ':' '“' CADENA '“' ')';
+atributoFuente: 'fuente' ':' CADENA_HTML;
 
-atributoTipo: '(' 'tipo' ':' '“' TEXTO '“' ')';
+atributoTipo: 'tipo' ':' CADENA_HTML;
 
-atributoNombre: '(' 'nombre' ':' '“' TEXTO '“' ')';
+atributoNombre: 'nombre' ':' CADENA_HTML;
 
-atributoValor: '(' 'valor' ':' '“' TEXTO '“' ')';
+atributoValor: 'valor' ':' CADENA_HTML;
 
-atributoDescripcion: '(' 'descripcion' ':' '“' TEXTO '“' ')';
+atributoDescripcion: 'descripcion' ':' CADENA_HTML;
 
-atributoFilas: '(' 'filas' ':' '“' NUMERO '“' ')';
+atributoFilas: 'filas' ':' ENTERO;
 
-atributoColumnas: '(' 'columnas' ':' '“' NUMERO '“' ')';
+atributoColumnas: 'columnas' ':' ENTERO;
 
-tipoEntrada: '(' 'tipo' ':' '“' TIPO_ENTRADA '“' ')';
+atributoImagen: ATRIBUTO_IMAGEN ':' CADENA_HTML;
 
-atributoImagen:
-'textoAlternativo'
-| 'ancho'
-| 'alto';
+tipoEntrada: 'tipo' ':' '"' tipoEntradaValor '"';
 
-estilos: '( ''estilos' ':' estilo ('y' estilo)* ')';
+estilos: 'estilos' ':' estilo ('y' estilo)*;
 
-estilo: ESTILO 'es' valorEstilo | ESTILO_BOOLEANO;
+estilo: nombreEstilo 'es' valorEstilo | estilo_booleano;
 
-eventoComun: '(' EVENTO_COMUN ':' '“' ID '“' ')';
+eventoComun: EVENTO_COMUN ':' ID;
 
-eventoFormulario: (EVENTO_COMUN | 'alEnviarDatos') ':' '“' ID '“' ')';
+eventoFormulario: 'alEnviarDatos' ':' ID;
 
-eventoEntrada: '(' EVENTO_ENTRADA ':'  '“' ID '“' ')';
+eventoEntrada: 'EVENTO_ENTRADA' ':' ID;
 
 codigo: declaracion codigo | asignacionSimple codigo | condicional codigo | ciclo codigo | seleccion codigo | declaracionF codigo |
         dfuncion codigo | cambioElemento codigo | obtenerElemento codigo | impresion codigo | objeto codigo | arregloDec codigo | arregloAsig codigo | ;
@@ -96,8 +102,6 @@ obtenerElemento: 'asignarElemento' '(' (elemento|CLASE) ')' 'a' ID;
 elemento: ('Contenedor' | 'Formulario' | 'Parrafo' | 'ListaOrdenada' | 'ListaSinOrden' | 'Tabla' | 'Enlace' | 'Linea' |
            'TextoConEnfasis' | 'EntradaDeTexto' | 'AreaDeTexto' | 'Etiqueta' | 'Boton' | 'Selector' | 'Texto' | 'TextoAlernativo' |
            'EncabezadoTabla' | 'FilaTabla' | 'ElementoTabla' | 'Audio' | 'Video' | 'Imagen');
-
-CLASE: '.'[a-zA-Z0-9_][a-zA-Z0-9_-]+;
 
 declaracion: 'variable' ID asignacion otrasDec;
 
@@ -191,82 +195,48 @@ valor: ENTERO | REAL | CADENA | CARACTER | BOOLEANO | ID | IDCOMPUESTO | arreglo
 objeto: 'objeto' ID 'tiene' propiedades 'fin_objeto';
 otroObjeto: 'objeto' (ID | ) 'tiene' propiedades 'fin_objeto';
 
-TEXTO: '\'' ~[']*  '\'';
-OPERADOR: '&&' | '||' | '<' | '>' | '<=' | '>=' | '==' | '!=' | '+' | '-' | '*' | '/' | '%';
-ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA | ID) ']' ('.' (ID))* ;
-ENTERO: ('-'|)[0-9]+;
-REAL: ('-'|)[0-9]+'.'[0-9]+;
-CADENA: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '<' | '>' | '/')*'"';
-CARACTER: '\''([a-zA-Z0-9] | ' ' | '_' | '\\n' | '\\t') '\'';
-BOOLEANO: 'true' | 'false';
-ID: ('-'|)[a-zA-Z]+( '_'*[a-zA-Z0-9]+)*;
-IDCOMPUESTO: (('-'|)[a-zA-Z]+( '_'*[a-zA-Z0-9]+)* ('.' [a-zA-Z]+( '_'*[a-zA-Z0-9]+)* )+);
-Whitespace: [ \t]+ -> skip;
-Newline: ('\r' '\n'? | '\n') -> skip;
-BlockComment: '/*' .*? '*/' -> skip;
-LineComment: '//' ~ [\r\n]* -> skip;
-ENFASIS: [1-6];
+enfasis: '1' | '2' | '3' | '4' | '5' | '6';
 
-TIPO_ENTRADA: 'texto' | 'numero' | 'correo' | 'clave' | 'fecha' | 'boton' | 'casilla' | 'radio' | 'archivo' | 'imagen' |
+tipoEntradaValor: TEXTO_T | 'numero' | 'correo' | 'clave' | 'fecha' | 'boton' | 'casilla' | 'radio' | 'archivo' | 'imagen' |
  'rango' | 'reinicio' | 'busqueda' | 'telefono' | 'tiempo' | 'semana' | 'color' | 'mes' | 'envio';
 
-ESTILO: ('ancho' | 'alto' | 'anchoMinimo' |  'anchoMaximo' | 'alturaMinima' | 'alturaMaxima' |
+nombreEstilo: ('ancho' | 'alto' | 'anchoMinimo' |  'anchoMaximo' | 'alturaMinima' | 'alturaMaxima' |
 'posicion' | 'ubicacion' | 'visualizacion' | 'profundidad' | 'flotamiento' | 'alineado' | 'justificado' |
  'borde' | 'cursor' | 'margen' | 'espaciado' | 'color' | 'colorFondo' | 'opacidad' | 'tamaño' | 'familia' );
-
-ESTILO_BOOLEANO: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
-
+ 
 valorEstilo:
-      CADENA_CSS
     | ENTERO
-    | COLOR
     | VISUALIZACION
     | POSICION
-    | ubicacion
     | JUSTIFICADO
-    | borde
+    | ALINEADO
     | CURSOR
-    | FLOTAMIENTO
+    | color
+    | borde
+    | ubicacion
+    | dimension
+    | flotamiento
     | colorFormato
-    | dimensiones;
-    
-CADENA_CSS: '"'([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' )+'"';
+    | dimensiones
+    | CADENA_HTML;
 
-NUMERO: [0-9]+;
+estilo_booleano: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
 
-COLOR: 'rojo' | 'verde' | 'azul' | 'amarillo' | 'violeta' | 'negro' | 'marron' | 'gris' |
+flotamiento: 'derecha' | 'izquierda' | 'ninguno';
+
+color: 'rojo' | 'verde' | 'azul' | 'amarillo' | 'violeta' | 'negro' | 'marron' | 'gris' |
  'naranja' | 'rosa' | 'purpura' | 'blanco' ;
 
-colorFormato: '#' 'rojo' N_COLOR 'verde' N_COLOR 'azul' N_COLOR;
-
-N_COLOR: [0-255];
-
-VISUALIZACION: 'nada' | 'bloque' | 'enlinea' | 'flexible' | 'fila' | 'columna';
-
-POSICION: 'estatica' | 'relativa' | 'absoluta' | 'fija' ;
-
-FLOTAMIENTO: 'derecha' | 'izquierda' | 'ninguno';
-
-ALINEADO: 'centro' | 'extendido' | 'inicio' | 'final';
-
-JUSTIFICADO: 'centrado' | 'espacioEntre' | 'espacioAlrededor' | 'inicio' | 'final';
+colorFormato: '#' 'rojo' ENTERO 'verde' ENTERO 'azul' ENTERO;
 
 ubicacion:
     'superior' valorEstilo 'derecha' valorEstilo 'inferior' valorEstilo 'izquierda' valorEstilo
     | 'horizontal' valorEstilo 'vertical' valorEstilo;
 
-borde: dimension CADENA (COLOR | colorFormato);
-
-CURSOR: 'puntero' | 'texto' | 'esperando' | 'automatico' | 'invisible';
+borde: dimension CADENA (color | colorFormato);
 
 dimensiones: dimension (dimension (dimension dimension)? )?;
 
-dimension: DIMENSION UNIDAD_DIMENSION;
+dimension: (ENTERO | REAL) UNIDAD;
 
-DIMENSION: [0-9]+ ('.' [0-9]+)?;
-
-UNIDAD_DIMENSION: 'pixeles' | '%';
-
-EVENTO_ENTRADA: 'alModificar' | 'alSeleccionar';
-
-EVENTO_COMUN: 'alHacerClic' | 'alApuntar' | 'alSalir';
+UNIDAD: 'pixeles' | '%';

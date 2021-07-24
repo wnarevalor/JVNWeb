@@ -280,7 +280,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitTextoConEnfasis( JVNWebParser.TextoConEnfasisContext ctx ) {
-        write.print( "<h" + ctx.ENFASIS() + " " );
+        write.print( "<h" + ctx.enfasis().getText() + " " );
         if ( !ctx.clases().isEmpty() ) {
             visitClases( ctx.clases() );
         }
@@ -302,7 +302,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         } else if ( ctx.texto( 0 ) != null ) {
             visitTexto( ctx.texto( 0 ) );
         }
-        write.print( "</h" + ctx.ENFASIS().getText() + ">\n" );
+        write.print( "</h" + ctx.enfasis().getText() + ">\n" );
         return null;
     }
     
