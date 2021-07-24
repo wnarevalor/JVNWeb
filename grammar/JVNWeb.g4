@@ -9,52 +9,62 @@ titulo: 'Titulo' TEXTO 'FinTitulo';
 
 contenido: (elementoCompuesto | elementoSimple | elementoFormulario)+;
 
-elementoCompuesto://Elementolista antes de eventoComun?
-    'Contenedor' ('(' atributosComunes (',' atributosComunes)* ')')* contenido 'FinContenedor' #contenedor
-    | 'Formulario' ('(' (atributosComunes | eventoFormulario) (',' (atributosComunes | eventoFormulario))* ')')* 
-        contenido 'FinFormulario' #formulario
-    | 'Parrafo' ('(' atributosComunes ')')* texto* 'FinParrafo' #parrafo
-    | 'ListaOrdenada' ('(' atributosComunes ')')* elementoLista* 'FinListaOrdenada' #listaOrdenada
-    | 'ListaSinOrden' ('(' atributosComunes ')')* elementoLista*  'FinListaSinOrden' #listaSinOrden
-    | 'Tabla' ('(' atributosComunes)* contenidoTabla 'FinTabla' #tabla
-    | multimedia #elementoMultimedia ;
+elementoCompuesto:
+    'Contenedor' ('(' atributosComunes (',' atributosComunes)* ')')? contenido? 'FinContenedor' #contenedor
+    | 'Formulario' ('(' (atributosComunes | eventoFormulario) (',' (atributosComunes | eventoFormulario))* ')')? 
+    contenido? 'FinFormulario' #formulario
+    | 'Parrafo' ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinParrafo' #parrafo
+    | 'ListaOrdenada' ('(' atributosComunes (',' atributosComunes)* ')')? elementoLista* 'FinListaOrdenada' #listaOrdenada
+    | 'ListaSinOrden' ('(' atributosComunes (',' atributosComunes)* ')')? elementoLista*  'FinListaSinOrden' #listaSinOrden
+    | 'Tabla' ('(' atributosComunes (',' atributosComunes)* ')')? contenidoTabla 'FinTabla' #tabla
+    | multimedia #elementoMultimedia;
 
 elementoSimple:
     texto #elementoTexto
-    | 'Enlace' ('(' atributosComunes | referencia ')')* TEXTO 'FinEnlace' #enlace
-    | 'Linea' ('(' atributosComunes ')')* 'FinLinea' #linea
-    | 'TextoConEnfasis' enfasis ('(' atributosComunes ')')* texto* 'FinTextoConEnfasis' #textoConEnfasis
-    | 'Boton' ('(' atributosComunes ')')* texto* 'Boton' #boton;
+    | 'Enlace' ('(' (atributosComunes | referencia) (',' (atributosComunes | referencia))* ')')? texto* 'FinEnlace' #enlace
+    | 'Linea' ('(' atributosComunes (',' atributosComunes)* ')')? 'FinLinea' #linea
+    | 'TextoConEnfasis' enfasis ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinTextoConEnfasis' #textoConEnfasis
+    | 'Boton' ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'Boton' #boton;
     
 referencia: '(' 'referencia' ':' CADENA_HTML ')';
 
 elementoFormulario:
-     'Etiqueta' ('(' atributosComunes ')')* texto* 'FinEtiqueta' #etiqueta
-    | 'EntradaDeTexto' ('(' (atributosComunes | atributosEntrada | tipoEntrada) ')')* 'FinEntradaDeTexto' #entradaDeTexto
-    | 'AreaDeTexto' ('(' atributosAreaDeTexto (',' atributosAreaDeTexto)* ')')* 'FinAreaDeTexto' #areaDeTexto
-    | 'Selector' ('(' atributosComunes | atributoNombre | atributoValor | eventoEntrada ')')* 
-      ('Opcion' ('(' atributosComunes | atributoValor ')')* texto* 'FinOpcion')* 'FinSelector' #selector;
+     'Etiqueta' ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinEtiqueta' #etiqueta
+    | 'EntradaDeTexto' ('(' atributosEntradaDeTexto (',' atributosEntradaDeTexto)* ')')?             'FinEntradaDeTexto' #entradaDeTexto
+    | 'AreaDeTexto' ('(' atributosAreaDeTexto (',' atributosAreaDeTexto)* ')')? 'FinAreaDeTexto' #areaDeTexto
+    | 'Selector' ('(' atributosSelector (',' atributosSelector)* ')')? 
+      ('Opcion' ('(' (atributosComunes | atributoValor) (',' (atributosComunes | atributoValor))* ')')? texto* 'FinOpcion')* 'FinSelector' #selector;
 
-elementoLista:  'ElementoLista' ('(' atributosComunes ')')* (elementoSimple | multimedia)* 'FinElementoLista';
+elementoLista:  'ElementoLista' ('(' atributosComunes (',' atributosComunes)* ')')? contenidoElementoListaYTabla* 'FinElementoLista';
 
-texto: TEXTO | ('Texto' ('(' atributosComunes ')')* texto* 'FinTexto');
+texto: TEXTO | ('Texto' ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinTexto');
 
-contenidoTabla: ('EncabezadoTabla' ('(' atributosComunes ')')*  elementoTabla* 'FinEncabezadoTabla')? filaTabla*;
+contenidoTabla: encabezadoTabla? filaTabla*;
 
-filaTabla: 'FilaTabla' ('(' atributosComunes ')')* elementoTabla* 'FinFilaTabla';
+encabezadoTabla: 'EncabezadoTabla' ('(' atributosComunes (',' atributosComunes)* ')')?  contenidoEncabezadoTabla* 'FinEncabezadoTabla';
 
-elementoTabla: 'ElementoTabla' ('(' atributosComunes ')')* (elementoSimple | multimedia)* 'FinElementoTabla';
+contenidoEncabezadoTabla:  elementoTabla | filaTabla;
+
+filaTabla: 'FilaTabla' ('(' atributosComunes (',' atributosComunes)* ')')? elementoTabla* 'FinFilaTabla';
+
+elementoTabla: 'ElementoTabla' ('(' atributosComunes (',' atributosComunes)* ')')? contenidoElementoListaYTabla* 'FinElementoTabla';
 
 multimedia:
-    'Audio' ('(' atributosComunes | mostrarControles ')')* fuente 'FinAudio' #audio
-    | 'Video' ('(' atributosComunes | mostrarControles ')')*  fuente 'FinVideo' #video
-    | 'Imagen' ('(' atributosComunes | atributoFuente | atributoImagen ')')*  'FinImagen' #imagen;
+    'Audio' ('(' (atributosComunes | mostrarControles) (',' (atributosComunes | mostrarControles)*) ')')? fuente* 'FinAudio' #audio
+    | 'Video' ('(' (atributosComunes | mostrarControles) (',' (atributosComunes | mostrarControles)*) ')')?  fuente* 'FinVideo' #video
+    | 'Imagen' ('(' (atributosComunes | atributoFuente | atributoImagen) (',' (atributosComunes | atributoFuente | atributoImagen))* ')')? 'FinImagen' #imagen;
+
+contenidoElementoListaYTabla: elementoSimple | multimedia;
 
 atributosComunes: clases | estilos | eventoComun;
 
 atributosEntrada: atributoNombre | atributoValor | atributoDescripcion | eventoEntrada;
 
+atributosEntradaDeTexto: atributosComunes | atributosEntrada | tipoEntrada;
+
 atributosAreaDeTexto: atributosComunes | atributosEntrada | atributoFilas | atributoColumnas;
+
+atributosSelector: atributosComunes | atributoNombre | atributoValor | eventoEntrada;
 
 mostrarControles: 'conControles';
 
@@ -76,13 +86,13 @@ atributoFilas: 'filas' ':' ENTERO;
 
 atributoColumnas: 'columnas' ':' ENTERO;
 
-atributoImagen: ATRIBUTO_IMAGEN ':' CADENA_HTML;
+atributoImagen: 'textoAlternativo' ':' CADENA_HTML | ATRIBUTO_IMAGEN ':' dimension;
 
 tipoEntrada: 'tipo' ':' '"' tipoEntradaValor '"';
 
 estilos: 'estilos' ':' estilo ('y' estilo)*;
 
-estilo: nombreEstilo 'es' valorEstilo | estilo_booleano;
+estilo: nombreEstilo 'es' valorEstilo | estiloBooleano;
 
 eventoComun: EVENTO_COMUN ':' ID;
 
@@ -220,7 +230,7 @@ valorEstilo:
     | dimensiones
     | CADENA_HTML;
 
-estilo_booleano: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
+estiloBooleano: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
 
 flotamiento: 'derecha' | 'izquierda' | 'ninguno';
 

@@ -1,9 +1,6 @@
 lexer grammar JVNWebLexerRules;
 
-ATRIBUTO_IMAGEN:
-    'textoAlternativo'
-    | 'ancho'
-    | 'alto';
+ATRIBUTO_IMAGEN: 'ancho' | 'alto';
 VISUALIZACION: 'nada' | 'bloque' | 'enlinea' | 'flexible' | 'fila' | COLUMNA_T;
 COLUMNA_T: 'columna';
 POSICION: 'estatica' | 'relativa' | 'absoluta' | 'fija' ;
