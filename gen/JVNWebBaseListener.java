@@ -387,18 +387,6 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterContenidoElementoListaYTabla(JVNWebParser.ContenidoElementoListaYTablaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitContenidoElementoListaYTabla(JVNWebParser.ContenidoElementoListaYTablaContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterAtributosComunes(JVNWebParser.AtributosComunesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -586,6 +574,18 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAtributoImagen(JVNWebParser.AtributoImagenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDimensionImagen(JVNWebParser.DimensionImagenContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDimensionImagen(JVNWebParser.DimensionImagenContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1258,18 +1258,6 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitOtroObjeto(JVNWebParser.OtroObjetoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterEnfasis(JVNWebParser.EnfasisContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEnfasis(JVNWebParser.EnfasisContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

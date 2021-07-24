@@ -1,6 +1,5 @@
 lexer grammar JVNWebLexerRules;
 
-ATRIBUTO_IMAGEN: 'ancho' | 'alto';
 VISUALIZACION: 'nada' | 'bloque' | 'enlinea' | 'flexible' | 'fila' | COLUMNA_T;
 COLUMNA_T: 'columna';
 POSICION: 'estatica' | 'relativa' | 'absoluta' | 'fija' ;
@@ -16,8 +15,8 @@ OPERADOR: '&&' | '||' | '<' | '>' | '<=' | '>=' | '==' | '!=' | '+' | '-' | '*' 
 ELEMENTOARR: (ID|IDCOMPUESTO) '[' (ENTERO | CADENA | ID) ']' ('.' (ID))* ;
 ENTERO: ('-'|)[0-9]+;
 REAL: ('-'|)[0-9]+'.'[0-9]+;
-CADENA_HTML: '"' ([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' | '<' | '>' | '/')+ '"';
-CADENA: '`' ([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' | '<' | '>' | '/')+ '`';
+CADENA_HTML: '"' ([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' | '<' | '>' | '/' | ':')+ '"';
+CADENA: '`' ([a-zA-Z0-9] | '_' | ' ' | '\\n' | '\\t' | '.' | ',' | '#' | '-' | '%' | '(' | ')' | '<' | '>' | '/' | ':')+ '`';
 CARACTER: '\''([a-zA-Z0-9] | ' ' | '_' | '\\n' | '\\t') '\'';
 BOOLEANO: 'true' | 'false';
 ID: ('-'|)[a-zA-Z]+( '_'*[a-zA-Z0-9]+)*;

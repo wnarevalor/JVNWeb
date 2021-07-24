@@ -23,19 +23,19 @@ elementoSimple:
     texto #elementoTexto
     | 'Enlace' ('(' (atributosComunes | referencia) (',' (atributosComunes | referencia))* ')')? texto* 'FinEnlace' #enlace
     | 'Linea' ('(' atributosComunes (',' atributosComunes)* ')')? 'FinLinea' #linea
-    | 'TextoConEnfasis' enfasis ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinTextoConEnfasis' #textoConEnfasis
-    | 'Boton' ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'Boton' #boton;
+    | 'TextoConEnfasis' ENTERO ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinTextoConEnfasis' #textoConEnfasis
+    | 'Boton' ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinBoton' #boton;
     
-referencia: '(' 'referencia' ':' CADENA_HTML ')';
+referencia: 'referencia' ':' CADENA_HTML;
 
 elementoFormulario:
      'Etiqueta' ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinEtiqueta' #etiqueta
-    | 'EntradaDeTexto' ('(' atributosEntradaDeTexto (',' atributosEntradaDeTexto)* ')')?             'FinEntradaDeTexto' #entradaDeTexto
-    | 'AreaDeTexto' ('(' atributosAreaDeTexto (',' atributosAreaDeTexto)* ')')? 'FinAreaDeTexto' #areaDeTexto
+    | 'EntradaDeTexto' ('(' atributosEntradaDeTexto (',' atributosEntradaDeTexto)* ')')? 'FinEntradaDeTexto' #entradaDeTexto
+    | 'AreaDeTexto' ('(' atributosAreaDeTexto (',' atributosAreaDeTexto)* ')')? texto* 'FinAreaDeTexto' #areaDeTexto
     | 'Selector' ('(' atributosSelector (',' atributosSelector)* ')')? 
       ('Opcion' ('(' (atributosComunes | atributoValor) (',' (atributosComunes | atributoValor))* ')')? texto* 'FinOpcion')* 'FinSelector' #selector;
 
-elementoLista:  'ElementoLista' ('(' atributosComunes (',' atributosComunes)* ')')? contenidoElementoListaYTabla* 'FinElementoLista';
+elementoLista:  'ElementoLista' ('(' atributosComunes (',' atributosComunes)* ')')? contenido* 'FinElementoLista';
 
 texto: TEXTO | ('Texto' ('(' atributosComunes (',' atributosComunes)* ')')? texto* 'FinTexto');
 
@@ -47,14 +47,12 @@ contenidoEncabezadoTabla:  elementoTabla | filaTabla;
 
 filaTabla: 'FilaTabla' ('(' atributosComunes (',' atributosComunes)* ')')? elementoTabla* 'FinFilaTabla';
 
-elementoTabla: 'ElementoTabla' ('(' atributosComunes (',' atributosComunes)* ')')? contenidoElementoListaYTabla* 'FinElementoTabla';
+elementoTabla: 'ElementoTabla' ('(' atributosComunes (',' atributosComunes)* ')')? contenido* 'FinElementoTabla';
 
 multimedia:
-    'Audio' ('(' (atributosComunes | mostrarControles) (',' (atributosComunes | mostrarControles)*) ')')? fuente* 'FinAudio' #audio
-    | 'Video' ('(' (atributosComunes | mostrarControles) (',' (atributosComunes | mostrarControles)*) ')')?  fuente* 'FinVideo' #video
+    'Audio' ('(' (atributosComunes | mostrarControles) (',' (atributosComunes | mostrarControles))* ')')? fuente* 'FinAudio' #audio
+    | 'Video' ('(' (atributosComunes | mostrarControles) (',' (atributosComunes | mostrarControles))* ')')?  fuente* 'FinVideo' #video
     | 'Imagen' ('(' (atributosComunes | atributoFuente | atributoImagen) (',' (atributosComunes | atributoFuente | atributoImagen))* ')')? 'FinImagen' #imagen;
-
-contenidoElementoListaYTabla: elementoSimple | multimedia;
 
 atributosComunes: clases | estilos | eventoComun;
 
@@ -62,13 +60,13 @@ atributosEntrada: atributoNombre | atributoValor | atributoDescripcion | eventoE
 
 atributosEntradaDeTexto: atributosComunes | atributosEntrada | tipoEntrada;
 
-atributosAreaDeTexto: atributosComunes | atributosEntrada | atributoFilas | atributoColumnas;
+atributosAreaDeTexto: atributosComunes | atributoNombre | eventoEntrada | atributoFilas | atributoColumnas;
 
 atributosSelector: atributosComunes | atributoNombre | atributoValor | eventoEntrada;
 
 mostrarControles: 'conControles';
 
-fuente:  'Fuente' atributoFuente atributoTipo TEXTO 'FinFuente';
+fuente:  'Fuente' '(' atributoFuente ',' atributoTipo ')' 'FinFuente';
 
 clases: 'clases' ':' CADENA_HTML;
 
@@ -86,7 +84,9 @@ atributoFilas: 'filas' ':' ENTERO;
 
 atributoColumnas: 'columnas' ':' ENTERO;
 
-atributoImagen: 'textoAlternativo' ':' CADENA_HTML | ATRIBUTO_IMAGEN ':' dimension;
+atributoImagen: 'textoAlternativo' ':' CADENA_HTML | dimensionImagen ':' dimension;
+
+dimensionImagen: 'ancho' | 'alto';
 
 tipoEntrada: 'tipo' ':' '"' tipoEntradaValor '"';
 
@@ -98,7 +98,7 @@ eventoComun: EVENTO_COMUN ':' ID;
 
 eventoFormulario: 'alEnviarDatos' ':' ID;
 
-eventoEntrada: 'EVENTO_ENTRADA' ':' ID;
+eventoEntrada: EVENTO_ENTRADA ':' ID;
 
 codigo: declaracion codigo | asignacionSimple codigo | condicional codigo | ciclo codigo | seleccion codigo | declaracionF codigo |
         dfuncion codigo | cambioElemento codigo | obtenerElemento codigo | impresion codigo | objeto codigo | arregloDec codigo | arregloAsig codigo | ;
@@ -205,8 +205,6 @@ valor: ENTERO | REAL | CADENA | CARACTER | BOOLEANO | ID | IDCOMPUESTO | arreglo
 objeto: 'objeto' ID 'tiene' propiedades 'fin_objeto';
 otroObjeto: 'objeto' (ID | ) 'tiene' propiedades 'fin_objeto';
 
-enfasis: '1' | '2' | '3' | '4' | '5' | '6';
-
 tipoEntradaValor: TEXTO_T | 'numero' | 'correo' | 'clave' | 'fecha' | 'boton' | 'casilla' | 'radio' | 'archivo' | 'imagen' |
  'rango' | 'reinicio' | 'busqueda' | 'telefono' | 'tiempo' | 'semana' | 'color' | 'mes' | 'envio';
 
@@ -216,6 +214,7 @@ nombreEstilo: ('ancho' | 'alto' | 'anchoMinimo' |  'anchoMaximo' | 'alturaMinima
  
 valorEstilo:
     | ENTERO
+    | REAL
     | VISUALIZACION
     | POSICION
     | JUSTIFICADO
@@ -228,7 +227,7 @@ valorEstilo:
     | flotamiento
     | colorFormato
     | dimensiones
-    | CADENA_HTML;
+    | TEXTO;
 
 estiloBooleano: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
 
@@ -243,7 +242,7 @@ ubicacion:
     'superior' valorEstilo 'derecha' valorEstilo 'inferior' valorEstilo 'izquierda' valorEstilo
     | 'horizontal' valorEstilo 'vertical' valorEstilo;
 
-borde: dimension CADENA (color | colorFormato);
+borde: dimension TEXTO (color | colorFormato);
 
 dimensiones: dimension (dimension (dimension dimension)? )?;
 

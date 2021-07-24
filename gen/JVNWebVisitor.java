@@ -215,12 +215,6 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitImagen(JVNWebParser.ImagenContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#contenidoElementoListaYTabla}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitContenidoElementoListaYTabla(JVNWebParser.ContenidoElementoListaYTablaContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#atributosComunes}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -316,6 +310,12 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAtributoImagen(JVNWebParser.AtributoImagenContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#dimensionImagen}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDimensionImagen(JVNWebParser.DimensionImagenContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#tipoEntrada}.
 	 * @param ctx the parse tree
@@ -655,12 +655,6 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOtroObjeto(JVNWebParser.OtroObjetoContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JVNWebParser#enfasis}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEnfasis(JVNWebParser.EnfasisContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#tipoEntradaValor}.
 	 * @param ctx the parse tree

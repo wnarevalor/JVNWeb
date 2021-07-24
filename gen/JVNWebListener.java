@@ -355,16 +355,6 @@ public interface JVNWebListener extends ParseTreeListener {
 	 */
 	void exitImagen(JVNWebParser.ImagenContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#contenidoElementoListaYTabla}.
-	 * @param ctx the parse tree
-	 */
-	void enterContenidoElementoListaYTabla(JVNWebParser.ContenidoElementoListaYTablaContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#contenidoElementoListaYTabla}.
-	 * @param ctx the parse tree
-	 */
-	void exitContenidoElementoListaYTabla(JVNWebParser.ContenidoElementoListaYTablaContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#atributosComunes}.
 	 * @param ctx the parse tree
 	 */
@@ -524,6 +514,16 @@ public interface JVNWebListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAtributoImagen(JVNWebParser.AtributoImagenContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JVNWebParser#dimensionImagen}.
+	 * @param ctx the parse tree
+	 */
+	void enterDimensionImagen(JVNWebParser.DimensionImagenContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JVNWebParser#dimensionImagen}.
+	 * @param ctx the parse tree
+	 */
+	void exitDimensionImagen(JVNWebParser.DimensionImagenContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#tipoEntrada}.
 	 * @param ctx the parse tree
@@ -1090,16 +1090,6 @@ public interface JVNWebListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOtroObjeto(JVNWebParser.OtroObjetoContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JVNWebParser#enfasis}.
-	 * @param ctx the parse tree
-	 */
-	void enterEnfasis(JVNWebParser.EnfasisContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JVNWebParser#enfasis}.
-	 * @param ctx the parse tree
-	 */
-	void exitEnfasis(JVNWebParser.EnfasisContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#tipoEntradaValor}.
 	 * @param ctx the parse tree

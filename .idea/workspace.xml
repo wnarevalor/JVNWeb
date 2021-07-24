@@ -2,7 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69774313-4e73-4b06-a409-9ff214bb64ca" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/JVNWeb.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JVNWeb.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWeb.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWeb.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWeb.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWeb.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWebBaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebBaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWebBaseVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebBaseVisitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWebLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebLexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWebLexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebLexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWebLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebLexer.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWebListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWebParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/JVNWebVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grammar/JVNWeb.g4" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/JVNWeb.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grammar/JVNWebLexerRules.g4" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/JVNWebLexerRules.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TraductorJVNWeb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TraductorJVNWeb.java" afterDir="false" />
@@ -79,7 +89,7 @@
       <workItem from="1627084491498" duration="738000" />
       <workItem from="1627085247562" duration="2565000" />
       <workItem from="1627145554682" duration="4559000" />
-      <workItem from="1627157265969" duration="4240000" />
+      <workItem from="1627157265969" duration="8799000" />
     </task>
     <task id="LOCAL-00001" summary="Añadida tabla de traducciones y traducción de estilos">
       <created>1626733391470</created>
@@ -109,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627161476254</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Actualización V3.1">
+      <created>1627161682145</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1627161682145</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -121,6 +138,7 @@
     <MESSAGE value="Actualización V2.1" />
     <MESSAGE value="Actualización V2.2" />
     <MESSAGE value="Actualización V3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualización V3" />
+    <MESSAGE value="Actualización V3.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualización V3.1" />
   </component>
 </project>

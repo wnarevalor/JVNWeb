@@ -146,11 +146,11 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitTextoConEnfasis( JVNWebParser.TextoConEnfasisContext ctx ) {
-        write.print( "<h" + ctx.enfasis().getText() );
+        write.print( "<h" + ctx.ENTERO().getText() );
         ctx.atributosComunes().forEach( this::visitAtributosComunes );
         write.print( ">\n" );
         ctx.texto().forEach( this::visitTexto );
-        write.print( "</h" + ctx.enfasis().getText() + ">\n" );
+        write.print( "</h" + ctx.ENTERO().getText() + ">\n" );
         return null;
     }
     
@@ -194,6 +194,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         write.print( "<textarea" );
         ctx.atributosAreaDeTexto().forEach( this::visitAtributosAreaDeTexto );
         write.print( ">\n" );
+        ctx.texto().forEach( this::visitTexto );
         write.print( "</textarea>\n" );
         return null;
     }
@@ -220,15 +221,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         write.print( "<li" );
         ctx.atributosComunes().forEach( this::visitAtributosComunes );
         write.print( ">\n" );
-        ctx.contenidoElementoListaYTabla().forEach( this::visitContenidoElementoListaYTabla );
+        ctx.contenido().forEach( this::visitContenido );
         write.print( "</li>\n" );
-        return null;
-    }
-    
-    @Override
-    public T visitContenidoElementoListaYTabla( JVNWebParser.ContenidoElementoListaYTablaContext ctx ) {
-        if ( ctx.elementoSimple().isEmpty() ) visit( ctx.elementoSimple() );
-        else visitChildren( ctx );
         return null;
     }
     
@@ -286,7 +280,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         write.print( "<td" );
         ctx.atributosComunes().forEach( this::visitAtributosComunes );
         write.print( ">\n" );
-        ctx.contenidoElementoListaYTabla().forEach( this::visitContenidoElementoListaYTabla );
+        ctx.contenido().forEach( this::visitContenido );
         write.print( "</td>\n" );
         return null;
     }
@@ -335,8 +329,6 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         visitAtributoFuente( ctx.atributoFuente() );
         visitAtributoTipo( ctx.atributoTipo() );
         write.print( ">\n" );
-        write.print( ctx.TEXTO().getText() );
-        write.print( "</source>\n" );
         return null;
     }
     
@@ -374,7 +366,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitAtributosAreaDeTexto( JVNWebParser.AtributosAreaDeTextoContext ctx ) {
         if ( !ctx.atributosComunes().isEmpty() ) visitAtributosComunes( ctx.atributosComunes() );
-        else if ( !ctx.atributosEntrada().isEmpty() ) visitAtributosEntrada( ctx.atributosEntrada() );
+        else if ( !ctx.atributoNombre().isEmpty() ) visitAtributoNombre( ctx.atributoNombre() );
+        else if ( !ctx.eventoEntrada().isEmpty() ) visitEventoEntrada( ctx.eventoEntrada() );
         else if ( !ctx.atributoFilas().isEmpty() ) visitAtributoFilas( ctx.atributoFilas() );
         else visitAtributoColumnas( ctx.atributoColumnas() );
         return null;
@@ -441,8 +434,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitAtributoImagen( JVNWebParser.AtributoImagenContext ctx ) {
-        if ( ctx.ATRIBUTO_IMAGEN() != null ) {
-            write.print( ( ctx.ATRIBUTO_IMAGEN().getText().equals( "ancho" ) ? " width" : " height" )
+        if ( ctx.dimensionImagen().isEmpty() ) {
+            write.print( ( ctx.dimensionImagen().getText().equals( "ancho" ) ? " width" : " height" )
                 + "=\"" );
             visitDimension( ctx.dimension() );
             write.print( "\"" );
@@ -454,11 +447,11 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitEventoComun( JVNWebParser.EventoComunContext ctx ) {
         if ( ctx.getText().equals( "alHacerClic" ) ) {
-            write.print( " onclick= " );
+            write.print( " onclick=" );
         } else if ( ctx.getText().equals( "alApuntar" ) ) {
-            write.print( " onhover= " );
+            write.print( " onmouseover=" );
         } else if ( ctx.getText().equals( "alSalir" ) ) {
-            write.print( " onexit= " );
+            write.print( " onmouseout=" );
         }
         write.print( "\"" + ctx.ID().getText() + "\"" );
         return null;
@@ -466,27 +459,17 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitEventoFormulario( JVNWebParser.EventoFormularioContext ctx ) {
-        if ( ctx.getText().equals( "alEnviarDatos" ) ) {
-            write.print( " onsubmit= " );
-        } else if ( !ctx.isEmpty() ) {
-            if ( ctx.getText().equals( "alHacerClic" ) ) {
-                write.print( " onclick= " );
-            } else if ( ctx.getText().equals( "alApuntar" ) ) {
-                write.print( " onhover= " );
-            } else if ( ctx.getText().equals( "alSalir" ) ) {
-                write.print( " onexit= " );
-            }
-        }
+        write.print( " onsubmit=" );
         write.print( "\"" + ctx.ID().getText() + "\"" );
         return null;
     }
     
     @Override
     public T visitEventoEntrada( JVNWebParser.EventoEntradaContext ctx ) {
-        if ( ctx.getText().equals( "alModificar" ) ) {
-            write.print( " onchange= " );
+        if ( ctx.EVENTO_ENTRADA().getText().equals( "alModificar" ) ) {
+            write.print( " onchange=" );
         } else if ( ctx.getText().equals( "alSeleccionar" ) ) {
-            write.print( " onselect= " );
+            write.print( " onselect=" );
         }
         write.print( "\"" + ctx.ID().getText() + "\"" );
         return null;
@@ -1284,6 +1267,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitValorEstilo( JVNWebParser.ValorEstiloContext ctx ) {
         if ( ctx.ENTERO() != null ) write.print( ctx.ENTERO().getText() );
+        else if ( ctx.REAL() != null) write.print( ctx.REAL().getText() );
         else if ( ctx.VISUALIZACION() != null ) {
             String valorVisualizacion = ctx.VISUALIZACION().getText();
             if ( valorVisualizacion.equals( "fila" ) || valorVisualizacion.equals( "columna" ) ) {
@@ -1306,7 +1290,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         else if ( !ctx.flotamiento().isEmpty() ) visitFlotamiento( ctx.flotamiento() );
         else if ( !ctx.colorFormato().isEmpty() ) visitColorFormato( ctx.colorFormato() );
         else if ( !ctx.dimensiones().isEmpty() ) visitDimensiones( ctx.dimensiones() );
-        else if ( ctx.CADENA_HTML() != null ) write.print( ctx.CADENA_HTML().getText() );
+        else if ( ctx.TEXTO() != null )
+            write.print( ctx.TEXTO().getText().substring( 1, ctx.TEXTO().getText().length() - 1 ) );
         write.print( "; " );
         return null;
     }
@@ -1314,7 +1299,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitBorde( JVNWebParser.BordeContext ctx ) {
         visitDimension( ctx.dimension() );
-        write.print( ctx.CADENA() + " " );
+        write.print( ctx.TEXTO().getText().substring( 1, ctx.TEXTO().getText().length() - 1 ) + " " );
         if ( ctx.color() != null )
             write.print( Constantes.colores.get( ctx.color().getText() ) );
         else
