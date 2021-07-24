@@ -1323,6 +1323,18 @@ public class JVNWebBaseListener implements JVNWebListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCursor(JVNWebParser.CursorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCursor(JVNWebParser.CursorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterColor(JVNWebParser.ColorContext ctx) { }
 	/**
 	 * {@inheritDoc}

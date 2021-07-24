@@ -1141,6 +1141,16 @@ public interface JVNWebListener extends ParseTreeListener {
 	 */
 	void exitFlotamiento(JVNWebParser.FlotamientoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JVNWebParser#cursor}.
+	 * @param ctx the parse tree
+	 */
+	void enterCursor(JVNWebParser.CursorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JVNWebParser#cursor}.
+	 * @param ctx the parse tree
+	 */
+	void exitCursor(JVNWebParser.CursorContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JVNWebParser#color}.
 	 * @param ctx the parse tree
 	 */

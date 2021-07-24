@@ -1,20 +1,20 @@
 Encabezado Titulo 'text' FinTitulo FinEncabezado
 Cuerpo 'this is a text' FinCuerpo
 Codigo
-    variable code = "codigo"
+    variable code = `codigo`
     lista arreglo = [1,2,3]
-    objeto carro tiene techo: "rojo", ruedas: "amarillas", numeroPuertas : 2 , colores : ["rojo","negro", "azul"] fin_objeto
-    objeto casa tiene entrada : "azul", :objeto cuarto tiene puertas : 2 fin_objeto , garage : "peque" fin_objeto
-    lista arregloObjetos = ["objeto", n, n.e, n[0], n["carde"], n[1].val.ee, objeto tiene carro: 2 fin_objeto]
+    objeto carro tiene techo: `rojo`, ruedas: `amarillas`, numeroPuertas : 2 , colores : [`rojo`,`negro`, `azul`] fin_objeto
+    objeto casa tiene entrada : `azul`, :objeto cuarto tiene puertas : 2 fin_objeto , garage : `peque` fin_objeto
+    lista arregloObjetos = [`objeto`, n, n.e, n[0], n[`carde`], n[1].val.ee, objeto tiene carro: 2 fin_objeto]
 
-    variable codigo = 3, regla = "a", arreglo = 25
+    variable codigo = 3, regla = `a`, arreglo = 25
 
     obtenerElemento (.clase) en parrafo
 
 
     obtenerElemento (Parrafo) en p
 
-    parrafo nuevo contenido es : arreglo[0] , "es un numero" , "<p> This is a paragraph </p>"
+    parrafo nuevo contenido es : arreglo[0] , `es un numero` , ``<p> This is a paragraph </p>``
 
     arreglo = [];
     func(230012, [123,1]);
@@ -28,14 +28,14 @@ Codigo
     fin_si
     para(i=3;i<10;29)hacer
         si(i>5)entonces
-            imprimir("log")fin_imprimir
+            imprimir(`log`)fin_imprimir
         fin_si
     fin_para
     objeto casa tiene puertas: 2, ventanas : 5 fin_objeto
     para (cosa en casa) hacer
         imprimir casa[cosa] fin_imprimir
     fin_para
-    variable text = "texto"
+    variable text = `texto`
     para (letra de texto) hacer
         imprimir letra fin_imprimir
     fin_para
@@ -46,9 +46,9 @@ Codigo
     variable a = 1
     seleccionar (a) entre
         caso 1:
-            imprimir "imprimir nada" fin_imprimir
+            imprimir `imprimir nada` fin_imprimir
         defecto:
-            imprimir "defecto" fin_imprimir
+            imprimir `defecto` fin_imprimir
     fin_seleccionar
     funcion hacerAlgo () hace
         retornar a;

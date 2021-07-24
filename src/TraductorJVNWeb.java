@@ -1281,8 +1281,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
             write.print( Constantes.valoresJustificado.get( ctx.JUSTIFICADO().getText() ) );
         else if ( ctx.ALINEADO() != null )
             write.print( Constantes.valoresAlineado.get( ctx.ALINEADO().getText() ) );
-        else if ( ctx.CURSOR() != null )
-            write.print( Constantes.valoresCursor.get( ctx.CURSOR().getText() ) );
+        else if ( ctx.cursor() != null )
+            write.print( Constantes.valoresCursor.get( ctx.cursor().getText() ) );
         else if ( !ctx.color().isEmpty() ) visitColor( ctx.color() );
         else if ( !ctx.borde().isEmpty() ) visitBorde( ctx.borde() );
         else if ( !ctx.ubicacion().isEmpty() ) visitUbicacion( ctx.ubicacion() );

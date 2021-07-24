@@ -219,7 +219,7 @@ valorEstilo:
     | POSICION
     | JUSTIFICADO
     | ALINEADO
-    | CURSOR
+    | cursor
     | color
     | borde
     | ubicacion
@@ -232,6 +232,8 @@ valorEstilo:
 estiloBooleano: 'cursiva' | 'negrilla' | 'subrayado' | 'tachado';
 
 flotamiento: 'derecha' | 'izquierda' | 'ninguno';
+
+cursor: 'puntero' | 'texto' | 'esperando' | 'automatico' | 'invisible';
 
 color: 'rojo' | 'verde' | 'azul' | 'amarillo' | 'violeta' | 'negro' | 'marron' | 'gris' |
  'naranja' | 'rosa' | 'purpura' | 'blanco' ;

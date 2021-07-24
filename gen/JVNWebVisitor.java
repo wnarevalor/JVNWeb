@@ -686,6 +686,12 @@ public interface JVNWebVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFlotamiento(JVNWebParser.FlotamientoContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JVNWebParser#cursor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCursor(JVNWebParser.CursorContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JVNWebParser#color}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

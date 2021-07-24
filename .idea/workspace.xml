@@ -15,6 +15,7 @@
       <change beforePath="$PROJECT_DIR$/gen/JVNWebVisitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/gen/JVNWebVisitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grammar/JVNWeb.g4" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/JVNWeb.g4" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/grammar/JVNWebLexerRules.g4" beforeDir="false" afterPath="$PROJECT_DIR$/grammar/JVNWebLexerRules.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input/input.txt" beforeDir="false" afterPath="$PROJECT_DIR$/input/input.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TraductorJVNWeb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TraductorJVNWeb.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +90,7 @@
       <workItem from="1627084491498" duration="738000" />
       <workItem from="1627085247562" duration="2565000" />
       <workItem from="1627145554682" duration="4559000" />
-      <workItem from="1627157265969" duration="8799000" />
+      <workItem from="1627157265969" duration="11798000" />
     </task>
     <task id="LOCAL-00001" summary="Añadida tabla de traducciones y traducción de estilos">
       <created>1626733391470</created>
@@ -126,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627161682145</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Actualización V3.2">
+      <created>1627166177515</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1627166177515</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +147,7 @@
     <MESSAGE value="Actualización V2.2" />
     <MESSAGE value="Actualización V3" />
     <MESSAGE value="Actualización V3.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Actualización V3.1" />
+    <MESSAGE value="Actualización V3.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Actualización V3.2" />
   </component>
 </project>
