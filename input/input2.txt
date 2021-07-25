@@ -410,7 +410,7 @@ Selector
  alApuntar: _Disparar,
  alSalir: _desordenar,
  valor: "sadasdas" )
- 
+    ''
     'sdasdasdasd'
  
  FinOpcion

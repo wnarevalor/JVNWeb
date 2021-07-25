@@ -55,7 +55,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitTitulo( JVNWebParser.TituloContext ctx ) {
-        write.print( ctx.TEXTO().getText() + "\n" );
+        write.print( ctx.TEXTO().getText().substring( 1, ctx.TEXTO().getText().length() - 1 ) + "\n" );
         return null;
     }
     
@@ -229,7 +229,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitTexto( JVNWebParser.TextoContext ctx ) {
         if ( ctx.TEXTO() != null )
-            write.print( ctx.TEXTO().getText() + "\n" );
+            write.print( ctx.TEXTO().getText().substring( 1, ctx.TEXTO().getText().length() - 1 ) + "\n" );
         else {
             write.print( "<span" );
             ctx.atributosComunes().forEach( this::visitAtributosComunes );
