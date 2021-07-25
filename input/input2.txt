@@ -1,0 +1,538 @@
+Encabezado
+Titulo
+'Este es un titulo'
+FinTitulo
+FinEncabezado
+Cuerpo
+Contenedor
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+ Formulario
+ (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar,
+ alEnviarDatos: _enviarDatos)
+ 
+ FinFormulario
+TextoConEnfasis 1
+ (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+    'SDASDA'
+FinTextoConEnfasis
+
+Parrafo
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+ 'Texto parrafo'
+FinParrafo
+
+ListaOrdenada
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+ 
+ ElementoLista
+ (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+    Contenedor
+     Parrafo
+     FinParrafo
+    FinContenedor
+ FinElementoLista
+ 
+FinListaOrdenada
+
+ListaSinOrden
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+ 
+  ElementoLista
+ (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+    Contenedor
+     Parrafo
+     FinParrafo
+    FinContenedor
+ FinElementoLista
+ 
+FinListaSinOrden
+
+Tabla
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+ 
+ EncabezadoTabla
+    FilaTabla
+        ElementoTabla
+        FinElementoTabla
+    FinFilaTabla
+    ElementoTabla
+    FinElementoTabla
+    FilaTabla
+        ElementoTabla
+        FinElementoTabla
+    FinFilaTabla
+ FinEncabezadoTabla
+ 
+ FilaTabla
+ (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+ 
+    ElementoTabla
+    (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+    Contenedor
+     Parrafo
+     FinParrafo
+    FinContenedor
+    FinElementoTabla
+ FinFilaTabla
+FinTabla
+
+Enlace
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar,
+ referencia: "https://mequierenhackear.com")
+FinEnlace
+
+Linea
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+FinLinea
+
+Boton
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+ 'Texto'
+ Texto
+ (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+    'ASDADASD'
+    Texto
+    FinTexto
+ FinTexto
+FinBoton
+
+Etiqueta
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+ 
+ Texto
+ (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar )
+    'ASDADASD'
+    Texto
+    FinTexto
+ FinTexto
+ 
+FinEtiqueta
+
+EntradaDeTexto
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar,
+ nombre: "Entradadsd",
+ valor: "afasfdasd",
+ descripcion: "sdadasd",
+ alSeleccionar: _cambiarColor,
+ alModificar: _cambiarPropiedad )
+FinEntradaDeTexto
+
+AreaDeTexto
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar,
+ nombre: "Entradadsd",
+ alSeleccionar: _cambiarColor,
+ alModificar: _cambiarPropiedad,
+ filas: 23,
+ columnas: 4534)
+ 'asdasdasd'
+FinAreaDeTexto
+
+Selector
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar,
+ nombre: "sadasd",
+ valor: "sdasda",
+ alSeleccionar: _errwerew,
+ alModificar: _sdadads )
+ 
+ Opcion
+    (clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar,
+ valor: "sadasdas" )
+ 
+    'sdasdasdasd'
+ 
+ FinOpcion
+FinSelector
+
+Audio
+    ( conControles, conControles, conControles,
+    clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar)
+ 
+ Fuente
+ (fuente: "sdasdas", tipo: "sxdasdasd")
+ FinFuente
+ 
+FinAudio
+
+Video
+( conControles, conControles, conControles,
+    clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar)
+ 
+ Fuente
+ (fuente: "sdasdas", tipo: "sxdasdasd")
+ FinFuente
+FinVideo
+
+Imagen
+(clases: "ssdasdasd",
+ estilos:
+    ancho es 23 pixeles 
+    y color es #rojo 34 verde 42 azul 43
+    y color es rojo
+    y alto es 23 pixeles
+    y borde es 23 pixeles 'solid' #rojo 23 verde 12 azul 2565757
+    y opacidad es 0.6
+    y tamano es 32 pixeles
+    y familia es 'Papyrus'
+    y cursiva y negrilla y subrayado y tachado,
+ alHacerClic: _manejarClick,
+ alApuntar: _Disparar,
+ alSalir: _desordenar,
+ fuente: "sdasdasd",
+ textoAlternativo: "213e2ewee",
+ ancho: 23 pixeles,
+ alto: 23 %)
+FinImagen
+
+FinContenedor
+FinCuerpo
+Codigo
+    variable _code = `codigo`
+    lista _arreglo = [1,2,3]
+    objeto _carro tiene _techo: `rojo`, _ruedas: `amarillas`, _numeroPuertas : 2 , _colores : [`rojo`,`negro`, `azul`] fin_objeto
+    objeto _casa tiene _entrada : `azul`, :objeto _cuarto tiene _puertas : 2 fin_objeto , _garage : `peque` fin_objeto
+    lista _arregloObjetos = [`objeto`, _n, _n._e, _n[0], _n[`carde`], _n[1]._val._ee, objeto tiene _carro: 2 fin_objeto]
+
+    variable _codigo = 3, _regla = `a`, _arreglo = 25
+
+    asignarElemento (.clase) a _parrafo
+
+
+    asignarElemento (Parrafo) a _p
+
+    _parrafo nuevoContenido : _arreglo[0] , `es un numero` , `<p> This is a paragraph </p>`
+
+    _arreglo = [];
+    _func(230012, [123,1]);
+    _k = !(false)
+    variable _function = _suma(2,5) + 500
+    si (_booleano) entonces
+        lista _discos = [12,4,24]
+    fin_si
+    para(_i=3;_i<10;29)hacer
+        si(_i>5)entonces
+            imprimir(`log`)fin_imprimir
+        fin_si
+    fin_para
+    objeto _casa tiene _puertas: 2, _ventanas : 5 fin_objeto
+    para (_cosa en _casa) hacer
+        imprimir _casa[_cosa] fin_imprimir
+    fin_para
+    variable _text = `texto`
+    para (_letra de _texto) hacer
+        imprimir _letra fin_imprimir
+    fin_para
+    mientras (true) hacer
+        romper;
+    fin_mientras
+    hacer romper; mientras (true)
+    variable _a = 1
+    seleccionar (_a) entre
+        caso 1:
+            imprimir `imprimir nada` fin_imprimir
+        defecto:
+            imprimir `defecto` fin_imprimir
+    fin_seleccionar
+    funcion _hacerAlgo () hace
+        retornar _a;
+    fin_funcion
+
+FinCodigo
