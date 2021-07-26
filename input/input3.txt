@@ -1,0 +1,7 @@
+Encabezado
+Titulo
+'Titulo de la pagina'
+FinTitulo
+FinEncabezado
+Cuerpo
+FinCuerpo

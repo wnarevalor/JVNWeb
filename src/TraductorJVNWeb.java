@@ -1240,7 +1240,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitEstilos( JVNWebParser.EstilosContext ctx ) {
-        write.print( "style=\"" );
+        write.print( " style=\"" );
         ctx.estilo().forEach( this::visitEstilo );
         write.print( "\" " );
         return null;
@@ -1259,7 +1259,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
                     write.printf( "font-style: %s;", Constantes.estilosBooleanos.get( estiloBooleano ) );
                 else if ( estiloBooleano.equals( "subrayado" ) || estiloBooleano.equals( "tachado" ) )
                     write.printf( "text-decoration: %s;", Constantes.estilosBooleanos.get( estiloBooleano ) );
-                else if (estiloBooleano.equals( "negrilla" )) {
+                else if ( estiloBooleano.equals( "negrilla" ) ) {
                     write.printf( "font-weight: %s;", Constantes.estilosBooleanos.get( estiloBooleano ) );
                 }
             }
@@ -1326,7 +1326,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     }
     
     @Override
-    public T visitColor( JVNWebParser.ColorContext ctx) {
+    public T visitColor( JVNWebParser.ColorContext ctx ) {
         write.print( Constantes.colores.get( ctx.getText() ) );
         return null;
     }
