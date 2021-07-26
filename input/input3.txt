@@ -1,0 +1,28 @@
+Encabezado
+    Titulo
+        'Este es un titulo'
+    FinTitulo
+FinEncabezado
+Cuerpo
+    Contenedor
+        Imagen
+        (clases: "ssdasdasd",
+         estilos:
+            ancho es 100% y alto es 100%
+            y opacidad es 0.7,
+         alHacerClic: _manejarClick,
+         fuente: "https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg",
+         textoAlternativo: "Mi imagen")
+        FinImagen
+        Parrafo
+
+        FinParrafo
+    FinContenedor
+FinCuerpo
+Codigo
+    asignarElemento (.ssdasdasd) a _image
+    asignarElemento (Parrafo) a _p
+    funcion _manejarClick () hace
+        _p[0] nuevoContenido : 2
+    fin_funcion
+FinCodigo

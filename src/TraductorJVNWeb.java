@@ -453,14 +453,14 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         } else if ( ctx.EVENTO_COMUN().getText().equals( "alSalir" ) ) {
             write.print( " onmouseout=" );
         }
-        write.print( "\"" + ctx.ID().getText() + "\"" );
+        write.print( "\"" + ctx.ID().getText() + "()\"" );
         return null;
     }
     
     @Override
     public T visitEventoFormulario( JVNWebParser.EventoFormularioContext ctx ) {
         write.print( " onsubmit=" );
-        write.print( "\"" + ctx.ID().getText() + "\"" );
+        write.print( "\"" + ctx.ID().getText() + "()\"" );
         return null;
     }
     
@@ -471,7 +471,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         } else if ( ctx.EVENTO_ENTRADA().getText().equals( "alSeleccionar" ) ) {
             write.print( " onselect=" );
         }
-        write.print( "\"" + ctx.ID().getText() + "\"" );
+        write.print( "\"" + ctx.ID().getText() + "()\"" );
         return null;
     }
     
@@ -520,7 +520,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
             }
             write.write( "; \n" );
         } else if ( ctx.ELEMENTOARR() != null ) {
-            write.print( ctx.ID().getText() + ".innerHTML = " + ctx.ELEMENTOARR().getText() );
+            write.print( ctx.ELEMENTOARR().getText() + ".innerHTML = " + ctx.valor().getText() );
             if ( !ctx.otrosValores().getText().isEmpty() ) {
                 visitOtrosValores( ctx.otrosValores() );
             }
@@ -1240,7 +1240,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitEstilos( JVNWebParser.EstilosContext ctx ) {
-        write.print( "style=\"" );
+        write.print( " style=\"" );
         ctx.estilo().forEach( this::visitEstilo );
         write.print( "\" " );
         return null;
