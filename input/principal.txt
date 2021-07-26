@@ -1,0 +1,236 @@
+Encabezado
+    Titulo
+        'Título de la página'
+    FinTitulo
+FinEncabezado
+Cuerpo
+    (estilos: margen es 40 pixeles)
+    Texto
+        (estilos: cursiva y negrilla y color es verde y tamano es 23 pixeles)
+        'Este es un texto con estilos'
+    FinTexto
+    Linea
+    FinLinea
+    'Este es un contenedor:'
+    Contenedor
+        (estilos: borde es 2 pixeles 'solid' azul)
+        TextoConEnfasis 1
+            'Este es un texto con énfasis 1'
+        FinTextoConEnfasis
+        TextoConEnfasis 2
+            'Este es un texto con énfasis 2'
+        FinTextoConEnfasis
+        TextoConEnfasis 2
+            '...'
+        FinTextoConEnfasis
+        TextoConEnfasis 6
+            'Este es un texto con énfasis 6'
+        FinTextoConEnfasis
+    FinContenedor
+    Parrafo
+        'Este es un párrafo'
+    FinParrafo
+    Formulario
+        (estilos:
+            espaciado es 10 pixeles
+            y borde es 2 pixeles 'dotted' azul)
+        'Este es un formulario'
+        EntradaDeTexto
+            (descripcion: "Esta es una entrada de texto",
+            estilos:
+                margen es 10 pixeles
+                y visualizacion es bloque)
+        FinEntradaDeTexto
+        AreaDeTexto
+            (estilos:
+                margen es 10 pixeles
+                y visualizacion es bloque,
+             filas: 10,
+             columnas: 150)
+            'Esta es un área de texto'
+        FinAreaDeTexto
+        Selector
+            (estilos: ancho es 200pixeles)
+            Opcion
+                (valor: "opcion1")
+                'Esta es la opción 1'
+            FinOpcion
+            Opcion
+                (valor: "opcion2")
+                'Esta es la opción 2'
+            FinOpcion
+        FinSelector
+        Contenedor
+            Etiqueta
+                (estilos: color es rojo)
+                'Esta es una ETIQUETA de casilla'
+            FinEtiqueta
+            EntradaDeTexto
+                (tipo: casilla)
+            FinEntradaDeTexto
+        FinContenedor
+        Contenedor
+            'Este es un botón radio:'
+            EntradaDeTexto
+                (tipo: radio)
+            FinEntradaDeTexto
+        FinContenedor
+        Contenedor
+            'Este es un campo de tiempo:'
+            EntradaDeTexto
+                (tipo: tiempo)
+            FinEntradaDeTexto
+        FinContenedor
+        Contenedor
+            'Este es un seleccionador de color:'
+            EntradaDeTexto
+                (tipo: color)
+            FinEntradaDeTexto
+        FinContenedor
+    FinFormulario
+    ListaOrdenada
+        ElementoLista
+            'Elemento lista ordenada'
+        FinElementoLista
+        ElementoLista
+            'Elemento lista ordenada'
+        FinElementoLista
+    FinListaOrdenada
+    ListaSinOrden
+        ElementoLista
+            'Elemento lista no ordenada'
+        FinElementoLista
+        ElementoLista
+            'Elemento lista no ordenada'
+        FinElementoLista
+    FinListaSinOrden
+    // Este es un comentario
+    Tabla
+        EncabezadoTabla
+            FilaTabla
+                ElementoTabla
+                    (estilos: borde es 2 pixeles 'solid' # rojo 234 verde 23 azul 234)
+                    'Elemento fila encabezado 1'
+                FinElementoTabla
+                ElementoTabla
+                    (estilos: borde es 2 pixeles 'solid' # rojo 234 verde 23 azul 234)
+                    'Elemento fila encabezado 2'
+                FinElementoTabla
+            FinFilaTabla
+        FinEncabezadoTabla
+        FilaTabla
+            ElementoTabla
+                (estilos: borde es 2 pixeles 'solid' # rojo 234 verde 23 azul 234)
+                'Elemento 1 fila 1'
+            FinElementoTabla
+            ElementoTabla
+                (estilos: borde es 2 pixeles 'solid' # rojo 234 verde 23 azul 234)
+                'Elemento 2 fila 1'
+            FinElementoTabla
+        FinFilaTabla
+        FilaTabla
+            ElementoTabla
+                (estilos: borde es 2 pixeles 'solid' # rojo 234 verde 23 azul 234)
+                'Elemento 1 fila 2'
+            FinElementoTabla
+            ElementoTabla
+                (estilos: borde es 2 pixeles 'solid' # rojo 234 verde 23 azul 234)
+                'Elemento 2 fila 2'
+            FinElementoTabla
+        FinFilaTabla
+    FinTabla
+    Enlace
+        (referencia: "https://www.google.com")
+        'Este es un enlace'
+    FinEnlace
+    Boton
+        (estilos: visualizacion es bloque y margen es 20pixeles, alHacerClic: _aumentarContador)
+        'Aumentar Contador'
+    FinBoton
+    Contenedor
+        Parrafo
+            (clases: "contador")
+        FinParrafo
+        Parrafo
+            (clases: "mostrarObjeto")
+        FinParrafo
+    FinContenedor
+    Contenedor
+        Audio
+            (conControles)
+            Fuente
+                (fuente: "http://codeskulptor-demos.commondatastorage.googleapis.com/descent/gotitem.mp3", tipo: "audio/mp3")
+            FinFuente
+        FinAudio
+    FinContenedor
+    Contenedor
+        Video
+            (conControles)
+            Fuente
+                (fuente: "http://techslides.com/demos/sample-videos/small.mp4", tipo: "video/mp4")
+            FinFuente
+        FinVideo
+    FinContenedor
+    Contenedor
+        Imagen
+            (fuente: "https://cdn.pixabay.com/photo/2020/11/07/10/24/desert-5720527_960_720.jpg",
+            ancho: 400 pixeles,
+            alto: 200 pixeles)
+        FinImagen
+    FinContenedor
+    Parrafo
+        (estilos: borde es 2pixeles 'solid' azul y ancho es 200 pixeles y alto es 200 pixeles,
+        alApuntar: _alternarFondo, alSalir: _alternarFondo)
+        'Pasa el mouse aquí para cambiar el fondo'
+    FinParrafo
+FinCuerpo
+Codigo
+    variable _contador = 0
+    variable _toggle = false
+    
+    funcion _alternarFondo() hace
+        _toggle = !_toggle
+        si (_toggle) entonces
+            asignarElemento(Cuerpo) a _elC
+            variable _elementoCuerpo = _elC[0]
+            variable _elC_style = _elementoCuerpo[`style`]
+            _elC_style[`background`] = `rgb(230, 246, 247)`
+            
+            asignarElemento(Contenedor) a _elementosContenedores
+            para (_el de _elementosContenedores) hacer
+                variable _el_style = _el[`style`]
+                _el_style[`background`] = `url(https://cdn.pixabay.com/photo/2016/09/01/19/13/confetti-1637197_960_720.jpg)`
+            fin_para
+        fin_si
+        si (!_toggle) entonces
+            asignarElemento(Cuerpo) a _elC
+            variable _elementoCuerpo = _elC[0]
+            variable _elC_style = _elementoCuerpo[`style`]
+            _elC_style[`background`] = `white`
+                        
+            asignarElemento(Contenedor) a _elementosContenedores
+            para (_el de _elementosContenedores) hacer
+                variable _el_style = _el[`style`]
+                _el_style[`background`] = `white`
+            fin_para
+        fin_si
+    fin_funcion
+    
+    
+    funcion _aumentarContador() hace
+        asignarElemento(.contador) a _elementoContador
+        _contador = _contador + 1
+        _elementoContador[0] nuevoContenido: `Contador es: `, _contador
+        lista _arreglo = [1,2,3]
+        
+        objeto _carro tiene _techo: `rojo`, _ruedas: `amarillas`, _numeroContador : _contador, _colores : [`rojo`,`negro`, `azul`] fin_objeto
+        asignarElemento(.mostrarObjeto) a _mostrarObjeto
+        variable _colores = `[`
+        para (_i de _carro._colores) hacer
+            _colores = _colores + _i + `, `
+        fin_para
+        _colores = _colores + `]`
+        _mostrarObjeto[0] nuevoContenido: `Objeto _carro tiene techo: `, _carro._techo, `, ruedas: `, _carro._ruedas, `, numeroContador: `, _contador,
+        `, colores: `, _colores
+    fin_funcion
+FinCodigo

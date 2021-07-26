@@ -26,7 +26,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
             visitContenidoEncabezado( ctx.contenidoEncabezado() );
         write.print( "<meta charset=\"UTF-8\">\n" );
         write.print( "</head>\n" );
-        write.print( "<body>\n" );
+        write.print( "<body" );
+        ctx.atributosComunes().forEach( this::visitAtributosComunes );
+        write.print( ">\n" );
         if ( ctx.contenido() != null )
             visitContenido( ctx.contenido() );
         write.print( "</body>\n" );
@@ -204,15 +206,17 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         write.print( "<select" );
         ctx.atributosSelector().forEach( this::visitAtributosSelector );
         write.print( ">\n" );
-        if ( ctx.texto() != null ) {
-            write.print( "<option" );
-            ctx.atributoValor().forEach( this::visitAtributoValor );
-            ctx.atributosComunes().forEach( this::visitAtributosComunes );
-            write.print( ">\n" );
-            ctx.texto().forEach( this::visitTexto );
-            write.print( "</option>\n" );
-        }
+        ctx.opcion().forEach( this::visitOpcion );
         write.print( "</select>\n" );
+        return null;
+    }
+    
+    @Override
+    public T visitOpcion( JVNWebParser.OpcionContext ctx ) {
+        write.print( "<option" );
+        write.print( ">\n" );
+        ctx.texto().forEach( this::visitTexto );
+        write.print( "</option>\n" );
         return null;
     }
     
@@ -288,8 +292,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitAudio( JVNWebParser.AudioContext ctx ) {
         write.print( "<audio" );
-        ctx.atributosComunes().forEach( this::visitAtributosComunes );
-        ctx.mostrarControles().forEach( this::visitMostrarControles );
+        ctx.atributoMultimedia().forEach( this::visitAtributoMultimedia );
         write.print( ">\n" );
         ctx.fuente().forEach( this::visitFuente );
         write.print( "</audio>\n" );
@@ -299,8 +302,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitVideo( JVNWebParser.VideoContext ctx ) {
         write.print( "<video" );
-        ctx.atributosComunes().forEach( this::visitAtributosComunes );
-        ctx.mostrarControles().forEach( this::visitMostrarControles );
+        ctx.atributoMultimedia().forEach( this::visitAtributoMultimedia );
         write.print( ">\n" );
         ctx.fuente().forEach( this::visitFuente );
         write.print( "</video>\n" );
@@ -326,8 +328,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     @Override
     public T visitFuente( JVNWebParser.FuenteContext ctx ) {
         write.print( "<source" );
-        visitAtributoFuente( ctx.atributoFuente() );
-        visitAtributoTipo( ctx.atributoTipo() );
+        ctx.atributosFuente().forEach( this::visitAtributosFuente );
         write.print( ">\n" );
         return null;
     }
@@ -377,8 +378,28 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     public T visitAtributosSelector( JVNWebParser.AtributosSelectorContext ctx ) {
         if ( ctx.atributosComunes() != null ) visitAtributosComunes( ctx.atributosComunes() );
         else if ( ctx.atributoNombre() != null ) visitAtributoNombre( ctx.atributoNombre() );
-        else if ( ctx.atributoValor() != null ) visitAtributoValor( ctx.atributoValor() );
         else visitEventoEntrada( ctx.eventoEntrada() );
+        return null;
+    }
+    
+    @Override
+    public T visitAtributosOpcion( JVNWebParser.AtributosOpcionContext ctx ) {
+        if ( ctx.atributosComunes() != null ) visitAtributosComunes( ctx.atributosComunes() );
+        else visitAtributoValor( ctx.atributoValor() );
+        return null;
+    }
+    
+    @Override
+    public T visitAtributosFuente( JVNWebParser.AtributosFuenteContext ctx ) {
+        if ( ctx.atributoFuente() != null ) visitAtributoFuente( ctx.atributoFuente() );
+        else visitAtributoTipoFuente( ctx.atributoTipoFuente() );
+        return null;
+    }
+    
+    @Override
+    public T visitAtributoMultimedia( JVNWebParser.AtributoMultimediaContext ctx ) {
+        if ( ctx.atributosComunes() != null ) visitAtributosComunes( ctx.atributosComunes() );
+        else visitMostrarControles( ctx.mostrarControles() );
         return null;
     }
     
@@ -389,7 +410,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     }
     
     @Override
-    public T visitAtributoTipo( JVNWebParser.AtributoTipoContext ctx ) {
+    public T visitAtributoTipoFuente( JVNWebParser.AtributoTipoFuenteContext ctx ) {
         write.print( " type=" + ctx.CADENA_HTML().getText() );
         return null;
     }
@@ -428,7 +449,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     //ni idea
     @Override
     public T visitTipoEntrada( JVNWebParser.TipoEntradaContext ctx ) {
-        write.print( " type=\"" + ctx.tipoEntradaValor().getText() + "\"" );
+        write.print( " type=\"" + Constantes.tiposDeEntrada.get( ctx.tipoEntradaValor().getText() ) + "\"" );
         return null;
     }
     
@@ -584,6 +605,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
             write.print( ctx.ID().getText() + " = " + ctx.expresion().getText() + "; \n" );
         } else if ( ctx.IDCOMPUESTO() != null ) {
             write.print( ctx.IDCOMPUESTO().getText() + " = " + ctx.expresion().getText() + "; \n" );
+        } else {
+            write.print( ctx.ELEMENTOARR().getText() + " = " + ctx.expresion().getText() + "; \n" );
         }
         return null;
     }
@@ -734,7 +757,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitCparaIn( JVNWebParser.CparaInContext ctx ) {
-        write.print( "for(let " + ctx.ID( 0 ).getText() + " in " + ctx.ID( 1 ).getText() + "){\n" );
+        write.print( "for(let " + ctx.ID( 0 ).getText() + " in "
+            + ( ctx.ID( 1 ) != null ? ctx.ID( 1 ) : ctx.IDCOMPUESTO() ).getText() + "){\n" );
         if ( !ctx.contPara().getText().isEmpty() ) {
             visitContPara( ctx.contPara() );
         }
@@ -747,7 +771,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitCparaOf( JVNWebParser.CparaOfContext ctx ) {
-        write.print( "for(let " + ctx.ID( 0 ).getText() + " of " + ctx.ID( 1 ).getText() + "){\n" );
+        write.print( "for(let " + ctx.ID( 0 ).getText() + " of "
+            + ( ctx.ID( 1 ) != null ? ctx.ID( 1 ) : ctx.IDCOMPUESTO() ) + "){\n" );
         if ( !ctx.contPara().getText().isEmpty() ) {
             visitContPara( ctx.contPara() );
         }
@@ -1136,8 +1161,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitPropiedades( JVNWebParser.PropiedadesContext ctx ) {
-        if ( ctx.ID() != null ) {
-            write.print( ctx.ID().getText() + ": " );
+        if ( ctx.idPropiedad() != null ) {
+            visitIdPropiedad( ctx.idPropiedad() );
         }
         if ( ctx.ENTERO() != null ) {
             write.print( ctx.ENTERO().getText() );
@@ -1160,8 +1185,9 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitOtroObjeto( JVNWebParser.OtroObjetoContext ctx ) {
-        if ( ctx.ID() != null ) {
-            write.print( ctx.ID().getText() + ": { \n" );
+        if ( ctx.idPropiedad() != null ) {
+            visitIdPropiedad( ctx.idPropiedad() );
+            write.print( "\n" );
             if ( ctx.propiedades() != null ) {
                 visitPropiedades( ctx.propiedades() );
             }
@@ -1178,11 +1204,10 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
     
     @Override
     public T visitOtrasProp( JVNWebParser.OtrasPropContext ctx ) {
-        
         if ( ctx.otrasProp() != null ) {
             write.print( ", " );
-            if ( ctx.ID() != null ) {
-                write.print( ctx.ID().getText() + ": " );
+            if ( ctx.idPropiedad() != null ) {
+                visitIdPropiedad( ctx.idPropiedad() );
             }
             if ( ctx.ENTERO() != null ) {
                 write.print( ctx.ENTERO().getText() );
@@ -1190,12 +1215,16 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
                 write.print( ctx.REAL().getText() );
             } else if ( ctx.CADENA() != null ) {
                 write.print( ctx.CADENA().getText() );
+            } else if ( ctx.BOOLEANO() != null ) {
+                write.print( ctx.BOOLEANO().getText() );
             } else if ( ctx.dfuncion() != null ) {
                 visitDfuncion( ctx.dfuncion() );
             } else if ( ctx.arreglo() != null ) {
                 visitArreglo( ctx.arreglo() );
             } else if ( ctx.otroObjeto() != null ) {
                 visitOtroObjeto( ctx.otroObjeto() );
+            } else {
+                write.print( ctx.ID().getText() );
             }
             visitOtrasProp( ctx.otrasProp() );
         }
@@ -1209,8 +1238,6 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         } else if ( ctx.REAL() != null ) {
             write.print( ctx.REAL().getText() );
         } else if ( ctx.CADENA() != null ) {
-            write.print( ctx.CADENA().getText() );
-        } else if ( ctx.CARACTER() != null ) {
             write.print( ctx.CADENA().getText() );
         } else if ( ctx.BOOLEANO() != null ) {
             write.print( ctx.BOOLEANO().getText() );
@@ -1235,6 +1262,12 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
             visitPropiedades( ctx.propiedades() );
         }
         write.print( "\n};\n" );
+        return null;
+    }
+    
+    @Override
+    public T visitIdPropiedad( JVNWebParser.IdPropiedadContext ctx ) {
+        write.print( ctx.ID().getText() + ": " );
         return null;
     }
     

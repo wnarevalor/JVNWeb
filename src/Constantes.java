@@ -16,6 +16,7 @@ public final class Constantes {
     
     static {
         elementos = new HashMap<>();
+        elementos.put( "Cuerpo", "body" );
         elementos.put( "Contenedor", "div" );
         elementos.put( "Formulario", "form" );
         elementos.put( "Parrafo", "p" );
@@ -136,9 +137,9 @@ public final class Constantes {
         estilos.put( "margen", "margin" );
         estilos.put( "espaciado", "padding" );
         estilos.put( "color", "color" );
-        estilos.put( "colorFondo", "background-color" );
+        estilos.put( "fondo", "background" );
         estilos.put( "opacidad", "opacity" );
-        estilos.put( "tamano", "text-size" );
+        estilos.put( "tamano", "font-size" );
         estilos.put( "familia", "font-family" );
         
         estilosBooleanos = new HashMap<>();

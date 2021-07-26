@@ -1,7 +1,8 @@
 grammar JVNWeb;
 import JVNWebLexerRules;
 
-main: 'Encabezado' contenidoEncabezado 'FinEncabezado' 'Cuerpo' contenido 'FinCuerpo' ('Codigo' codigo 'FinCodigo')?;
+main: 'Encabezado' contenidoEncabezado 'FinEncabezado' 'Cuerpo' ('(' atributosComunes (',' atributosComunes)* ')')?
+ contenido? 'FinCuerpo' ('Codigo' codigo 'FinCodigo')?;
 
 contenidoEncabezado: titulo;
 
@@ -33,7 +34,9 @@ elementoFormulario:
     | 'EntradaDeTexto' ('(' atributosEntradaDeTexto (',' atributosEntradaDeTexto)* ')')? 'FinEntradaDeTexto' #entradaDeTexto
     | 'AreaDeTexto' ('(' atributosAreaDeTexto (',' atributosAreaDeTexto)* ')')? texto* 'FinAreaDeTexto' #areaDeTexto
     | 'Selector' ('(' atributosSelector (',' atributosSelector)* ')')? 
-      ('Opcion' ('(' (atributosComunes | atributoValor) (',' (atributosComunes | atributoValor))* ')')? texto* 'FinOpcion')* 'FinSelector' #selector;
+      opcion* 'FinSelector' #selector;
+
+opcion: 'Opcion' ('(' atributosOpcion (',' atributosOpcion)* ')')? texto* 'FinOpcion';
 
 elementoLista:  'ElementoLista' ('(' atributosComunes (',' atributosComunes)* ')')? contenido* 'FinElementoLista';
 
@@ -50,9 +53,11 @@ filaTabla: 'FilaTabla' ('(' atributosComunes (',' atributosComunes)* ')')? eleme
 elementoTabla: 'ElementoTabla' ('(' atributosComunes (',' atributosComunes)* ')')? contenido* 'FinElementoTabla';
 
 multimedia:
-    'Audio' ('(' (atributosComunes | mostrarControles) (',' (atributosComunes | mostrarControles))* ')')? fuente* 'FinAudio' #audio
-    | 'Video' ('(' (atributosComunes | mostrarControles) (',' (atributosComunes | mostrarControles))* ')')?  fuente* 'FinVideo' #video
+    'Audio' ('(' atributoMultimedia (',' atributoMultimedia)* ')')? fuente* 'FinAudio' #audio
+    | 'Video' ('(' atributoMultimedia (',' atributoMultimedia)* ')')?  fuente* 'FinVideo' #video
     | 'Imagen' ('(' (atributosComunes | atributoFuente | atributoImagen) (',' (atributosComunes | atributoFuente | atributoImagen))* ')')? 'FinImagen' #imagen;
+
+fuente: 'Fuente' ('(' atributosFuente (',' atributosFuente)* ')')? 'FinFuente';
 
 atributosComunes: clases | estilos | eventoComun;
 
@@ -62,17 +67,21 @@ atributosEntradaDeTexto: atributosComunes | atributosEntrada | tipoEntrada;
 
 atributosAreaDeTexto: atributosComunes | atributoNombre | eventoEntrada | atributoFilas | atributoColumnas;
 
-atributosSelector: atributosComunes | atributoNombre | atributoValor | eventoEntrada;
+atributosSelector: atributosComunes | atributoNombre | eventoEntrada;
+
+atributosOpcion: atributosComunes | atributoValor;
+
+atributoMultimedia: atributosComunes | mostrarControles;
+
+atributosFuente: atributoFuente | atributoTipoFuente;
 
 mostrarControles: 'conControles';
-
-fuente:  'Fuente' '(' atributoFuente ',' atributoTipo ')' 'FinFuente';
 
 clases: 'clases' ':' CADENA_HTML;
 
 atributoFuente: 'fuente' ':' CADENA_HTML;
 
-atributoTipo: 'tipo' ':' CADENA_HTML;
+atributoTipoFuente: 'tipo' ':' CADENA_HTML;
 
 atributoNombre: 'nombre' ':' CADENA_HTML;
 
@@ -88,7 +97,7 @@ atributoImagen: 'textoAlternativo' ':' CADENA_HTML | dimensionImagen ':' dimensi
 
 dimensionImagen: 'ancho' | 'alto';
 
-tipoEntrada: 'tipo' ':' '"' tipoEntradaValor '"';
+tipoEntrada: 'tipo' ':' tipoEntradaValor;
 
 estilos: 'estilos' ':' estilo ('y' estilo)*;
 
@@ -109,7 +118,7 @@ otrosValores: ',' valor otrosValores | ;
 
 obtenerElemento: 'asignarElemento' '(' (elemento|CLASE) ')' 'a' ID;
 
-elemento: ('Contenedor' | 'Formulario' | 'Parrafo' | 'ListaOrdenada' | 'ListaSinOrden' | 'Tabla' | 'Enlace' | 'Linea' |
+elemento: ('Cuerpo' | 'Contenedor' | 'Formulario' | 'Parrafo' | 'ListaOrdenada' | 'ListaSinOrden' | 'Tabla' | 'Enlace' | 'Linea' |
            'TextoConEnfasis' | 'EntradaDeTexto' | 'AreaDeTexto' | 'Etiqueta' | 'Boton' | 'Selector' | 'Texto' | 'TextoAlernativo' |
            'EncabezadoTabla' | 'FilaTabla' | 'ElementoTabla' | 'Audio' | 'Video' | 'Imagen');
 
@@ -119,7 +128,7 @@ otrasDec: ',' ID asignacion otrasDec | ;
 
 asignacion: ( '=' expresion | );
 
-asignacionSimple: (ID | IDCOMPUESTO) '=' expresion;
+asignacionSimple: (ID | IDCOMPUESTO | ELEMENTOARR) '=' expresion;
 
 declaracionF: ID '(' argumentos ')' ';';
 
@@ -153,9 +162,9 @@ contSiNo: asignacionSimple contSiNo | declaracion contSiNo | declaracionF contSi
 
 cpara: 'para' '(' ID '=' expresion ';' expresion ';' avance ')' 'hacer' contPara rompe 'fin_para';
 
-cparaIn: 'para' '(' ID 'en' ID ')' 'hacer' contPara rompe 'fin_para';
+cparaIn: 'para' '(' ID 'en' (ID | IDCOMPUESTO) ')' 'hacer' contPara rompe 'fin_para';
 
-cparaOf: 'para' '(' ID 'de' ID ')' 'hacer' contPara rompe 'fin_para';
+cparaOf: 'para' '(' ID 'de' (ID | IDCOMPUESTO) ')' 'hacer' contPara rompe 'fin_para';
 
 avance: ID | ENTERO | REAL;
 
@@ -199,18 +208,20 @@ rompe: 'romper' ';' #romper
 arreglo: '[' ( valor ( ',' valor)* )? ']';
 arregloDec: 'lista' ID '=' arreglo;
 arregloAsig: ID '=' arreglo ';';
-propiedades: (ID| ) ':' (ENTERO | REAL | CADENA | dfuncion | arreglo | otroObjeto ) otrasProp;
-otrasProp: ',' (ID | ) ':' (ENTERO | REAL | CADENA | dfuncion |  arreglo | otroObjeto ) otrasProp | ;
-valor: ENTERO | REAL | CADENA | CARACTER | BOOLEANO | ID | IDCOMPUESTO | arreglo | otroObjeto | ELEMENTOARR;
+propiedades: idPropiedad ':' (ENTERO | REAL | CADENA | ID | BOOLEANO | dfuncion | arreglo | otroObjeto ) otrasProp;
+otrasProp: ',' idPropiedad ':' (ENTERO | REAL | CADENA | BOOLEANO | ID | dfuncion |  arreglo | otroObjeto ) otrasProp | ;
+valor: ENTERO | REAL | CADENA | BOOLEANO | ID | IDCOMPUESTO | arreglo | otroObjeto | ELEMENTOARR;
 objeto: 'objeto' ID 'tiene' propiedades 'fin_objeto';
-otroObjeto: 'objeto' (ID | ) 'tiene' propiedades 'fin_objeto';
+otroObjeto: 'objeto' idPropiedad 'tiene' propiedades 'fin_objeto';
+
+idPropiedad: ID | ;
 
 tipoEntradaValor: 'texto' | 'numero' | 'correo' | 'clave' | 'fecha' | 'boton' | 'casilla' | 'radio' | 'archivo' | 'imagen' |
  'rango' | 'reinicio' | 'busqueda' | 'telefono' | 'tiempo' | 'semana' | 'color' | 'mes' | 'envio';
 
 nombreEstilo: ('ancho' | 'alto' | 'anchoMinimo' |  'anchoMaximo' | 'alturaMinima' | 'alturaMaxima' |
 'posicion' | 'ubicacion' | 'visualizacion' | 'profundidad' | 'flotamiento' | 'alineado' | 'justificado' |
- 'borde' | 'cursor' | 'margen' | 'espaciado' | 'color' | 'colorFondo' | 'opacidad' | 'tamano' | 'familia' );
+ 'borde' | 'cursor' | 'margen' | 'espaciado' | 'color' | 'fondo' | 'opacidad' | 'tamano' | 'familia' );
  
 valorEstilo:
     | ENTERO
