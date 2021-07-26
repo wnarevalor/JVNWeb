@@ -190,10 +190,12 @@ Codigo
     
     funcion _alternarFondo() hace
         _toggle = !_toggle
+        
+        asignarElemento(Cuerpo) a _elC
+        variable _elementoCuerpo = _elC[0]
+        variable _elC_style = _elementoCuerpo[`style`]
+        
         si (_toggle) entonces
-            asignarElemento(Cuerpo) a _elC
-            variable _elementoCuerpo = _elC[0]
-            variable _elC_style = _elementoCuerpo[`style`]
             _elC_style[`background`] = `rgb(230, 246, 247)`
             
             asignarElemento(Contenedor) a _elementosContenedores
@@ -203,11 +205,8 @@ Codigo
             fin_para
         fin_si
         si (!_toggle) entonces
-            asignarElemento(Cuerpo) a _elC
-            variable _elementoCuerpo = _elC[0]
-            variable _elC_style = _elementoCuerpo[`style`]
             _elC_style[`background`] = `white`
-                        
+
             asignarElemento(Contenedor) a _elementosContenedores
             para (_el de _elementosContenedores) hacer
                 variable _el_style = _el[`style`]
