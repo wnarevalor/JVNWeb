@@ -186,7 +186,7 @@ Cuerpo
         FinBoton
         Boton
             (estilos: margen es 30 pixeles, alHacerClic: _cambiarEstiloBooleano)
-            'Cambiar estilo del parrafo de abajo'
+            'Cambiar estilo del parrafo de abajo y la visualizacion del contenedor actual'
         FinBoton
     FinContenedor
     Parrafo
