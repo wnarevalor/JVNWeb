@@ -178,6 +178,17 @@ Cuerpo
             alto: 200 pixeles)
         FinImagen
     FinContenedor
+    Contenedor
+        (estilos: visualizacion es columna)
+        Boton
+            (estilos: margen es 30 pixeles, alHacerClic: _cambiarEstilo)
+            'Cambiar estilo de la imagen'
+        FinBoton
+        Boton
+            (estilos: margen es 30 pixeles, alHacerClic: _cambiarEstiloBooleano)
+            'Cambiar estilo del parrafo de abajo'
+        FinBoton
+    FinContenedor
     Parrafo
         (estilos: borde es 2pixeles 'solid' azul y ancho es 200 pixeles y alto es 200 pixeles,
         alApuntar: _alternarFondo, alSalir: _alternarFondo)
@@ -187,17 +198,29 @@ FinCuerpo
 Codigo
     variable _contador = 0
     variable _toggle = false
-    
+    asignarElemento(Imagen) a _img
+    asignarElemento(Parrafo) a _p
+    asignarElemento(Contenedor) a _d
+    funcion _cambiarEstilo()hace
+        _img[0] nuevoEstilo : borde es 15 pixeles 'solid' #rojo 100 verde 50 azul 25
+    fin_funcion
+
+    funcion _cambiarEstiloBooleano()hace
+        _p[3] nuevoEstilo : tachado
+        _p[3] nuevoEstilo: color es #rojo 100 verde 50 azul 25
+        _d[9] nuevoEstilo: visualizacion es bloque
+    fin_funcion
+
     funcion _alternarFondo() hace
         _toggle = !_toggle
-        
+
         asignarElemento(Cuerpo) a _elC
         variable _elementoCuerpo = _elC[0]
         variable _elC_style = _elementoCuerpo[`style`]
-        
+
         si (_toggle) entonces
             _elC_style[`background`] = `rgb(230, 246, 247)`
-            
+
             asignarElemento(Contenedor) a _elementosContenedores
             para (_el de _elementosContenedores) hacer
                 variable _el_style = _el[`style`]
@@ -214,14 +237,14 @@ Codigo
             fin_para
         fin_si
     fin_funcion
-    
-    
+
+
     funcion _aumentarContador() hace
         asignarElemento(.contador) a _elementoContador
         _contador = _contador + 1
         _elementoContador[0] nuevoContenido: `Contador es: `, _contador
         lista _arreglo = [1,2,3]
-        
+
         objeto _carro tiene _techo: `rojo`, _ruedas: `amarillas`, _numeroContador : _contador, _colores : [`rojo`,`negro`, `azul`] fin_objeto
         asignarElemento(.mostrarObjeto) a _mostrarObjeto
         variable _colores = `[`

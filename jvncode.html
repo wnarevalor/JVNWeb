@@ -131,6 +131,14 @@ Aumentar Contador
 <div>
 <img src="https://cdn.pixabay.com/photo/2020/11/07/10/24/desert-5720527_960_720.jpg" width="400px " height="200px ">
 </div>
+<div style="display: flex; flex-direction: column; " >
+<button style="margin: 30px ; "  onclick="_cambiarEstilo()">
+Cambiar estilo de la imagen
+</button>
+<button style="margin: 30px ; "  onclick="_cambiarEstiloBooleano()">
+Cambiar estilo del parrafo de abajo
+</button>
+</div>
 <p style="border: 2px solid #0000ff; width: 200px ; height: 200px ; "  onmouseover="_alternarFondo()" onmouseout="_alternarFondo()">
 Pasa el mouse aquí para cambiar el fondo
 </p>
@@ -139,6 +147,19 @@ Pasa el mouse aquí para cambiar el fondo
 <script>
 var _contador = 0;
 var _toggle = false;
+var _img = document.querySelectorAll('img'); 
+var _p = document.querySelectorAll('p'); 
+var _d = document.querySelectorAll('div'); 
+function _cambiarEstilo( ){
+_img[0].style.border = '15px solid rgb(100, 50,25)'; 
+
+}
+function _cambiarEstiloBooleano( ){
+_p[3].style.textDecoration = 'line-through'; 
+_p[3].style.color = 'rgb(100, 50,25)'; 
+_d[9].style.display = 'block'; 
+
+}
 function _alternarFondo( ){
 _toggle = !_toggle; 
 var _elC = document.querySelectorAll('body'); 

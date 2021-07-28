@@ -110,9 +110,14 @@ eventoFormulario: 'alEnviarDatos' ':' ID;
 eventoEntrada: EVENTO_ENTRADA ':' ID;
 
 codigo: declaracion codigo | asignacionSimple codigo | condicional codigo | ciclo codigo | seleccion codigo | declaracionF codigo |
-        dfuncion codigo | cambioElemento codigo | obtenerElemento codigo | impresion codigo | objeto codigo | arregloDec codigo | arregloAsig codigo | ;
+        dfuncion codigo | cambioElemento codigo | obtenerElemento codigo | impresion codigo | objeto codigo | arregloDec codigo | arregloAsig codigo |
+        cambioEstiloElemento codigo | ;
 
-cambioElemento: (ID | ELEMENTOARR) ('nuevoContenido') ':' valor otrosValores ;
+cambioElemento: (ID | ELEMENTOARR) ('nuevoContenido') ':' (valor otrosValores);
+
+cambioEstiloElemento: (ID | ELEMENTOARR) 'nuevoEstilo' ':' (nombreEstilo 'es' valorEstiloCambio | estiloBooleano);
+
+valorEstiloCambio: valorEstilo;
 
 otrosValores: ',' valor otrosValores | ;
 
@@ -152,13 +157,13 @@ condicional: 'si' '(' expresion ')' 'entonces' contCond rompe sino 'fin_si';
 
 contCond: asignacionSimple contCond | declaracion contCond | declaracionF contCond | impresion contCond | condicional contCond | ciclo contCond |
           seleccion contCond | dfuncion contCond | cambioElemento contCond | obtenerElemento contCond | objeto contCond | arregloDec contCond |
-          arregloAsig contCond | ;
+          arregloAsig contCond | cambioEstiloElemento contCond | ;
 
 sino: 'si_no' contSiNo rompe | ;
 
 contSiNo: asignacionSimple contSiNo | declaracion contSiNo | declaracionF contSiNo | impresion contSiNo | condicional contSiNo | ciclo contSiNo |
           seleccion contSiNo | dfuncion contSiNo | cambioElemento contSiNo | obtenerElemento contSiNo | objeto contSiNo | arregloDec contSiNo |
-          arregloAsig contSiNo |  ;
+          arregloAsig contSiNo | cambioEstiloElemento contSiNo |  ;
 
 cpara: 'para' '(' ID '=' expresion ';' expresion ';' avance ')' 'hacer' contPara rompe 'fin_para';
 
@@ -170,7 +175,7 @@ avance: ID | ENTERO | REAL;
 
 contPara: asignacionSimple contPara | declaracion contPara | declaracionF contPara | impresion contPara | condicional contPara | ciclo contPara |
           seleccion contPara | dfuncion contPara | cambioElemento contPara | obtenerElemento contPara | objeto contPara | arregloDec contPara |
-          arregloAsig contPara | ;
+          arregloAsig contPara |  ;
 
 cmientras: 'mientras' '(' expresion ')' 'hacer' contMientras rompe 'fin_mientras';
 
@@ -191,15 +196,15 @@ casos: 'caso' (ID | valor) ':' contSelec rompe casos |;
 cdefecto: 'defecto' ':' contDefecto rompe |;
 contSelec: asignacionSimple contSelec | declaracion contSelec | declaracionF contSelec | impresion contSelec | condicional contSelec | ciclo contSelec |
            seleccion contSelec | dfuncion contSelec | cambioElemento contSelec | obtenerElemento contSelec | objeto contSelec | arregloDec contSelec |
-           arregloAsig contSelec | ;
+           arregloAsig contSelec | cambioEstiloElemento contSelec | ;
 contDefecto: asignacionSimple contDefecto | declaracion contDefecto | declaracionF contDefecto | impresion contDefecto | condicional contDefecto |
              ciclo contDefecto | seleccion contDefecto | dfuncion contDefecto | cambioElemento contDefecto | obtenerElemento contDefecto | objeto contDefecto |
-             arregloDec contDefecto | arregloAsig contDefecto | ;
+             arregloDec contDefecto | arregloAsig contDefecto | cambioEstiloElemento contDefecto | ;
 
 dfuncion: 'funcion' (ID | ) '(' argumentos ')' 'hace' contFun ('retornar' expresion ';' |  ) 'fin_funcion';
 contFun: asignacionSimple contFun | declaracion contFun | declaracionF contFun  | impresion contFun | condicional contFun |
          ciclo contFun | seleccion contFun | dfuncion contFun | cambioElemento contFun | obtenerElemento contFun | objeto contFun | arregloDec contFun |
-         arregloAsig contFun |  ;
+         arregloAsig contFun | cambioEstiloElemento contFun | ;
 
 rompe: 'romper' ';' #romper
         | 'continuar' ';' #continuar

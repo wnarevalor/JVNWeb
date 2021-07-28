@@ -525,15 +525,17 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
                 visitArregloAsig( ctx.arregloAsig() );
             } else if ( ctx.arregloDec() != null ) {
                 visitArregloDec( ctx.arregloDec() );
+            } else if ( ctx.cambioEstiloElemento() != null ) {
+                visitCambioEstiloElemento( ctx.cambioEstiloElemento() );
             }
             visitCodigo( ctx.codigo() );
         }
         return null;
     }
-    
+
     @Override
     public T visitCambioElemento( JVNWebParser.CambioElementoContext ctx ) {
-        
+
         if ( ctx.ID() != null ) {
             write.print( ctx.ID().getText() + ".innerHTML = " + ctx.valor().getText() );
             if ( !ctx.otrosValores().getText().isEmpty() ) {
@@ -549,7 +551,7 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         }
         return null;
     }
-    
+
     @Override
     public T visitOtrosValores( JVNWebParser.OtrosValoresContext ctx ) {
         if ( ctx.otrosValores() != null ) {
@@ -558,7 +560,78 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
         }
         return null;
     }
-    
+
+    @Override public T visitCambioEstiloElemento(JVNWebParser.CambioEstiloElementoContext ctx) {
+
+        if ( ctx.ID() != null ) {
+            write.print( ctx.ID().getText() + ".style.");
+            if (ctx.nombreEstilo() != null){
+                write.print(Constantes.estilos.get(ctx.nombreEstilo().getText()) + " = '");
+                visitValorEstiloCambio(ctx.valorEstiloCambio());
+                write.print("'");
+            }else if(ctx.estiloBooleano() != null){
+                visitEstiloBooleano(ctx.estiloBooleano());
+            }
+            write.write( "; \n" );
+        } else if ( ctx.ELEMENTOARR() != null ) {
+            write.print( ctx.ELEMENTOARR().getText() + ".style.");
+            if (ctx.nombreEstilo() != null){
+                write.print(Constantes.estilos.get(ctx.nombreEstilo().getText()) + " = '");
+                visitValorEstiloCambio(ctx.valorEstiloCambio());
+                write.print("'");
+            }else if(ctx.estiloBooleano() != null){
+                visitEstiloBooleano(ctx.estiloBooleano());
+            }
+            write.write( "; \n" );
+        }
+        return null;
+    }
+
+    @Override public T visitValorEstiloCambio(JVNWebParser.ValorEstiloCambioContext ctx) {
+        if ( ctx.valorEstilo().ENTERO() != null ) write.print( ctx.valorEstilo().ENTERO().getText() );
+        else if ( ctx.valorEstilo().REAL() != null ) write.print( ctx.valorEstilo().REAL().getText() );
+        else if ( ctx.valorEstilo().VISUALIZACION() != null ) {
+            String valorVisualizacion = ctx.valorEstilo().VISUALIZACION().getText();
+            if ( valorVisualizacion.equals( "fila" ) || valorVisualizacion.equals( "columna" ) ) {
+                write.print("flex");
+            } else
+                write.print( Constantes.valoresVisualizacion.get( valorVisualizacion ) );
+        } else if ( ctx.valorEstilo().POSICION() != null )
+            write.print( Constantes.valoresPosicion.get( ctx.valorEstilo().POSICION().getText() ) );
+        else if ( ctx.valorEstilo().JUSTIFICADO() != null )
+            write.print( Constantes.valoresJustificado.get( ctx.valorEstilo().JUSTIFICADO().getText() ) );
+        else if ( ctx.valorEstilo().ALINEADO() != null )
+            write.print( Constantes.valoresAlineado.get( ctx.valorEstilo().ALINEADO().getText() ) );
+        else if ( ctx.valorEstilo().cursor() != null )
+            write.print( Constantes.valoresCursor.get( ctx.valorEstilo().cursor().getText() ) );
+        else if ( ctx.valorEstilo().color() != null ) visitColor( ctx.valorEstilo().color() );
+        else if ( ctx.valorEstilo().borde() != null ) visitBorde( ctx.valorEstilo().borde() );
+        else if ( ctx.valorEstilo().ubicacion() != null ) visitUbicacion( ctx.valorEstilo().ubicacion() );
+        else if ( ctx.valorEstilo().dimension() != null ) visitDimension( ctx.valorEstilo().dimension() );
+        else if ( ctx.valorEstilo().flotamiento() != null ) visitFlotamiento( ctx.valorEstilo().flotamiento() );
+        else if ( ctx.valorEstilo().colorFormato() != null ) visitColorFormato( ctx.valorEstilo().colorFormato() );
+        else if ( ctx.valorEstilo().dimensiones() != null ) visitDimensiones( ctx.valorEstilo().dimensiones() );
+        else if ( ctx.valorEstilo().TEXTO() != null )
+            write.print( ctx.valorEstilo().TEXTO().getText().substring( 1, ctx.valorEstilo().TEXTO().getText().length() - 1 ) );
+        return null;
+    }
+
+    @Override
+    public T visitEstiloBooleano(JVNWebParser.EstiloBooleanoContext ctx){
+        String estiloBooleano = ctx.getText();
+        String traduccion = Constantes.estilosBooleanos.get( estiloBooleano );
+        if ( traduccion != null ) {
+            if ( estiloBooleano.equals( "cursiva" ) )
+                write.printf( "fontStyle = '%s'", Constantes.estilosBooleanos.get( estiloBooleano ) );
+            else if ( estiloBooleano.equals( "subrayado" ) || estiloBooleano.equals( "tachado" ) )
+                write.printf( "textDecoration = '%s'", Constantes.estilosBooleanos.get( estiloBooleano ) );
+            else if ( estiloBooleano.equals( "negrilla" ) ) {
+                write.printf( "fontWeight = '%s'", Constantes.estilosBooleanos.get( estiloBooleano ) );
+            }
+        }
+        return null;
+    }
+
     @Override
     public T visitObtenerElemento( JVNWebParser.ObtenerElementoContext ctx ) {
         write.print( "var " + ctx.ID().getText() + " = document.querySelectorAll('" );
@@ -683,6 +756,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
                 visitArregloAsig( ctx.arregloAsig() );
             } else if ( ctx.arregloDec() != null ) {
                 visitArregloDec( ctx.arregloDec() );
+            } else if ( ctx.cambioEstiloElemento() != null ) {
+                visitCambioEstiloElemento( ctx.cambioEstiloElemento() );
             }
             visitContCond( ctx.contCond() );
         }
@@ -732,6 +807,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
                 visitArregloAsig( ctx.arregloAsig() );
             } else if ( ctx.arregloDec() != null ) {
                 visitArregloDec( ctx.arregloDec() );
+            } else if ( ctx.cambioEstiloElemento() != null ) {
+                visitCambioEstiloElemento( ctx.cambioEstiloElemento() );
             }
             visitContSiNo( ctx.contSiNo() );
         }
@@ -1015,6 +1092,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
                 visitArregloAsig( ctx.arregloAsig() );
             } else if ( ctx.arregloDec() != null ) {
                 visitArregloDec( ctx.arregloDec() );
+            } else if ( ctx.cambioEstiloElemento() != null ) {
+                visitCambioEstiloElemento( ctx.cambioEstiloElemento() );
             }
             visitContSelec( ctx.contSelec() );
         }
@@ -1050,6 +1129,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
                 visitArregloAsig( ctx.arregloAsig() );
             } else if ( ctx.arregloDec() != null ) {
                 visitArregloDec( ctx.arregloDec() );
+            } else if ( ctx.cambioEstiloElemento() != null ) {
+                visitCambioEstiloElemento( ctx.cambioEstiloElemento() );
             }
             visitContDefecto( ctx.contDefecto() );
         }
@@ -1119,6 +1200,8 @@ public class TraductorJVNWeb<T> extends JVNWebBaseVisitor<T> {
                 visitArregloAsig( ctx.arregloAsig() );
             } else if ( ctx.arregloDec() != null ) {
                 visitArregloDec( ctx.arregloDec() );
+            } else if ( ctx.cambioEstiloElemento() != null ) {
+                visitCambioEstiloElemento( ctx.cambioEstiloElemento() );
             }
             visitContFun( ctx.contFun() );
         }
